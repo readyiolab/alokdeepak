@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors */
+  --primary-50: #E6EFEF;
+  --primary-100: #CCDFE0;
+  --primary-200: #99BFC0;
+  --primary-300: #669FA0;
+  --primary-400: #337F80;
+  --primary-500: #106466; /* Main Primary */
+  --primary-600: #0D5052;
+  --primary-700: #0A3C3D;
+  --primary-800: #062829;
+  --primary-900: #031414;
+
+  /* Secondary Colors */
+  --secondary-50: #FFEEE6;
+  --secondary-100: #FFDECB;
+  --secondary-200: #FFBD97;
+  --secondary-300: #FF9C63;
+  --secondary-400: #FF7B2F;
+  --secondary-500: #FF8552; /* Main Secondary */
+  --secondary-600: #CC6A42;
+  --secondary-700: #995031;
+  --secondary-800: #663521;
+  --secondary-900: #331B10;
+
+  /* Accent Colors */
+  --accent-50: #EDE7F9;
+  --accent-100: #DCD0F3;
+  --accent-200: #B9A1E7;
+  --accent-300: #9572DB;
+  --accent-400: #8059CD;
+  --accent-500: #6C4BC0; /* Main Accent */
+  --accent-600: #563C9A;
+  --accent-700: #412D73;
+  --accent-800: #2B1E4D;
+  --accent-900: #160F26;
+
+  /* Neutral/Background Color */
+  --neutral-50: #FAF0D7;
+  --neutral-100: #F5E6BF;
+  --neutral-200: #EBCD7F;
+  --neutral-300: #E0B33F;
+  --neutral-400: #D89A00;
+  --neutral-500: #C08A00;
+  --neutral-600: #9A6E00;
+  --neutral-700: #735300;
+  --neutral-800: #4D3700;
+  --neutral-900: #261C00;
+
+  /* Success, Warning, Error Colors */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  /* Text Colors */
+  --text-primary: #1A202C;
+  --text-secondary: #4A5568;
+  --text-tertiary: #718096;
+}
+
+@layer base {
+  html {
+    font-family: 'Open Sans', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-neutral-50 text-text-primary;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md transition-all duration-300 shadow-sm;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-4 focus:ring-primary-300;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-4 focus:ring-secondary-300;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 focus:ring-4 focus:ring-accent-300;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+
+  .heading-xl {
+    @apply text-4xl md:text-5xl font-bold leading-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-bold leading-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl font-bold leading-tight;
+  }
+
+  .heading-sm {
+    @apply text-xl md:text-2xl font-semibold leading-tight;
+  }
+
+  .paragraph {
+    @apply text-base leading-relaxed text-text-secondary;
+  }
+}
+
+/* Custom animations */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
