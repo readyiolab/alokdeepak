@@ -208,7 +208,7 @@ const DigitalMarketingPage = () => {
                 title: 'Certified Digital Marketing Professional',
                 description:
                   'Master every aspect of digital marketing with our flagship comprehensive program covering SEO, SEM, Social Media, Content Marketing, Email Marketing, Analytics, and advanced strategies.',
-                duration: '12 weeks',
+                duration: '8 weeks',
                 level: 'Beginner to Advanced',
                
                 features: ['Live Sessions', '1-on-1 Mentoring', 'Job Placement Support', 'Lifetime Access'],
@@ -220,7 +220,7 @@ const DigitalMarketingPage = () => {
                 title: 'Advanced SEO & Content Marketing',
                 description:
                   'Deep dive into SEO strategies and content creation techniques that drive organic traffic, improve rankings, and build lasting audience engagement.',
-                duration: '8 weeks',
+                duration: '4 weeks',
                 level: 'Intermediate',
                 
                 features: ['SEO Tools Access', 'Content Templates', 'Performance Tracking', 'Expert Reviews'],
@@ -232,7 +232,7 @@ const DigitalMarketingPage = () => {
                 title: 'Social Media Marketing Specialist',
                 description:
                   'Create and execute winning social media strategies across all major platforms with advanced analytics, automation, and community management.',
-                duration: '6 weeks',
+                duration: '4 weeks coming soon',
                 level: 'All Levels',
               
                 features: [
@@ -300,6 +300,7 @@ const DigitalMarketingPage = () => {
                         background: 'linear-gradient(135deg, #1a2957, #90abff)',
                         color: 'white',
                       }}
+                      
                     >
                       Enroll Now
                     </button>

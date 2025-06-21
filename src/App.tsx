@@ -16,6 +16,9 @@ import WebDevelopmentPage from './pages/WebDevelopmentPage';
 // import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
+import BlogPage from './pages/BlogPage';
+import AboutUsPage from './pages/AboutUsPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 function App() {
   return (
@@ -27,9 +30,9 @@ function App() {
           <Route path="hiring-solutions" element={<HiringSolutionsPage />} />
           <Route path="digital-marketing-agency" element={<AgencyServicesPage />} />
           <Route path="website-development" element={<WebDevelopmentPage />} />
-          {/* <Route path="blog" element={<BlogPage />} /> */}
-          {/* <Route path="blog/:slug" element={<BlogPostPage />} /> */}
-          {/* <Route path="about" element={<AboutPage />} /> */}
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="blog/:slug" element={<BlogPostPage />} />
+          <Route path="about" element={<AboutUsPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

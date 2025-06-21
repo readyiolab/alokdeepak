@@ -1,113 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Twitter, Youtube, Mail, Phone } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Facebook, Instagram, Linkedin, Twitter, Youtube, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 },
-  };
-
-  const staggerContainer = {
-    initial: {},
-    whileInView: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
   return (
-    <footer
-      className="relative pt-16 pb-8 text-white overflow-hidden"
-      style={{ background: 'linear-gradient(315deg, #1a2957 0%, #2d4a8f 100%)' }}
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 80%, #90abff 0%, transparent 50%), 
-                             radial-gradient(circle at 80% 20%, #90abff 0%, transparent 50%)`,
-          }}
-        ></div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
-        >
+    <footer className="bg-white text-gray-800 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1 - Logo & About */}
-          <motion.div variants={fadeInUp}>
-            <div className="mb-6">
-              <img src="./logo.webp" alt="" />
-            </div>
-            <p className="text-blue-100 mb-6 text-sm leading-relaxed">
-              Your partner in digital growth. Master digital marketing, find top talent, and drive online success.
+          <div>
+            <img src="./logo.webp" alt="Sownmark Logo" className="h-12 mb-6" />
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Empowering your digital journey with innovative marketing and talent solutions.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mt-6">
               {[
-                { icon: <Linkedin size={24} />, href: '#', label: 'LinkedIn', color: '#0077B5' },
-                { icon: <Facebook size={24} />, href: '#', label: 'Facebook', color: '#1877F2' },
-                {
-                  icon: <Instagram size={24} />,
-                  href: '#',
-                  label: 'Instagram',
-                  
-                },
-                { icon: <Twitter size={24} />, href: '#', label: 'Twitter', color: '#1DA1F2' },
-                { icon: <Youtube size={24} />, href: '#', label: 'YouTube', color: '#FF0000' },
+                { icon: <Linkedin size={20} />, href: '#', label: 'LinkedIn' },
+              
+                { icon: <Instagram size={20} />, href: '#', label: 'Instagram' },
+               
               ].map((social, index) => (
-                <motion.a
+                <a
                   key={index}
                   href={social.href}
-                  className={`p-2 rounded-full hover:opacity-90 transition-opacity ${social.color}`}
+                  className="text-gray-500 hover:text-gray-800 transition-colors duration-300"
                   aria-label={social.label}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   {social.icon}
-                </motion.a>
+                </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Column 2 - Quick Links */}
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-lg font-bold mb-4 text-white">Quick Links</h3>
-            <ul className="space-y-3">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-6">Quick Links</h3>
+            <ul className="space-y-3 text-sm">
               {[
                 { to: '/', label: 'Home' },
-                { to: '/digital-marketing-mastery', label: 'Digital Marketing Mastery' },
+                { to: '/digital-marketing', label: 'Digital Marketing' },
                 { to: '/hiring-solutions', label: 'Hiring Solutions' },
-                { to: '/digital-marketing-agency', label: 'Digital Marketing Agency' },
+                { to: '/marketing-agency', label: 'Marketing Agency' },
                 { to: '/website-development', label: 'Website Development' },
               ].map((link, index) => (
-                <motion.li key={index} whileHover={{ x: 5 }} transition={{ duration: 0.3 }}>
+                <li key={index}>
                   <Link
                     to={link.to}
-                    className="text-blue-100 hover:text-white transition-colors text-sm"
+                    className="text-gray-600 hover:text-gray-800 transition-colors duration-300 hover:underline"
                   >
                     {link.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Column 3 - More Links */}
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-lg font-bold mb-4 text-white">More</h3>
-            <ul className="space-y-3">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-6">More</h3>
+            <ul className="space-y-3 text-sm">
               {[
                 { to: '/blog', label: 'Blog' },
                 { to: '/about', label: 'About Us' },
@@ -115,72 +68,45 @@ const Footer: React.FC = () => {
                 { to: '/privacy-policy', label: 'Privacy Policy' },
                 { to: '/terms-conditions', label: 'Terms & Conditions' },
               ].map((link, index) => (
-                <motion.li key={index} whileHover={{ x: 5 }} transition={{ duration: 0.3 }}>
+                <li key={index}>
                   <Link
                     to={link.to}
-                    className="text-blue-100 hover:text-white transition-colors text-sm"
+                    className="text-gray-600 hover:text-gray-800 transition-colors duration-300 hover:underline"
                   >
                     {link.label}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Column 4 - Contact */}
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-lg font-bold mb-4 text-white">Contact Us</h3>
-            <ul className="space-y-4">
-              {[
-                {
-                  icon: <Mail size={20} className="text-white" />,
-                  content: (
-                    <a
-                      href="mailto:hello@sownmark.com"
-                      className="text-blue-100 hover:text-white transition-colors text-sm"
-                    >
-                      hello@sownmark.com
-                    </a>
-                  ),
-                },
-              
-                {
-                  icon: null,
-                  content: (
-                    <div>
-                      <h4 className="text-sm font-medium mb-2 text-white">Operating Hours:</h4>
-                      <p className="text-blue-100 text-sm">Monday - Saturday: 9:00 AM - 6:00 PM</p>
-                    </div>
-                  ),
-                },
-              ].map((item, index) => (
-                <motion.li
-                  key={index}
-                  variants={fadeInUp}
-                  className="flex items-start"
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-6">Contact Us</h3>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-center">
+                <Mail size={18} className="text-gray-600 mr-3" />
+                <a
+                  href="mailto:hello@sownmark.com"
+                  className="text-gray-600 hover:text-gray-800 transition-colors duration-300 hover:underline"
                 >
-                  {item.icon && (
-                    <div
-                      className="mt-1 mr-3 flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ background: 'linear-gradient(135deg, #1a2957, #90abff)' }}
-                    >
-                      {item.icon}
-                    </div>
-                  )}
-                  <div>{item.content}</div>
-                </motion.li>
-              ))}
+                  hello@sownmark.com
+                </a>
+              </li>
+              <li className="text-gray-600">
+                <span className="font-medium">Hours:</span> Monday - Saturday, 9 AM - 6 PM
+              </li>
             </ul>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <hr className="my-12 border-gray-200" />
 
         {/* Copyright */}
-        <motion.div
-          {...fadeInUp}
-          className="pt-8 border-t border-blue-200/20 text-center text-sm text-blue-100"
-        >
+        <div className="text-center text-sm text-gray-600">
           <p>© {currentYear} Sownmark. All rights reserved.</p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
