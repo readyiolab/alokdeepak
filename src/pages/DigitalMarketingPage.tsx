@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
 import { Book, Users, Award, BarChart, Star, CheckCircle, ArrowRight, Play } from 'lucide-react';
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DigitalMarketingPage = () => {
+
+
+  const navigate = useNavigate();
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -68,23 +72,16 @@ const DigitalMarketingPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                to="/contact"
+
                 className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
               >
                 Start Learning
                 <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
-              >
-                <Play className="w-4 h-4" />
-                Watch Demo
-              </motion.button>
+
             </div>
 
             {/* Stats */}
@@ -210,7 +207,7 @@ const DigitalMarketingPage = () => {
                   'Master every aspect of digital marketing with our flagship comprehensive program covering SEO, SEM, Social Media, Content Marketing, Email Marketing, Analytics, and advanced strategies.',
                 duration: '8 weeks',
                 level: 'Beginner to Advanced',
-               
+
                 features: ['Live Sessions', '1-on-1 Mentoring', 'Job Placement Support', 'Lifetime Access'],
                 popular: true,
                 image:
@@ -222,7 +219,7 @@ const DigitalMarketingPage = () => {
                   'Deep dive into SEO strategies and content creation techniques that drive organic traffic, improve rankings, and build lasting audience engagement.',
                 duration: '4 weeks',
                 level: 'Intermediate',
-                
+
                 features: ['SEO Tools Access', 'Content Templates', 'Performance Tracking', 'Expert Reviews'],
                 popular: false,
                 image:
@@ -234,7 +231,7 @@ const DigitalMarketingPage = () => {
                   'Create and execute winning social media strategies across all major platforms with advanced analytics, automation, and community management.',
                 duration: '4 weeks coming soon',
                 level: 'All Levels',
-              
+
                 features: [
                   'Platform Certification',
                   'Campaign Templates',
@@ -291,7 +288,7 @@ const DigitalMarketingPage = () => {
                       <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                         {course.duration}
                       </span>
-                      
+
                     </div>
 
                     <button
@@ -300,7 +297,7 @@ const DigitalMarketingPage = () => {
                         background: 'linear-gradient(135deg, #1a2957, #90abff)',
                         color: 'white',
                       }}
-                      
+                      onClick={() => navigate('/contact')} // Replace with your Contact Us route
                     >
                       Enroll Now
                     </button>
@@ -441,6 +438,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                 onClick={() => navigate('/contact')} 
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
               >
                 Start Your Journey
@@ -450,6 +448,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                 onClick={() => navigate('/contact')} 
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation

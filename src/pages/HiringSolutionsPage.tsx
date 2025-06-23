@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Search, CheckCircle, Clock, Award, Briefcase, ArrowRight, MessageCircle } from 'lucide-react';
 
 
 const HiringSolutionsPage = () => {
+  const navigate = useNavigate();
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -72,6 +73,7 @@ const HiringSolutionsPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                 onClick={() => navigate('/contact')} 
                 className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[200px] justify-center"
               >
                 Get Started
@@ -81,6 +83,7 @@ const HiringSolutionsPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                 onClick={() => navigate('/contact')} 
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[200px] justify-center"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -404,13 +407,14 @@ const HiringSolutionsPage = () => {
                 <ArrowRight className="w-5 h-5" />
               </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
+              <Link
+                to="/contact"
+              
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Learn More
-              </motion.button>
+              </Link>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-blue-200">

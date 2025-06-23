@@ -324,14 +324,7 @@ const BlogPage = () => {
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
-              >
-                <Play className="w-4 h-4" />
-                Watch Tutorials
-              </motion.button>
+             
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
