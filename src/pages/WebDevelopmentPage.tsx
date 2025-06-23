@@ -360,7 +360,7 @@ const technologies = [
         </div>
       </section>
 
-      // Technologies Section
+     
       <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50/30">
         <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-16 lg:mb-20">

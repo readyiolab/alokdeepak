@@ -248,7 +248,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Meet the Team Section - Light Theme */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">
+      {/* <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="container px-4 sm:px-6 md:px-8">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -310,7 +310,7 @@ const AboutUsPage = () => {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Milestones Section - Dark Theme */}
       <section className="py-16 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}>
