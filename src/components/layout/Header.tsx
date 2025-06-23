@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
@@ -9,13 +9,9 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
-  const toggleDropdown = (dropdown: string) => {
-    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
-  };
 
   return (
     <header
@@ -44,61 +40,26 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           >
             Home
           </NavLink>
-
-          {/* Digital Marketing Dropdown */}
-          <div className="relative group">
-            <div
-              className="flex items-center text-sm font-medium text-[#1a2957] hover:text-[#90abff] cursor-pointer transition-colors"
-              onClick={() => toggleDropdown('marketing')}
-            >
-              Digital Marketing
-              <ChevronDown size={16} className="ml-1 text-[#1a2957] group-hover:text-[#90abff]" />
-            </div>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <NavLink
-                to="/digital-marketing-mastery"
-                className="block px-4 py-2 text-sm text-[#1a2957] hover:bg-[#f9fafb] hover:text-[#90abff] rounded-lg"
-                onClick={closeMenu}
-              >
-                Overview
-              </NavLink>
-              <NavLink
-                to="/digital-marketing-mastery#courses"
-                className="block px-4 py-2 text-sm text-[#1a2957] hover:bg-[#f9fafb] hover:text-[#90abff] rounded-lg"
-                onClick={closeMenu}
-              >
-                Courses
-              </NavLink>
-            </div>
-          </div>
-
-          {/* Hiring Solutions Dropdown */}
-          <div className="relative group">
-            <div
-              className="flex items-center text-sm font-medium text-[#1a2957] hover:text-[#90abff] cursor-pointer transition-colors"
-              onClick={() => toggleDropdown('hiring')}
-            >
-              Hiring Solutions
-              <ChevronDown size={16} className="ml-1 text-[#1a2957] group-hover:text-[#90abff]" />
-            </div>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <NavLink
-                to="/hiring-solutions"
-                className="block px-4 py-2 text-sm text-[#1a2957] hover:bg-[#f9fafb] hover:text-[#90abff] rounded-lg"
-                onClick={closeMenu}
-              >
-                Overview
-              </NavLink>
-              <NavLink
-                to="/hiring-solutions#for-companies"
-                className="block px-4 py-2 text-sm text-[#1a2957] hover:bg-[#f9fafb] hover:text-[#90abff] rounded-lg"
-                onClick={closeMenu}
-              >
-                For Companies
-              </NavLink>
-            </div>
-          </div>
-
+          <NavLink
+            to="/digital-marketing-mastery"
+            className={({ isActive }) =>
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${
+                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              }`
+            }
+          >
+            Digital Marketing
+          </NavLink>
+          <NavLink
+            to="/hiring-solutions"
+            className={({ isActive }) =>
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${
+                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              }`
+            }
+          >
+            Hiring Solutions
+          </NavLink>
           <NavLink
             to="/digital-marketing-agency"
             className={({ isActive }) =>
@@ -177,91 +138,24 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                   >
                     Home
                   </NavLink>
-
-                  {/* Mobile Dropdown - Digital Marketing */}
-                  <div>
-                    <div
-                      className="flex items-center justify-between text-base font-medium py-2 text-[#1a2957] hover:text-[#90abff]"
-                      onClick={() => toggleDropdown('marketing')}
-                    >
-                      Digital Marketing
-                      <ChevronDown
-                        size={16}
-                        className={`transition-transform text-[#1a2957] hover:text-[#90abff] ${
-                          activeDropdown === 'marketing' ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </div>
-                    <AnimatePresence>
-                      {activeDropdown === 'marketing' && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden pl-4"
-                        >
-                          <NavLink
-                            to="/digital-marketing-mastery"
-                            className="block text-sm py-1.5 text-[#1a2957] hover:text-[#90abff]"
-                            onClick={closeMenu}
-                          >
-                            Overview
-                          </NavLink>
-                          <NavLink
-                            to="/digital-marketing-mastery#courses"
-                            className="block text-sm py-1.5 text-[#1a2957] hover:text-[#90abff]"
-                            onClick={closeMenu}
-                          >
-                            Courses
-                          </NavLink>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Mobile Dropdown - Hiring Solutions */}
-                  <div>
-                    <div
-                      className="flex items-center justify-between text-base font-medium py-2 text-[#1a2957] hover:text-[#90abff]"
-                      onClick={() => toggleDropdown('hiring')}
-                    >
-                      Hiring Solutions
-                      <ChevronDown
-                        size={16}
-                        className={`transition-transform text-[#1a2957] hover:text-[#90abff] ${
-                          activeDropdown === 'hiring' ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </div>
-                    <AnimatePresence>
-                      {activeDropdown === 'hiring' && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden pl-4"
-                        >
-                          <NavLink
-                            to="/hiring-solutions"
-                            className="block text-sm py-1.5 text-[#1a2957] hover:text-[#90abff]"
-                            onClick={closeMenu}
-                          >
-                            Overview
-                          </NavLink>
-                          <NavLink
-                            to="/hiring-solutions#for-companies"
-                            className="block text-sm py-1.5 text-[#1a2957] hover:text-[#90abff]"
-                            onClick={closeMenu}
-                          >
-                            For Companies
-                          </NavLink>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
+                  <NavLink
+                    to="/digital-marketing-mastery"
+                    className={({ isActive }) =>
+                      `text-base font-medium py-2 ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'}`
+                    }
+                    onClick={closeMenu}
+                  >
+                    Digital Marketing
+                  </NavLink>
+                  <NavLink
+                    to="/hiring-solutions"
+                    className={({ isActive }) =>
+                      `text-base font-medium py-2 ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'}`
+                    }
+                    onClick={closeMenu}
+                  >
+                    Hiring Solutions
+                  </NavLink>
                   <NavLink
                     to="/digital-marketing-agency"
                     className={({ isActive }) =>

@@ -90,21 +90,7 @@ const TestimonialsSection: React.FC = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Buttons */}
-          <button 
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-8 bg-[#223466] rounded-full p-2 shadow-md hover:bg-[#263a6d] transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft size={20} className="text-[#90abff]" />
-          </button>
-          <button 
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-8 bg-[#223466] rounded-full p-2 shadow-md hover:bg-[#263a6d] transition-colors"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight size={20} className="text-[#90abff]" />
-          </button>
+         
         </div>
 
         {/* Indicator dots */}

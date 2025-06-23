@@ -13,11 +13,13 @@ const HomePage: React.FC = () => {
         <title>Sownmark: Your Partner in Digital Growth</title>
         <meta name="description" content="Master digital marketing, find top talent, and drive online success with Sownmark - your comprehensive digital partner." />
       </Helmet>
-      <HeroSection />
-      <ServicesSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <CtaSection />
+      <div className=" bg-white ">
+        <HeroSection />
+        <ServicesSection />
+        <FeaturesSection />
+        <TestimonialsSection />
+        <CtaSection />
+      </div>
     </>
   );
 };

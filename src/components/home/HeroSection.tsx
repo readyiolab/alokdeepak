@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-20 bg-[#f9fafb] overflow-hidden">
-      <div className="container relative z-10 mx-auto px-4 max-w-7xl">
+    <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-20 bg-[#f9fafb] min-h-screen">
+      <div className="container relative z-10 mx-auto px-4 max-w-7xl overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -45,12 +45,12 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 lg:mt-0"
+            className="mt-8 lg:mt-0 relative"
           >
             <img
               src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="Digital Marketing Team Working Together"
-              className="rounded-xl shadow-md object-cover w-full h-auto max-h-[400px] sm:max-h-[500px] mx-auto border border-gray-100"
+              className="rounded-xl shadow-md object-cover w-full h-auto max-h-[400px] sm:max-h-[500px] mx-auto border border-gray-100 max-w-full"
             />
           </motion.div>
         </div>
