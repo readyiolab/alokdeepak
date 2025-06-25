@@ -33,7 +33,7 @@ const HeroSection: React.FC = () => {
                 Hire Top Talent
               </Link>
               <Link
-                to="/contact"
+                to="/contact#contact-form"
                 className="inline-block px-6 py-3 text-sm sm:text-base font-medium bg-[#1a2957] text-white rounded-md hover:bg-[#142145] shadow-sm transition-colors duration-300"
               >
                 Get a Free Consultation

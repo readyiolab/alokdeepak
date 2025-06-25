@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Search, Calendar, Clock, User, ArrowRight, Tag, TrendingUp, BookOpen, Users, Target, Lightbulb, Star, Play, CheckCircle } from 'lucide-react';
-
+import { Helmet } from 'react-helmet';
 const BlogPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -270,6 +270,11 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+        <Helmet>
+    <title>Sownmark: Blog</title>
+    <meta name="description" content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies" />
+    <meta name="keywords" content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips" />
+  </Helmet>
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
@@ -327,25 +332,7 @@ const BlogPage = () => {
              
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
-              {[
-                { number: '50+', label: 'Expert Articles' },
-                { number: '10K+', label: 'Monthly Readers' },
-                { number: '20+', label: 'Contributors' },
-                { number: '5+', label: 'Categories' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                  className="text-center"
-                >
-                  <div className="text-2xl sm:text-3xl font-bold text-white mb-1">{stat.number}</div>
-                  <div className="text-blue-200 text-xs sm:text-sm">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
+            
           </motion.div>
         </div>
       </section>
@@ -626,23 +613,22 @@ const BlogPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
-                onClick={() => window.open('/contact', '_blank')}
+                to='/contact'
               >
                 Get Started Today
                 <ArrowRight className="w-5 h-5" />
-              </motion.button>
+              </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                
+                 to='/contact'
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation
-              </motion.button>
+              </Link>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-blue-200">

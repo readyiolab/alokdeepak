@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Book, Users, Award, BarChart, Star, CheckCircle, ArrowRight, Play } from 'lucide-react';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 const DigitalMarketingPage = () => {
 
 
@@ -25,6 +25,12 @@ const DigitalMarketingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+
+      <Helmet>
+        <title>Sownmark: Digital Marketing Courses</title>
+        <meta name="description" content="Learn digital marketing with live projects, expert mentorship, and job-ready skills. Start your career with Sownmark’s best-rated course" />
+        <meta name="keywords" content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online" />
+      </Helmet>
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
@@ -84,26 +90,7 @@ const DigitalMarketingPage = () => {
 
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
-              {[
-                { number: '5000+', label: 'Students Trained' },
-                { number: '95%', label: 'Success Rate' },
-                { number: '50+', label: 'Industry Partners' },
-                { number: '24/7', label: 'Support Available' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                  className="text-center"
-                >
-                  <div className="text-2xl sm:text-3xl font-bold text-white mb-1">{stat.number}</div>
-                  <div className="text-blue-200 text-xs sm:text-sm">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
+            
           </motion.div>
         </div>
       </section>

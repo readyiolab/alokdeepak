@@ -137,7 +137,8 @@ const technologies = [
   { id: 'nodejs', name: 'Node.js', icon: 'https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg', color: '#339933', category: 'Backend' },
   { id: 'python', name: 'Python', icon: 'https://cdn.worldvectorlogo.com/logos/python-5.svg', color: '#3776AB', category: 'Backend' },
   { id: 'mongodb', name: 'MongoDB', icon: 'https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg', color: '#47A248', category: 'Backend' },
-  { id: 'mysql', name: 'MySQL', icon: 'https://cdn.worldvectorlogo.com/logos/mysql-logo.svg', color: '#4479A1', category: 'Backend' },
+
+  { id: 'mysql', name: 'MySQL', icon: 'https://www.svgrepo.com/show/303251/mysql-logo.svg', color: '#4479A1', category: 'Backend' },
   { id: 'redis', name: 'Redis', icon: 'https://cdn.worldvectorlogo.com/logos/redis.svg', color: '#DC382D', category: 'Backend' },
   // DevOps
   { id: 'aws', name: 'AWS', icon: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg', color: '#FF9900', category: 'DevOps' },
@@ -153,16 +154,14 @@ const technologies = [
   return (
     <>
       <Helmet>
-        <title>Website Development Services | Sownmark</title>
-        <meta
-          name="description"
-          content="Create stunning, high-performing websites that drive results. From custom development to e-commerce solutions."
-        />
-      </Helmet>
+    <title>Sownmark: Web Design Services</title>
+    <meta name="description" content="Get responsive, high-converting websites with Sownmark’s web design services. We build websites that turn visitors into loyal customers" />
+    <meta name="keywords" content="web design services, responsive website design, ecommerce website development, custom website design, UI UX design agency" />
+  </Helmet>
 
       {/* Hero Section */}
       <section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden py-10 sm:py-20 lg:py-24"
         style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2563eb 50%, #3b82f6 100%)' }}
       >
         <div className="absolute inset-0 opacity-20">
@@ -266,7 +265,7 @@ const technologies = [
       </section>
 
       {/* Services Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-50 to-gray-100/50">
+      <section className="py-16 sm:py-20 lg:py-24 ">
         <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-16 lg:mb-20">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
@@ -361,45 +360,63 @@ const technologies = [
       </section>
 
      
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50/30">
-        <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-16 lg:mb-20">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Technologies We Master
-              <span
-                className="block text-transparent bg-clip-text mt-2"
-                style={{ backgroundImage: 'linear-gradient(135deg, #1a2957, #3b82f6, #60a5fa)' }}
-              >
-                to Build Modern Websites
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We leverage the latest tools to deliver scalable, cutting-edge digital solutions.
-            </p>
-          </motion.div>
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
+      <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <motion.div
+          {...fadeInUp}
+          className="text-center mb-12 lg:mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Technologies We Master
+            <span
+              className="block text-transparent bg-clip-text"
+              style={{ backgroundImage: 'linear-gradient(135deg, #1a2957, #3b82f6)' }}
+            >
+              to Build Modern Websites
+            </span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            We harness cutting-edge tools to create scalable, high-performance digital solutions.
+          </p>
+        </motion.div>
 
-          {['Frontend', 'Backend', 'DevOps'].map(category => (
-            <div key={category} className="mb-12">
-              <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6 text-center">{category}</h3>
-              <motion.div
-                variants={staggerContainer}
-                initial="initial"
-                whileInView="whileInView"
-                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6"
-              >
-                {technologies
-                  .filter(tech => tech.category === category)
-                  .map(tech => (
-                    <div key={tech.id} style={{ textAlign: 'center', margin: '1rem' }}>
-                      <img src={tech.icon} alt={tech.name} width="48" height="48" />
-                    
+        {['Frontend', 'Backend', 'DevOps'].map((category) => (
+          <div key={category} className="mb-12">
+            <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">{category}</h3>
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+            >
+              {technologies
+                .filter((tech) => tech.category === category)
+                .map((tech) => (
+                  <motion.div
+                    key={tech.id}
+                    variants={fadeInUp}
+                    className="group relative flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <img
+                      src={tech.icon}
+                      alt={tech.name}
+                      width={48}
+                      height={48}
+                      className="mb-2"
+                      style={{ filter: `drop-shadow(0 0 4px ${tech.color}50)` }}
+                    />
+                    <span className="text-sm font-medium text-gray-700">{tech.name}</span>
+                    <div className="absolute -top-8 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                      {tech.name}
                     </div>
-                  ))}
-              </motion.div>
-            </div>
-          ))}
-        </div>
-      </section>
+                  </motion.div>
+                ))}
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </section>
 
       {/* CTA Section */}
       <section

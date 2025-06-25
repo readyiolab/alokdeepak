@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Twitter, Youtube, Mail } from 'lucide-react';
+import {  Instagram, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -17,9 +17,9 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-4 mt-6">
               {[
-                { icon: <Linkedin size={20} />, href: '#', label: 'LinkedIn' },
+                { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/company/sownmark/posts/?feedView=all', label: 'LinkedIn' },
               
-                { icon: <Instagram size={20} />, href: '#', label: 'Instagram' },
+                { icon: <Instagram size={20} />, href: 'https://www.instagram.com/sownmarkofficial/', label: 'Instagram' },
                
               ].map((social, index) => (
                 <a
@@ -40,9 +40,9 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm">
               {[
                 { to: '/', label: 'Home' },
-                { to: '/digital-marketing', label: 'Digital Marketing' },
+                { to: '/digital-marketing-agency', label: 'Digital Marketing' },
                 { to: '/hiring-solutions', label: 'Hiring Solutions' },
-                { to: '/marketing-agency', label: 'Marketing Agency' },
+                { to: '/digital-marketing-agency', label: 'Marketing Agency' },
                 { to: '/website-development', label: 'Website Development' },
               ].map((link, index) => (
                 <li key={index}>

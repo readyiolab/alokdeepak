@@ -11,9 +11,10 @@ const HomePage: React.FC = () => {
     <>
       <Helmet>
         <title>Sownmark: Your Partner in Digital Growth</title>
-        <meta name="description" content="Master digital marketing, find top talent, and drive online success with Sownmark - your comprehensive digital partner." />
+        <meta name="description" content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career" />
+        <meta name="keywords" content="digital marketing agency, website development company, best digital marketing course, social media marketing agency, SEO company USA" />
       </Helmet>
-      <div className=" bg-white ">
+      <div className="bg-white">
         <HeroSection />
         <ServicesSection />
         <FeaturesSection />

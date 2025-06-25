@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Clock, MapPin, Star, CheckCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import ContactForm from '../components/ui/ContactForm';
+import { useLocation } from 'react-router-dom';
 
 const ContactPage: React.FC = () => {
   const fadeInUp = {
@@ -21,8 +22,28 @@ const ContactPage: React.FC = () => {
     },
   };
 
+
+  useEffect(() => {
+  if (location.hash === '#contact-form') {
+    const scrollToForm = () => {
+      const element = document.getElementById('contact-form');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    // Delay scrolling to ensure animations are complete
+    const timer = setTimeout(scrollToForm, 500); // Adjust delay as needed
+    return () => clearTimeout(timer); // Cleanup
+  }
+}, [location]);
+
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Sownmark: Contact Us</title>
+        <meta name="description" content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We’re here to help!" />
+        <meta name="keywords" content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact" />
+      </Helmet>
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
@@ -103,10 +124,11 @@ const ContactPage: React.FC = () => {
             {/* Contact Form */}
             <div className="lg:col-span-7">
               <motion.div
+              id="contact-form"
                 {...fadeInUp}
-                
+
               >
-                
+
                 <ContactForm />
               </motion.div>
             </div>
@@ -135,13 +157,13 @@ const ContactPage: React.FC = () => {
                         </a>
                       ),
                     },
-                   
+
                     {
                       icon: <Clock className="w-6 h-6 text-white" />,
                       title: 'Operating Hours',
                       content: <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>,
                     },
-                    
+
                   ].map((item, index) => (
                     <motion.div key={index} variants={fadeInUp} className="flex items-start">
                       <div
@@ -163,7 +185,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-  
+
 
       {/* CTA Section - Light Theme */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">

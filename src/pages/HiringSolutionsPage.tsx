@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Search, CheckCircle, Clock, Award, Briefcase, ArrowRight, MessageCircle } from 'lucide-react';
-
+import { Helmet } from 'react-helmet';
 
 const HiringSolutionsPage = () => {
   const navigate = useNavigate();
@@ -24,7 +24,11 @@ const HiringSolutionsPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-
+<Helmet>
+    <title>Sownmark: Hiring Solutions</title>
+    <meta name="description" content="Hire top talent faster with Sownmark's hiring solution. We connect companies with skilled professionals across multiple industries" />
+    <meta name="keywords" content="hiring solutions for companies, digital marketing agency, recruitment services USA, job placement agency, best hiring agency" />
+  </Helmet>
 
       {/* Hero Section - Vibrant Theme */}
       <section
@@ -91,25 +95,7 @@ const HiringSolutionsPage = () => {
               </motion.button>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
-              {[
-                { number: '10K+', label: 'Candidates Placed' },
-                { number: '98%', label: 'Client Satisfaction' },
-                { number: '200+', label: 'Partner Companies' },
-                { number: '24/7', label: 'Support' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                  className="text-center"
-                >
-                  <div className="text-2xl sm:text-3xl font-bold text-white mb-1">{stat.number}</div>
-                  <div className="text-blue-200 text-xs sm:text-sm">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
+            
           </motion.div>
         </div>
       </section>

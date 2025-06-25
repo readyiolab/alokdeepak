@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Lightbulb, Award, Shield, Star, ArrowRight, Play, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const AboutUsPage = () => {
   const fadeInUp = {
@@ -47,39 +49,6 @@ const AboutUsPage = () => {
     },
   ];
 
-  const teamMembers = [
-    {
-      name: 'John Doe',
-      designation: 'Founder & CEO',
-      bio: 'Visionary leader passionate about digital transformation and empowering talent.',
-      image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      name: 'Jane Smith',
-      designation: 'Head of Education',
-      bio: 'Seasoned digital marketer with expertise in developing engaging curricula.',
-      image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      name: 'Michael Brown',
-      designation: 'Head of Recruitment',
-      bio: 'Experienced talent acquisition specialist connecting businesses with top professionals.',
-      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      name: 'Emily Davis',
-      designation: 'Head of Agency',
-      bio: 'Strategic digital marketing leader driving client success and ROI.',
-      image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-    {
-      name: 'David Wilson',
-      designation: 'Lead Web Developer',
-      bio: 'Creative and skilled developer crafting exceptional online experiences.',
-      image: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=800',
-    },
-  ];
-
   const milestones = [
     { year: '2023', event: 'Sownmark Founded' },
     { year: '2024', event: 'Launched First Masterclass' },
@@ -88,9 +57,15 @@ const AboutUsPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+
+        <Helmet>
+    <title>Sownmark: About Us</title>
+    <meta name="description" content="Learn more about Sownmark’s mission, team, and vision. Discover why businesses and students trust us to deliver results and growth" />
+    <meta name="keywords" content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are" />
+  </Helmet>
       {/* Hero Section - Dark Theme */}
       <section
-        className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
+        className="relative min-h-[100vh] flex items-center justify-center overflow-hidden py-6"
         style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}
       >
         <div className="absolute inset-0 opacity-10">
@@ -137,26 +112,16 @@ const AboutUsPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
-                onClick={() => window.open('/contact', '_blank')}
               >
                 Connect With Us
                 <ArrowRight className="w-4 h-4" />
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
-              >
-                <Play className="w-4 h-4" />
-                Watch Our Story
               </motion.button>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {[
                 { number: '50+', label: 'Industry Partners' },
-                { number: '5K+', label: 'Professionals Trained' },
+                { number: '1K+', label: 'Professionals Trained' },
                 { number: '3+', label: 'Years of Impact' },
                 { number: '100+', label: 'Projects Delivered' },
               ].map((stat, index) => (
@@ -247,82 +212,20 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Meet the Team Section - Light Theme */}
+      {/* Milestones Section - Light Theme */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="container px-4 sm:px-6 md:px-8">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              The Sownmark
+              Our Key
               <span
                 className="block text-transparent bg-clip-text"
                 style={{ backgroundImage: 'linear-gradient(135deg, #1a2957, #90abff)' }}
               >
-                Team
-              </span>
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Meet the passionate experts driving Sownmark’s mission to empower digital success.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="group relative"
-              >
-                <div className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-2 h-full">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute top-3 right-3">
-                      <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-2 py-1 rounded-full text-xs font-semibold">
-                        {member.designation}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{member.name}</h3>
-                    <p className="text-gray-600 text-sm mb-5 leading-relaxed">{member.bio}</p>
-                    <button
-                      className="w-full py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                      style={{
-                        background: 'linear-gradient(135deg, #1a2957, #90abff)',
-                        color: 'white',
-                      }}
-                    >
-                      Connect
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Milestones Section - Dark Theme */}
-      <section className="py-16 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}>
-        <div className="container px-4 sm:px-6 md:px-8">
-          <motion.div {...fadeInUp} className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Our Key
-              <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
                 Milestones
               </span>
             </h2>
-            <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
               A glimpse into our journey of growth and impact in the digital space.
             </p>
           </motion.div>
@@ -334,7 +237,7 @@ const AboutUsPage = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
             {milestones.map((milestone, index) => (
               <motion.div
                 key={index}
@@ -342,7 +245,7 @@ const AboutUsPage = () => {
                 className={`flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} relative`}
               >
                 <div className="w-1/2 px-4">
-                  <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 group-hover:border-blue-200">
+                  <div className="bg-white p-4 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 group-hover:border-blue-200">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative z-10">
                       <h3 className="text-lg font-semibold text-gray-900">{milestone.year}</h3>
@@ -387,23 +290,24 @@ const AboutUsPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                
+                
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
-                onClick={() => window.open('/contact', '_blank')}
+                to='/contact'
               >
                 Contact Sownmark
                 <ArrowRight className="w-5 h-5" />
-              </motion.button>
+              </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+              
+                 to='/contact'
+                
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation
-              </motion.button>
+              </Link>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-blue-200">

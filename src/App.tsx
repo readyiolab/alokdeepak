@@ -16,6 +16,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import BlogPage from './pages/BlogPage';
 import AboutUsPage from './pages/AboutUsPage';
 import BlogPostPage from './pages/BlogPostPage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="about" element={<AboutUsPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-conditions" element={<TermsAndConditions />} />
         </Route>
       </Routes>
     </AnimatePresence>
