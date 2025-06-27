@@ -1,10 +1,26 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate ,useLocation} from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Search, CheckCircle, Clock, Award, Briefcase, ArrowRight, MessageCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet';
+import {useEffect} from 'react';
 
 const HiringSolutionsPage = () => {
+
+   useEffect(() => {
+    if (location.hash === '#hire-top-talent') {
+      const scrollToForm = () => {
+        const element = document.getElementById('hire-top-talent');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+      // Delay scrolling to ensure animations are complete
+      const timer = setTimeout(scrollToForm, 500); // Adjust delay as needed
+      return () => clearTimeout(timer); // Cleanup
+    }
+  }, [location]);
+
   const navigate = useNavigate();
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -77,7 +93,7 @@ const HiringSolutionsPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact')} 
+                 onClick={() => navigate('/contact#contact-form')} 
                 className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[200px] justify-center"
               >
                 Get Started
@@ -87,7 +103,7 @@ const HiringSolutionsPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact')} 
+                 onClick={() => navigate('/contact#contact-form')} 
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[200px] justify-center"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -163,7 +179,7 @@ const HiringSolutionsPage = () => {
       </section>
 
       {/* Domains Section - Dark Theme */}
-      <section className="py-16 sm:py-20" style={{ background: 'linear-gradient(135deg, #2a4365 0%, #4c7bb8 100%)' }}>
+      <section id='hire-top-talent' className="py-16 sm:py-20" style={{ background: 'linear-gradient(135deg, #2a4365 0%, #4c7bb8 100%)' }}>
         <div className="container px-4 sm:px-6 md:px-8">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -386,7 +402,7 @@ const HiringSolutionsPage = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <Link
-                to="/contact"
+                to="/contact#contact-form"
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
               >
                 Schedule Consultation
@@ -394,7 +410,7 @@ const HiringSolutionsPage = () => {
               </Link>
 
               <Link
-                to="/contact"
+                to="/contact#contact-form"
               
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"

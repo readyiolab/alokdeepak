@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Search, Calendar, Clock, User, ArrowRight, Tag, TrendingUp, BookOpen, Users, Target, Lightbulb, Star, Play, CheckCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet';
+import NewsletterForm from './NewsletterForm';
+
 const BlogPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -490,31 +492,7 @@ const BlogPage = () => {
 
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-8">
-                <motion.div {...fadeInUp} className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="relative z-10">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Subscribe to Our Newsletter</h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      Get the latest insights delivered directly to your inbox.
-                    </p>
-                    <div className="space-y-3">
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                      <button
-                        className="w-full py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                        style={{
-                          background: 'linear-gradient(135deg, #1a2957, #90abff)',
-                          color: 'white',
-                        }}
-                      >
-                        Subscribe Now
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
+               <NewsletterForm/>
 
                 <motion.div {...fadeInUp} className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -616,7 +594,7 @@ const BlogPage = () => {
               <Link
                 
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
-                to='/contact'
+                to='/contact#contact-form'
               >
                 Get Started Today
                 <ArrowRight className="w-5 h-5" />
@@ -624,7 +602,7 @@ const BlogPage = () => {
 
               <Link
                 
-                 to='/contact'
+                 to='/contact#contact-form'
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation

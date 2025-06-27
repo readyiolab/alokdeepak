@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-20 bg-[#f9fafb] min-h-screen">
+    <section className="relative pt-20 pb-16 sm:pt-28 sm:pb-20 bg-[#f9fafb] min-h-screen">
       <div className="container relative z-10 mx-auto px-4 max-w-7xl overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <motion.div
@@ -21,13 +22,13 @@ const HeroSection: React.FC = () => {
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-4">
               <Link
-                to="/digital-marketing-mastery"
+                to="/digital-marketing-mastery#courses"
                 className="inline-block px-6 py-3 text-sm sm:text-base font-medium bg-[#1a2957] text-white rounded-md hover:bg-[#142145] shadow-sm transition-colors duration-300"
               >
                 Explore Courses
               </Link>
               <Link
-                to="/hiring-solutions"
+                to="/hiring-solutions#hire-top-talent"
                 className="inline-block px-6 py-3 text-sm sm:text-base font-medium bg-white border-2 border-[#1a2957] text-[#1a2957] rounded-md hover:bg-[#1a2957] hover:text-white shadow-sm transition-colors duration-300"
               >
                 Hire Top Talent
@@ -48,7 +49,7 @@ const HeroSection: React.FC = () => {
             className="mt-8 lg:mt-0 relative"
           >
             <img
-              src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src="./hero.webp"
               alt="Digital Marketing Team Working Together"
               className="rounded-xl shadow-md object-cover w-full h-auto max-h-[400px] sm:max-h-[500px] mx-auto border border-gray-100 max-w-full"
             />

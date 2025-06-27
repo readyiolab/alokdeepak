@@ -47,6 +47,12 @@ const ContactForm: React.FC = () => {
       newErrors.email = 'Email is invalid';
     }
 
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\+?\d{10,15}$/.test(formData.phone.replace(/\s/g, ''))) {
+      newErrors.phone = 'Phone number is invalid (must be 10-15 digits)';
+    }
+
     if (!formData.subject) {
       newErrors.subject = 'Please select a subject';
     }
@@ -75,9 +81,21 @@ const ContactForm: React.FC = () => {
     setSubmitError(false);
 
     try {
-      // Simulate API call
-      console.log('Form submitted:', formData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/contact/contact-messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit form');
+      }
+
+      const result = await response.json();
+      console.log('Form submitted:', result);
 
       // Reset form
       setFormData({
@@ -90,8 +108,9 @@ const ContactForm: React.FC = () => {
       });
 
       setSubmitSuccess(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting form:', error);
+      setErrors({ submit: error.message || 'There was a problem sending your message. Please try again.' });
       setSubmitError(true);
     } finally {
       setIsSubmitting(false);
@@ -113,7 +132,7 @@ const ContactForm: React.FC = () => {
 
       {submitError && (
         <div className="mb-6 p-4 bg-red-500/10 text-red-600 rounded-xl">
-          There was a problem sending your message. Please try again.
+          {errors.submit || 'There was a problem sending your message. Please try again.'}
         </div>
       )}
 
@@ -155,7 +174,7 @@ const ContactForm: React.FC = () => {
 
       <div className="mb-4">
         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-          Phone Number 
+          Phone Number <span className="text-red-600">*</span>
         </label>
         <input
           type="tel"
@@ -163,9 +182,12 @@ const ContactForm: React.FC = () => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]"
+          className={`w-full px-4 py-2 border ${
+            errors.phone ? 'border-red-600' : 'border-gray-300'
+          } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
           placeholder="Your phone number"
         />
+        {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
       </div>
 
       <div className="mb-4">

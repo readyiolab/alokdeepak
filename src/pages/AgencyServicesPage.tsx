@@ -167,7 +167,7 @@ const AgencyServicesPage: React.FC = () => {
               className="inline-flex group"
             >
               <Link
-                to="/contact"
+                to="/contact#contact-form"
                 className="bg-white text-gray-900 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-100 hover:shadow-2xl transition-all duration-300 flex items-center gap-3 min-w-[220px] justify-center shadow-xl"
                 aria-label="Get Started with Sownmark"
               >
@@ -358,7 +358,7 @@ const AgencyServicesPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="group">
                 <Link
-                  to="/contact"
+                  to="/contact#contact-form"
                   className="bg-white text-gray-900 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 flex items-center gap-3 min-w-[250px] justify-center shadow-2xl w-full sm:w-auto"
                   aria-label="Schedule a Free Consultation with Sownmark"
                 >

@@ -18,6 +18,7 @@ import AboutUsPage from './pages/AboutUsPage';
 import BlogPostPage from './pages/BlogPostPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
+import UnsubscribeForm from './pages/UnsubscribeForm';
 
 function App() {
   return (
@@ -35,7 +36,8 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          <Route path="/unsubscribe" element={<UnsubscribeForm />} />
         </Route>
       </Routes>
     </AnimatePresence>

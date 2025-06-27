@@ -1,9 +1,23 @@
 import { motion } from 'framer-motion';
 import { Book, Users, Award, BarChart, Star, CheckCircle, ArrowRight, Play } from 'lucide-react';
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {useEffect} from 'react';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 const DigitalMarketingPage = () => {
+
+  useEffect(() => {
+    if (location.hash === '#courses') {
+      const scrollToForm = () => {
+        const element = document.getElementById('courses');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+      // Delay scrolling to ensure animations are complete
+      const timer = setTimeout(scrollToForm, 500); // Adjust delay as needed
+      return () => clearTimeout(timer); // Cleanup
+    }
+  }, [location]);
 
 
   const navigate = useNavigate();
@@ -79,7 +93,7 @@ const DigitalMarketingPage = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
               <Link
-                to="/contact"
+                to="/contact#contact-form"
 
                 className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
               >
@@ -165,7 +179,7 @@ const DigitalMarketingPage = () => {
       </section>
 
       {/* Courses Section - Dark Theme */}
-      <section className="py-16 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}>
+      <section id='courses' className="py-16 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}>
         <div className="container px-4 sm:px-6 md:px-8">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -284,7 +298,7 @@ const DigitalMarketingPage = () => {
                         background: 'linear-gradient(135deg, #1a2957, #90abff)',
                         color: 'white',
                       }}
-                      onClick={() => navigate('/contact')} // Replace with your Contact Us route
+                      onClick={() => navigate('/contact#contact-form')} // Replace with your Contact Us route
                     >
                       Enroll Now
                     </button>
@@ -324,33 +338,33 @@ const DigitalMarketingPage = () => {
           >
             {[
               {
-                name: 'Sarah Johnson',
+                name: 'Ishika Patel',
                 role: 'Digital Marketing Manager',
                 company: 'Tech Innovators',
                 image:
-                  'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400',
+                  './stud.webp',
                 testimonial:
                   'The comprehensive curriculum and hands-on projects helped me secure my dream role as a Digital Marketing Manager. The practical approach made all the difference in my career transition.',
                 rating: 5,
                 achievement: '300% salary increase',
               },
               {
-                name: 'Michael Chen',
+                name: 'Dhruv Mehta',
                 role: 'SEO Specialist',
                 company: 'Growth Digital',
                 image:
-                  'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
+                  './stud2.webp',
                 testimonial:
                   'The SEO module was incredibly detailed and practical. I now lead SEO strategy for multiple high-profile clients and have seen consistent 200%+ traffic growth.',
                 rating: 5,
                 achievement: 'Lead SEO Strategist in 6 months',
               },
               {
-                name: 'Emma Thompson',
+                name: 'Akash Verma',
                 role: 'Social Media Strategist',
                 company: 'Creative Agency',
                 image:
-                  'https://images.pexels.com/photos/1542085/pexels-photo-1542085.jpeg?auto=compress&cs=tinysrgb&w=400',
+                  './stud3.webp',
                 testimonial:
                   "Thanks to Sownmark's course, I've doubled my clients' social media engagement and grown their following significantly. The real-world projects were invaluable.",
                 rating: 5,
@@ -425,7 +439,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact')} 
+                 onClick={() => navigate('/contact#contact-form')} 
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
               >
                 Start Your Journey
@@ -435,7 +449,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact')} 
+                 onClick={() => navigate('/contact#contact-form')} 
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation

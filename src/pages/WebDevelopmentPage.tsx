@@ -203,7 +203,7 @@ const technologies = [
               className="inline-flex group"
             >
               <Link
-                to="/contact"
+                to="/contact#contact-form"
                 className="bg-white text-gray-900 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-100 hover:shadow-2xl transition-all duration-300 flex items-center gap-3 min-w-[220px] justify-center shadow-xl"
                 aria-label="Get Started with Sownmark Web Development"
               >
@@ -396,7 +396,7 @@ const technologies = [
                   <motion.div
                     key={tech.id}
                     variants={fadeInUp}
-                    className="group relative flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                    className="group relative flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                   >
                     <img
                       src={tech.icon}
@@ -443,7 +443,7 @@ const technologies = [
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="group h-full">
                 <Link
-                  to="/contact"
+                  to="/contact#contact-form"
                   className="bg-white text-gray-900 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 flex items-center gap-3 min-w-[250px] justify-center w-full sm:w-auto shadow-2xl"
                   aria-label="Schedule a Free Website Consultation with Sownmark"
                 >

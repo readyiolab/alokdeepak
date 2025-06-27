@@ -4,28 +4,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const testimonials = [
   {
-    quote: "Sownmark's digital marketing course transformed my career. The instructors were knowledgeable and the content was relevant and up-to-date. Highly recommend!",
-    name: "Sarah Johnson",
-    designation: "Digital Marketing Manager",
-    image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600"
+    quote: "Sownmark turned our vision into a sleek, responsive website that truly reflects our brand. Their team was fast, professional, and always ready to listen. We've seen a 40% increase in online inquiries since launch!",
+    name: "Sarah Mitchell",
+    designation: " Founder – GreenGlow Skincare, California",
+    image: "./pro.webp"
   },
   {
-    quote: "We found our ideal digital marketing specialist through Sownmark's hiring services. Their team understood exactly what we needed and delivered exceptional candidates. Efficient and professional.",
-    name: "David Chen",
-    designation: "CEO, TechGrowth Inc.",
-    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600"
+    quote: "I’ve worked with several agencies before, but Sownmark’s web development team stands out. They delivered a flawless site ahead of schedule and ensured every detail was pixel-perfect. Highly recommended for U.S. businesses!",
+    name: "Emily Rogers",
+    designation: "CEO – TechNurture LLC, New York",
+    image: "./pro2.webp"
   },
   {
-    quote: "Our website built by Sownmark not only looks great but also performs exceptionally well. The team was responsive, creative, and technically skilled. Fantastic job!",
-    name: "Michael Rodriguez",
-    designation: "Founder, Bright Solutions",
-    image: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600"
+    quote: "From layout to speed optimization, every element of our site was executed with precision. Sownmark's communication was outstanding and the results exceeded our expectations. Our new site brought in more leads within the first week!",
+    name: "Jessica Cole",
+    designation: "Owner – Cole Interiors, Texas",
+    image: "./pro3.webp"
   },
   {
-    quote: "The social media strategy Sownmark developed for our brand led to a 200% increase in engagement and a significant boost in conversions. Their expertise is unmatched.",
-    name: "Emma Thompson",
-    designation: "Marketing Director, StyleHub",
-    image: "https://images.pexels.com/photos/1542085/pexels-photo-1542085.jpeg?auto=compress&cs=tinysrgb&w=600"
+    quote: "I was impressed with Sownmark’s expertise and dedication. They built us a fast, mobile-friendly site that looks great and performs even better. Their support team is also incredibly responsive and helpful.",
+    name: "Mark Dawson",
+    designation: "Director – Dawson Freight Co., Florida",
+    image: "./pro4.webp"
   }
 ];
 
