@@ -49,7 +49,7 @@ const HeroSection: React.FC = () => {
             className="mt-8 lg:mt-0 relative"
           >
             <img
-              src="./hero.webp"
+              src="./digitall.webp"
               alt="Digital Marketing Team Working Together"
               className="rounded-xl shadow-md object-cover w-full h-auto max-h-[400px] sm:max-h-[500px] mx-auto border border-gray-100 max-w-full"
             />

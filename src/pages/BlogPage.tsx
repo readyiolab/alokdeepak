@@ -273,7 +273,7 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-white">
         <Helmet>
-    <title>Sownmark: Blog</title>
+    <title> Digital Marketing & Tech Blog | Sownmark</title>
     <meta name="description" content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies" />
     <meta name="keywords" content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips" />
   </Helmet>

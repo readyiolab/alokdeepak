@@ -1,6 +1,7 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import GA4Tracker from './analytics/GA4Tracker';
 
 // Layouts
 import MainLayout from './layouts/MainLayout';
@@ -19,10 +20,18 @@ import BlogPostPage from './pages/BlogPostPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import UnsubscribeForm from './pages/UnsubscribeForm';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminLayout from './components/admin/AdminLayout';
+import AdminDashboard from './components/admin/AdminDashboard';
+import BlogForm from './components/admin/BlogForm';
+import BlogList from './components/admin/BlogList';
+import BlogDetail from './components/admin/BlogDetail';
+
 
 function App() {
   return (
     <AnimatePresence mode="wait">
+      <GA4Tracker />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
@@ -38,6 +47,14 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsAndConditions />} />
           <Route path="/unsubscribe" element={<UnsubscribeForm />} />
+        </Route>
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="blog/create" element={<BlogForm />} />
+          <Route path="blog/edit/:id" element={<BlogForm isEdit={true} />} />
+          <Route path="blogs" element={<BlogList />} />
+          <Route path="blog/:id" element={<BlogDetail />} />
         </Route>
       </Routes>
     </AnimatePresence>

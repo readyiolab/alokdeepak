@@ -1,11 +1,76 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, Clock, MapPin, Star, CheckCircle } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, Clock, MapPin, Star, CheckCircle, ChevronDown } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import ContactForm from '../components/ui/ContactForm';
 import { useLocation } from 'react-router-dom';
 
-const ContactPage: React.FC = () => {
+const ContactPage = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const faqs = [
+    {
+      question: "What is Sownmark and what services does it offer?",
+      answer: "Sownmark is a leading digital solutions company in India, offering digital marketing courses for students, digital marketing services for businesses, web development, and hiring solutions for companies in IT, BPO, sales, and digital marketing domains.",
+    },
+    {
+      question: "Who can join the Sownmark Digital Marketing Course?",
+      answer: "Our digital marketing course is ideal for students, freshers, entrepreneurs, and working professionals looking to upskill in SEO, Google Ads, social media marketing, content marketing, and more. No prior experience is needed.",
+    },
+    {
+      question: "Is the Sownmark digital marketing course 100% practical?",
+      answer: "Yes, our course includes 100% hands-on training, live projects, real-time tools, and practical assignments to help students gain industry-ready skills in SEO, PPC, email marketing, social media, and analytics.",
+    },
+    {
+      question: "What kind of businesses does Sownmark serve for digital marketing?",
+      answer: "We serve startups, small businesses, and large enterprises with result-driven digital marketing services including SEO services, Facebook & Google Ads, content marketing, social media management, and lead generation.",
+    },
+    {
+      question: "How does Sownmark help companies with hiring solutions?",
+      answer: "Sownmark provides end-to-end hiring solutions for companies in IT, sales, BPO, and digital marketing sectors. We offer pre-vetted candidates, skill-based assessments, and fast hiring processes to scale your workforce efficiently.",
+    },
+    {
+      question: "What makes Sownmark a reliable web development company?",
+      answer: "We specialize in responsive website design, ecommerce website development, and custom web solutions using the latest tech stacks. Our websites are SEO-optimized, mobile-friendly, and performance-focused to generate leads and conversions.",
+    },
+    {
+      question: "Can startups benefit from your digital marketing services?",
+      answer: "Absolutely! Our startup digital marketing packages are tailored to maximize ROI with affordable SEO, PPC campaigns, social media growth, and website traffic generation strategies that deliver real business results.",
+    },
+    {
+      question: "Does Sownmark offer placement after completing the digital marketing course?",
+      answer: "Yes. We provide placement assistance, resume-building support, mock interviews, and access to our partner companies looking to hire skilled digital marketers across India and globally.",
+    },
+    {
+      question: "What is the duration of the digital marketing course?",
+      answer: "Our comprehensive digital marketing course runs for 8–12 weeks, depending on the batch. You can choose between weekend, weekday, or online batches as per your convenience.",
+    },
+    {
+      question: "What industries do you offer hiring services for?",
+      answer: "We provide hiring services for IT companies, digital marketing agencies, call centers (BPO), eCommerce firms, and startups needing skilled talent in sales, marketing, web development, and customer support.",
+    },
+    {
+      question: "Are Sownmark’s services available across India and internationally?",
+      answer: "Yes, Sownmark works with clients across India, the US, UK, Canada, and other Tier 1 countries, delivering remote web development, outsourced digital marketing, and hiring solutions for global business needs.",
+    },
+    {
+      question: "How do I get a quote for digital marketing or web development?",
+      answer: "You can contact us through the Contact Us page or email us directly at hello@sownmark.com. Share your business goals and we’ll provide a customized strategy and quote for your project.",
+    },
+    {
+      question: "What platforms does Sownmark use for digital marketing?",
+      answer: "We use platforms like Google Ads, Facebook Ads, Instagram, LinkedIn, YouTube, Mailchimp, WordPress, and Shopify, depending on your business type and goals.",
+    },
+    {
+      question: "Do you offer SEO services separately?",
+      answer: "Yes, we offer standalone SEO services focused on Google ranking, keyword optimization, backlink building, content SEO, and technical SEO audits to improve organic traffic and visibility.",
+    },
+    {
+      question: "Is your hiring service suitable for remote teams?",
+      answer: "Yes, our remote hiring solutions connect you with vetted professionals across India and other countries. We help you build a productive, remote-ready team at cost-effective rates.",
+    },
+  ];
+
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -22,34 +87,42 @@ const ContactPage: React.FC = () => {
     },
   };
 
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   useEffect(() => {
-  if (location.hash === '#contact-form') {
-    const scrollToForm = () => {
-      const element = document.getElementById('contact-form');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-    // Delay scrolling to ensure animations are complete
-    const timer = setTimeout(scrollToForm, 500); // Adjust delay as needed
-    return () => clearTimeout(timer); // Cleanup
-  }
-}, [location]);
+    if (location.hash === '#contact-form') {
+      const scrollToForm = () => {
+        const element = document.getElementById('contact-form');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+      const timer = setTimeout(scrollToForm, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Sownmark: Contact Us</title>
-        <meta name="description" content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We’re here to help!" />
-        <meta name="keywords" content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact" />
+        <title>Contact Sownmark | Get Digital Solutions Today</title>
+        <meta
+          name="description"
+          content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We’re here to help!"
+        />
+        <meta
+          name="keywords"
+          content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
+        />
       </Helmet>
+
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}
       >
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -68,14 +141,6 @@ const ContactPage: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <Helmet>
-              <title>Contact Us | Sownmark</title>
-              <meta
-                name="description"
-                content="Get in touch with Sownmark. We're here to answer your questions and help you achieve your digital goals."
-              />
-            </Helmet>
-
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -123,12 +188,7 @@ const ContactPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Contact Form */}
             <div className="lg:col-span-7">
-              <motion.div
-              id="contact-form"
-                {...fadeInUp}
-
-              >
-
+              <motion.div id="contact-form" {...fadeInUp}>
                 <ContactForm />
               </motion.div>
             </div>
@@ -157,13 +217,11 @@ const ContactPage: React.FC = () => {
                         </a>
                       ),
                     },
-
                     {
                       icon: <Clock className="w-6 h-6 text-white" />,
                       title: 'Operating Hours',
                       content: <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>,
                     },
-
                   ].map((item, index) => (
                     <motion.div key={index} variants={fadeInUp} className="flex items-start">
                       <div
@@ -185,7 +243,69 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
+      {/* FAQs Section - Dark Theme */}
+      <section
+        className="py-16 sm:py-20"
+        style={{ background: 'linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)' }}
+      >
+        <div className="container px-4 sm:px-6 md:px-8">
+          <motion.div {...fadeInUp} className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Frequently Asked
+              <span
+                className="block text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg, #ffffff, #90abff)' }}
+              >
+                Questions
+              </span>
+            </h2>
+            <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
+              Find answers to common questions about our services, courses, and more.
+            </p>
+          </motion.div>
 
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20 overflow-hidden"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none transition-colors duration-200 hover:bg-white/20"
+                >
+                  <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                  <ChevronDown
+                    className={`w-5 h-5 text-blue-200 transform transition-transform duration-200 ${
+                      openIndex === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-6 pb-4"
+                    >
+                      <p className="text-blue-100">{faq.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* CTA Section - Light Theme */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">

@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm">
               {[
                 { to: '/', label: 'Home' },
-                { to: '/digital-marketing-agency', label: 'Digital Marketing' },
+                { to: '/digital-marketing-mastery', label: 'Digital Marketing' },
                 { to: '/hiring-solutions', label: 'Hiring Solutions' },
                 { to: '/digital-marketing-agency', label: 'Marketing Agency' },
                 { to: '/website-development', label: 'Website Development' },

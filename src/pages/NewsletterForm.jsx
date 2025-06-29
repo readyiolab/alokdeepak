@@ -33,7 +33,7 @@ const NewsletterForm = () => {
     setSubmitSuccess(false);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/newsletter/subscriptions`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/subscriptions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -59,7 +59,7 @@ const AboutUsPage = () => {
     <div className="min-h-screen bg-white">
 
         <Helmet>
-    <title>Sownmark: About Us</title>
+    <title> About Sownmark | Digital Growth Experts</title>
     <meta name="description" content="Learn more about Sownmark’s mission, team, and vision. Discover why businesses and students trust us to deliver results and growth" />
     <meta name="keywords" content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are" />
   </Helmet>
