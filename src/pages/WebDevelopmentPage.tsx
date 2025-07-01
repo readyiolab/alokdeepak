@@ -127,38 +127,45 @@ const WebDevelopmentPage: React.FC = () => {
     },
   ];
 
-const technologies = [
-  // Frontend
-  { id: 'html', name: 'HTML', icon: 'https://cdn.worldvectorlogo.com/logos/html-1.svg', color: '#E34F26', category: 'Frontend' },
-  { id: 'css', name: 'CSS', icon: 'https://cdn.worldvectorlogo.com/logos/css-3.svg', color: '#1572B6', category: 'Frontend' },
-  { id: 'react', name: 'React', icon: 'https://cdn.worldvectorlogo.com/logos/react-2.svg', color: '#61DAFB', category: 'Frontend' },
-  { id: 'react-native', name: 'React Native', icon: 'https://cdn.worldvectorlogo.com/logos/react-2.svg', color: '#61DAFB', category: 'Frontend' },
-  // Backend
-  { id: 'nodejs', name: 'Node.js', icon: 'https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg', color: '#339933', category: 'Backend' },
-  { id: 'python', name: 'Python', icon: 'https://cdn.worldvectorlogo.com/logos/python-5.svg', color: '#3776AB', category: 'Backend' },
-  { id: 'mongodb', name: 'MongoDB', icon: 'https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg', color: '#47A248', category: 'Backend' },
+  const technologies = [
+    // Frontend
+    { id: 'html', name: 'HTML', icon: 'https://cdn.worldvectorlogo.com/logos/html-1.svg', color: '#E34F26', category: 'Frontend' },
+    { id: 'css', name: 'CSS', icon: 'https://cdn.worldvectorlogo.com/logos/css-3.svg', color: '#1572B6', category: 'Frontend' },
+    { id: 'react', name: 'React', icon: 'https://cdn.worldvectorlogo.com/logos/react-2.svg', color: '#61DAFB', category: 'Frontend' },
+    { id: 'react-native', name: 'React Native', icon: 'https://cdn.worldvectorlogo.com/logos/react-2.svg', color: '#61DAFB', category: 'Frontend' },
+    // Backend
+    { id: 'nodejs', name: 'Node.js', icon: 'https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg', color: '#339933', category: 'Backend' },
+    { id: 'python', name: 'Python', icon: 'https://cdn.worldvectorlogo.com/logos/python-5.svg', color: '#3776AB', category: 'Backend' },
+    { id: 'mongodb', name: 'MongoDB', icon: 'https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg', color: '#47A248', category: 'Backend' },
 
-  { id: 'mysql', name: 'MySQL', icon: 'https://www.svgrepo.com/show/303251/mysql-logo.svg', color: '#4479A1', category: 'Backend' },
-  { id: 'redis', name: 'Redis', icon: 'https://cdn.worldvectorlogo.com/logos/redis.svg', color: '#DC382D', category: 'Backend' },
-  // DevOps
-  { id: 'aws', name: 'AWS', icon: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg', color: '#FF9900', category: 'DevOps' },
-  { id: 'digitalocean', name: 'DigitalOcean', icon: 'https://cdn.worldvectorlogo.com/logos/digitalocean.svg', color: '#0080FF', category: 'DevOps' },
-  { id: 'git', name: 'Git', icon: 'https://cdn.worldvectorlogo.com/logos/git-icon.svg', color: '#F05032', category: 'DevOps' },
-  { id: 'github', name: 'GitHub', icon: 'https://cdn.worldvectorlogo.com/logos/github-icon.svg', color: '#181717', category: 'DevOps' },
-  { id: 'jenkins', name: 'Jenkins', icon: 'https://cdn.worldvectorlogo.com/logos/jenkins-1.svg', color: '#D24939', category: 'DevOps' },
-  { id: 'linux', name: 'Linux', icon: 'https://cdn.worldvectorlogo.com/logos/linux-tux.svg', color: '#FCC624', category: 'DevOps' },
-  { id: 'nginx', name: 'Nginx', icon: 'https://cdn.worldvectorlogo.com/logos/nginx.svg', color: '#009639', category: 'DevOps' },
-  { id: 'pm2', name: 'PM2', icon: 'https://cdn.worldvectorlogo.com/logos/pm2.svg', color: '#2F2E8B', category: 'DevOps' },
-  { id: 'ubuntu', name: 'Ubuntu', icon: 'https://cdn.worldvectorlogo.com/logos/ubuntu-2.svg', color: '#E95420', category: 'DevOps' }
-];
+    { id: 'mysql', name: 'MySQL', icon: 'https://www.svgrepo.com/show/303251/mysql-logo.svg', color: '#4479A1', category: 'Backend' },
+    { id: 'redis', name: 'Redis', icon: 'https://cdn.worldvectorlogo.com/logos/redis.svg', color: '#DC382D', category: 'Backend' },
+    // DevOps
+    { id: 'aws', name: 'AWS', icon: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg', color: '#FF9900', category: 'DevOps' },
+    { id: 'digitalocean', name: 'DigitalOcean', icon: 'https://cdn.worldvectorlogo.com/logos/digitalocean.svg', color: '#0080FF', category: 'DevOps' },
+    { id: 'git', name: 'Git', icon: 'https://cdn.worldvectorlogo.com/logos/git-icon.svg', color: '#F05032', category: 'DevOps' },
+    { id: 'github', name: 'GitHub', icon: 'https://cdn.worldvectorlogo.com/logos/github-icon.svg', color: '#181717', category: 'DevOps' },
+    { id: 'jenkins', name: 'Jenkins', icon: 'https://cdn.worldvectorlogo.com/logos/jenkins-1.svg', color: '#D24939', category: 'DevOps' },
+    { id: 'linux', name: 'Linux', icon: 'https://cdn.worldvectorlogo.com/logos/linux-tux.svg', color: '#FCC624', category: 'DevOps' },
+    { id: 'nginx', name: 'Nginx', icon: 'https://cdn.worldvectorlogo.com/logos/nginx.svg', color: '#009639', category: 'DevOps' },
+    { id: 'pm2', name: 'PM2', icon: 'https://cdn.worldvectorlogo.com/logos/pm2.svg', color: '#2F2E8B', category: 'DevOps' },
+    { id: 'ubuntu', name: 'Ubuntu', icon: 'https://cdn.worldvectorlogo.com/logos/ubuntu-2.svg', color: '#E95420', category: 'DevOps' }
+  ];
   return (
     <>
       <Helmet>
-    <title>Custom Web Development Services | Sownmark
-</title>
-    <meta name="description" content="Get responsive, high-converting websites with Sownmark’s web design services. We build websites that turn visitors into loyal customers" />
-    <meta name="keywords" content="web design services, responsive website design, ecommerce website development, custom website design, UI UX design agency" />
-  </Helmet>
+        <title>Custom Web Development Services | Sownmark</title>
+        <meta
+          name="description"
+          content="Get responsive, high-converting websites with Sownmark’s web design services. We build websites that turn visitors into loyal customers"
+        />
+        <meta
+          name="keywords"
+          content="web design services, responsive website design, ecommerce website development, custom website design, UI UX design agency"
+        />
+        <link rel="canonical" href="https://www.sownmark.com/website-development" />
+      </Helmet>
+
 
       {/* Hero Section */}
       <section
@@ -360,64 +367,64 @@ const technologies = [
         </div>
       </section>
 
-     
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
-      <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <motion.div
-          {...fadeInUp}
-          className="text-center mb-12 lg:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Technologies We Master
-            <span
-              className="block text-transparent bg-clip-text"
-              style={{ backgroundImage: 'linear-gradient(135deg, #1a2957, #3b82f6)' }}
-            >
-              to Build Modern Websites
-            </span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            We harness cutting-edge tools to create scalable, high-performance digital solutions.
-          </p>
-        </motion.div>
 
-        {['Frontend', 'Backend', 'DevOps'].map((category) => (
-          <div key={category} className="mb-12">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">{category}</h3>
-            <motion.div
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={{ once: true }}
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-            >
-              {technologies
-                .filter((tech) => tech.category === category)
-                .map((tech) => (
-                  <motion.div
-                    key={tech.id}
-                    variants={fadeInUp}
-                    className="group relative flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-                  >
-                    <img
-                      src={tech.icon}
-                      alt={tech.name}
-                      width={48}
-                      height={48}
-                      className="mb-2"
-                      style={{ filter: `drop-shadow(0 0 4px ${tech.color}50)` }}
-                    />
-                    <span className="text-sm font-medium text-gray-700">{tech.name}</span>
-                    <div className="absolute -top-8 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
-                      {tech.name}
-                    </div>
-                  </motion.div>
-                ))}
-            </motion.div>
-          </div>
-        ))}
-      </div>
-    </section>
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
+        <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <motion.div
+            {...fadeInUp}
+            className="text-center mb-12 lg:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Technologies We Master
+              <span
+                className="block text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg, #1a2957, #3b82f6)' }}
+              >
+                to Build Modern Websites
+              </span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+              We harness cutting-edge tools to create scalable, high-performance digital solutions.
+            </p>
+          </motion.div>
+
+          {['Frontend', 'Backend', 'DevOps'].map((category) => (
+            <div key={category} className="mb-12">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">{category}</h3>
+              <motion.div
+                variants={staggerContainer}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: true }}
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+              >
+                {technologies
+                  .filter((tech) => tech.category === category)
+                  .map((tech) => (
+                    <motion.div
+                      key={tech.id}
+                      variants={fadeInUp}
+                      className="group relative flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                    >
+                      <img
+                        src={tech.icon}
+                        alt={tech.name}
+                        width={48}
+                        height={48}
+                        className="mb-2"
+                        style={{ filter: `drop-shadow(0 0 4px ${tech.color}50)` }}
+                      />
+                      <span className="text-sm font-medium text-gray-700">{tech.name}</span>
+                      <div className="absolute -top-8 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                        {tech.name}
+                      </div>
+                    </motion.div>
+                  ))}
+              </motion.div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section

@@ -116,7 +116,9 @@ const ContactPage = () => {
           name="keywords"
           content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
         />
+        <link rel="canonical" href="https://www.sownmark.com/contact" />
       </Helmet>
+
 
       {/* Hero Section - Dark Theme */}
       <section
@@ -283,9 +285,8 @@ const ContactPage = () => {
                 >
                   <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
                   <ChevronDown
-                    className={`w-5 h-5 text-blue-200 transform transition-transform duration-200 ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`}
+                    className={`w-5 h-5 text-blue-200 transform transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
+                      }`}
                   />
                 </button>
                 <AnimatePresence>

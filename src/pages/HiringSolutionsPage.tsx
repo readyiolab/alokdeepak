@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, useNavigate ,useLocation} from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Search, CheckCircle, Clock, Award, Briefcase, ArrowRight, MessageCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 
 const HiringSolutionsPage = () => {
 
-   useEffect(() => {
+  useEffect(() => {
     if (location.hash === '#hire-top-talent') {
       const scrollToForm = () => {
         const element = document.getElementById('hire-top-talent');
@@ -40,11 +40,19 @@ const HiringSolutionsPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-<Helmet>
-    <title>Sownmark: Hiring Solutions</title>
-    <meta name="description" content="Hire top talent faster with Sownmark's hiring solution. We connect companies with skilled professionals across multiple industries" />
-    <meta name="keywords" content="hiring solutions for companies, digital marketing agency, recruitment services USA, job placement agency, best hiring agency" />
-  </Helmet>
+      <Helmet>
+        <title>Hire Top Talent in India | Sownmark Solutions </title>
+        <meta
+          name="description"
+          content="Hire top talent faster with Sownmark's hiring solution. We connect companies with skilled professionals across multiple industries"
+        />
+        <meta
+          name="keywords"
+          content="hiring solutions for companies, digital marketing agency, recruitment services USA, job placement agency, best hiring agency"
+        />
+        <link rel="canonical" href="https://www.sownmark.com/hiring-solutions" />
+      </Helmet>
+
 
       {/* Hero Section - Vibrant Theme */}
       <section
@@ -93,7 +101,7 @@ const HiringSolutionsPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact#contact-form')} 
+                onClick={() => navigate('/contact#contact-form')}
                 className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[200px] justify-center"
               >
                 Get Started
@@ -103,7 +111,7 @@ const HiringSolutionsPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact#contact-form')} 
+                onClick={() => navigate('/contact#contact-form')}
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[200px] justify-center"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -111,7 +119,7 @@ const HiringSolutionsPage = () => {
               </motion.button>
             </div>
 
-            
+
           </motion.div>
         </div>
       </section>
@@ -411,7 +419,7 @@ const HiringSolutionsPage = () => {
 
               <Link
                 to="/contact#contact-form"
-              
+
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >

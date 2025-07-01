@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Book, Users, Award, BarChart, Star, CheckCircle, ArrowRight, Play } from 'lucide-react';
-import {useEffect} from 'react';
-import { Link, useNavigate,useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 const DigitalMarketingPage = () => {
 
@@ -42,9 +42,17 @@ const DigitalMarketingPage = () => {
 
       <Helmet>
         <title>Sownmark: Digital Marketing Courses</title>
-        <meta name="description" content="Learn digital marketing with live projects, expert mentorship, and job-ready skills. Start your career with Sownmark’s best-rated course" />
-        <meta name="keywords" content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online" />
+        <meta
+          name="description"
+          content="Learn digital marketing with live projects, expert mentorship, and job-ready skills. Start your career with Sownmark’s best-rated course"
+        />
+        <meta
+          name="keywords"
+          content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online"
+        />
+        <link rel="canonical" href="https://www.sownmark.com/digital-marketing-mastery" />
       </Helmet>
+
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
@@ -104,7 +112,7 @@ const DigitalMarketingPage = () => {
 
             </div>
 
-            
+
           </motion.div>
         </div>
       </section>
@@ -439,7 +447,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact#contact-form')} 
+                onClick={() => navigate('/contact#contact-form')}
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
               >
                 Start Your Journey
@@ -449,7 +457,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 onClick={() => navigate('/contact#contact-form')} 
+                onClick={() => navigate('/contact#contact-form')}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation

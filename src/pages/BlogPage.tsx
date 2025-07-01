@@ -264,7 +264,7 @@ const BlogPage = () => {
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -272,11 +272,19 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-        <Helmet>
-    <title> Digital Marketing & Tech Blog | Sownmark</title>
-    <meta name="description" content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies" />
-    <meta name="keywords" content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips" />
-  </Helmet>
+      <Helmet>
+        <title>Digital Marketing & Tech Blog | Sownmark</title>
+        <meta
+          name="description"
+          content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies"
+        />
+        <meta
+          name="keywords"
+          content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips"
+        />
+        <link rel="canonical" href="https://www.sownmark.com/blog" />
+      </Helmet>
+
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
@@ -331,10 +339,10 @@ const BlogPage = () => {
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
 
-             
+
             </div>
 
-            
+
           </motion.div>
         </div>
       </section>
@@ -382,11 +390,10 @@ const BlogPage = () => {
                 key={index}
                 variants={fadeInUp}
                 onClick={() => setSelectedCategory(category.name)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 group relative ${
-                  selectedCategory === category.name
-                    ? 'bg-white text-gray-900 shadow-lg border border-blue-200'
-                    : 'bg-white text-gray-600 hover:bg-blue-50 border border-gray-200'
-                }`}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 group relative ${selectedCategory === category.name
+                  ? 'bg-white text-gray-900 shadow-lg border border-blue-200'
+                  : 'bg-white text-gray-600 hover:bg-blue-50 border border-gray-200'
+                  }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 flex items-center gap-2">
@@ -492,7 +499,7 @@ const BlogPage = () => {
 
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-8">
-               <NewsletterForm/>
+                <NewsletterForm />
 
                 <motion.div {...fadeInUp} className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -592,7 +599,7 @@ const BlogPage = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <Link
-                
+
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
                 to='/contact#contact-form'
               >
@@ -601,8 +608,8 @@ const BlogPage = () => {
               </Link>
 
               <Link
-                
-                 to='/contact#contact-form'
+
+                to='/contact#contact-form'
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation

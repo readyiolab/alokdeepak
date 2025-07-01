@@ -58,11 +58,19 @@ const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-white">
 
-        <Helmet>
-    <title> About Sownmark | Digital Growth Experts</title>
-    <meta name="description" content="Learn more about Sownmark’s mission, team, and vision. Discover why businesses and students trust us to deliver results and growth" />
-    <meta name="keywords" content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are" />
-  </Helmet>
+      <Helmet>
+        <title>About Sownmark | Digital Growth Experts</title>
+        <meta
+          name="description"
+          content="Learn more about Sownmark’s mission, team, and vision. Discover why businesses and students trust us to deliver results and growth"
+        />
+        <meta
+          name="keywords"
+          content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are"
+        />
+        <link rel="canonical" href="https://www.sownmark.com/about" />
+      </Helmet>
+
       {/* Hero Section - Dark Theme */}
       <section
         className="relative min-h-[100vh] flex items-center justify-center overflow-hidden py-6"
@@ -291,8 +299,8 @@ const AboutUsPage = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <Link
-                
-                
+
+
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
                 to='/contact'
               >
@@ -301,9 +309,9 @@ const AboutUsPage = () => {
               </Link>
 
               <Link
-              
-                 to='/contact'
-                
+
+                to='/contact'
+
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation
