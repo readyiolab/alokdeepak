@@ -9,9 +9,7 @@ import { Helmet } from 'react-helmet';
 const HomePage: React.FC = () => {
   return (
     <>
-      <Helmet>
-       
-      </Helmet>
+      
       <div className="bg-white">
         <HeroSection />
         <ServicesSection />

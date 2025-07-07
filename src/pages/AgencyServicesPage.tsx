@@ -127,7 +127,7 @@ const AgencyServicesPage: React.FC = () => {
           name="keywords"
           content="digital marketing agency USA, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
         />
-        <link rel="canonical" href="https://www.sownmark.com/digital-marketing-agency" />
+        <link rel="canonical" href="https://sownmark.com/digital-marketing-agency" />
       </Helmet>
 
 

@@ -50,7 +50,7 @@ const HiringSolutionsPage = () => {
           name="keywords"
           content="hiring solutions for companies, digital marketing agency, recruitment services USA, job placement agency, best hiring agency"
         />
-        <link rel="canonical" href="https://www.sownmark.com/hiring-solutions" />
+        <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
       </Helmet>
 
 

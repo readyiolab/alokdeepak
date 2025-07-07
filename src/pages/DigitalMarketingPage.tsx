@@ -50,7 +50,7 @@ const DigitalMarketingPage = () => {
           name="keywords"
           content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online"
         />
-        <link rel="canonical" href="https://www.sownmark.com/digital-marketing-mastery" />
+        <link rel="canonical" href="https://sownmark.com/digital-marketing-mastery" />
       </Helmet>
 
       {/* Hero Section - Dark Theme */}

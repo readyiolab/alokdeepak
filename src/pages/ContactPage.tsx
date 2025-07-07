@@ -116,7 +116,7 @@ const ContactPage = () => {
           name="keywords"
           content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
         />
-        <link rel="canonical" href="https://www.sownmark.com/contact" />
+        <link rel="canonical" href="https://sownmark.com/contact" />
       </Helmet>
 
 
