@@ -5,71 +5,71 @@
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+ <url>
+  <loc>https://sownmark.com/</loc>
+  <priority>1.00</priority>
+  <changefreq>daily</changefreq>
+</url>
+
+
   <url>
-    <loc>https://www.sownmark.com/</loc>
+    <loc>https://sownmark.com/about</loc>
     <lastmod>2025-07-01</lastmod>
-    <priority>1.00</priority>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://sownmark.com/contact</loc>
+    <lastmod>2025-07-01</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://sownmark.com/website-development</loc>
+    <lastmod>2025-07-01</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://sownmark.com/hiring-solutions</loc>
+    <lastmod>2025-07-01</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://sownmark.com/digital-marketing-mastery</loc>
+    <lastmod>2025-07-01</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://sownmark.com/digital-marketing-agency</loc>
+    <lastmod>2025-07-01</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://sownmark.com/blog</loc>
+    <lastmod>2025-07-01</lastmod>
+    <priority>0.80</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.sownmark.com/about</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/contact</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.80</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/website-development</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/hiring-solutions</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/digital-marketing-mastery</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/digital-marketing-agency</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.85</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/blog</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>0.80</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.sownmark.com/privacy-policy</loc>
+    <loc>https://sownmark.com/privacy-policy</loc>
     <lastmod>2025-07-01</lastmod>
     <priority>0.50</priority>
     <changefreq>yearly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.sownmark.com/terms-conditions</loc>
+    <loc>https://sownmark.com/terms-conditions</loc>
     <lastmod>2025-07-01</lastmod>
     <priority>0.50</priority>
     <changefreq>yearly</changefreq>
