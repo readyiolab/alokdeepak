@@ -13,7 +13,7 @@ const testimonials = [
     quote: "I’ve worked with several agencies before, but Sownmark’s web development team stands out. They delivered a flawless site ahead of schedule and ensured every detail was pixel-perfect. Highly recommended for U.S. businesses!",
     name: "Emily Rogers",
     designation: "CEO – TechNurture LLC, New York",
-    image: "./pro2.webp"
+    image: "./pro4.webp"
   },
   {
     quote: "From layout to speed optimization, every element of our site was executed with precision. Sownmark's communication was outstanding and the results exceeded our expectations. Our new site brought in more leads within the first week!",
@@ -25,7 +25,7 @@ const testimonials = [
     quote: "I was impressed with Sownmark’s expertise and dedication. They built us a fast, mobile-friendly site that looks great and performs even better. Their support team is also incredibly responsive and helpful.",
     name: "Mark Dawson",
     designation: "Director – Dawson Freight Co., Florida",
-    image: "./pro4.webp"
+    image: "./pro2.webp"
   }
 ];
 
