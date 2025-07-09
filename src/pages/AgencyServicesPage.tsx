@@ -118,10 +118,10 @@ const AgencyServicesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Your Full-Services Digital Marketing Agency | Sownmark Solutions</title>
+        <title>Digital Marketing Agency | Sownmark Solutions</title>
         <meta
           name="description"
-          content="Grow your business with Sownmark, a full-service digital marketing agency offering SEO, PPC, branding, and social media management"
+          content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence."
         />
         <meta
           name="keywords"
