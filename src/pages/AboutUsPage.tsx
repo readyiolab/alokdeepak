@@ -59,20 +59,20 @@ const AboutUsPage = () => {
     <div className="min-h-screen bg-white">
 
       <Helmet>
-  <title>About Sownmark | Digital Growth Experts</title>
-  <meta
-    name="description"
-    content="Learn more about Sownmark's mission, team, and vision. Discover why businesses and students trust us to deliver results and growth"
-  />
-  <meta
-    name="keywords"
-    content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are"
-  />
-  <link rel="canonical" href="https://sownmark.com/about" />
-  <meta property="og:title" content="About Sownmark | Digital Growth Experts" />
-  <meta property="og:url" content="https://sownmark.com/about" />
-  <meta property="og:type" content="website" />
-</Helmet>
+        <title>About Sownmark | Digital Growth Experts</title>
+        <meta
+          name="description"
+          content="Learn more about Sownmark's mission, team, and vision. Discover why businesses and students trust us to deliver results and growth"
+        />
+        <meta
+          name="keywords"
+          content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are"
+        />
+        <link rel="canonical" href="https://sownmark.com/about" />
+        <meta property="og:title" content="About Sownmark | Digital Growth Experts" />
+        <meta property="og:url" content="https://sownmark.com/about" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
       {/* Hero Section - Dark Theme */}
       <section

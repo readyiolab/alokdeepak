@@ -107,20 +107,20 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-  <title>Contact Sownmark | Get Digital Solutions Today</title>
-  <meta
-    name="description"
-    content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!"
-  />
-  <meta
-    name="keywords"
-    content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
-  />
-  <link rel="canonical" href="https://sownmark.com/contact" />
-  <meta property="og:title" content="Contact Sownmark | Get Digital Solutions Today" />
-  <meta property="og:url" content="https://sownmark.com/contact" />
-  <meta property="og:type" content="website" />
-</Helmet>
+        <title>Contact Sownmark | Get Digital Solutions Today</title>
+        <meta
+          name="description"
+          content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!"
+        />
+        <meta
+          name="keywords"
+          content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
+        />
+        <link rel="canonical" href="https://sownmark.com/contact" />
+        <meta property="og:title" content="Contact Sownmark | Get Digital Solutions Today" />
+        <meta property="og:url" content="https://sownmark.com/contact" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
 
       {/* Hero Section - Dark Theme */}

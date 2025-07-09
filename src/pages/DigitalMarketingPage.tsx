@@ -40,21 +40,21 @@ const DigitalMarketingPage = () => {
   return (
     <div className="min-h-screen bg-white">
 
-     <Helmet>
-  <title>Sownmark: Digital Marketing Courses</title>
-  <meta
-    name="description"
-    content="Learn digital marketing with live projects, expert mentorship, and job-ready skills. Start your career with Sownmark's best-rated course"
-  />
-  <meta
-    name="keywords"
-    content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online"
-  />
-  <link rel="canonical" href="https://sownmark.com/digital-marketing-mastery" />
-  <meta property="og:title" content="Sownmark: Digital Marketing Courses" />
-  <meta property="og:url" content="https://sownmark.com/digital-marketing-mastery" />
-  <meta property="og:type" content="website" />
-</Helmet>
+      <Helmet>
+        <title>Sownmark: Digital Marketing Courses</title>
+        <meta
+          name="description"
+          content="Learn digital marketing with live projects, expert mentorship, and job-ready skills. Start your career with Sownmark's best-rated course"
+        />
+        <meta
+          name="keywords"
+          content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online"
+        />
+        <link rel="canonical" href="https://sownmark.com/digital-marketing-mastery" />
+        <meta property="og:title" content="Sownmark: Digital Marketing Courses" />
+        <meta property="og:url" content="https://sownmark.com/digital-marketing-mastery" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
       {/* Hero Section - Dark Theme */}
       <section
