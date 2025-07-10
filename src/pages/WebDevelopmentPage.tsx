@@ -163,10 +163,8 @@ const WebDevelopmentPage: React.FC = () => {
           name="keywords"
           content="web design services, responsive website design, ecommerce website development, custom website design, UI UX design agency"
         />
-        <link rel="canonical" href="https://sownmark.com/website-development" />
-        <meta property="og:title" content="Custom Web Development Services | Sownmark" />
-        <meta property="og:url" content="https://sownmark.com/website-development" />
-        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://www.sownmark.com/website-development" />
+        
       </Helmet>
 
 

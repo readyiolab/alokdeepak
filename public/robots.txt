@@ -1,10 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sownmark.com/sitemap.xml
+Sitemap: https://www.sownmark.com/sitemap.xml
 
 
 
 
-# Block duplicate www version
-Disallow: /www.sownmark.com/

@@ -20,10 +20,8 @@ const HomePage: React.FC = () => {
           name="keywords"
           content="digital marketing agency, website development company, best digital marketing course, social media marketing agency, SEO company USA"
         />
-        <link rel="canonical" href="https://sownmark.com/" />
-        <meta property="og:title" content="Sownmark: Your Partner in Digital Growth" />
-        <meta property="og:url" content="https://sownmark.com/" />
-        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://www.sownmark.com" />
+        
       </Helmet>
 
       <div className="bg-white">

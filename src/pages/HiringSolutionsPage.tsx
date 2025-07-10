@@ -50,10 +50,8 @@ const HiringSolutionsPage = () => {
           name="keywords"
           content="hiring solutions for companies, recruitment services India, job placement agency, best hiring agency, talent acquisition"
         />
-          <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
-        <meta property="og:title" content="Hire Top Talent in India | Sownmark Solutions" />
-        <meta property="og:url" content="https://sownmark.com/hiring-solutions" />
-        <meta property="og:type" content="website" />
+          <link rel="canonical" href="https://www.sownmark.com/hiring-solutions" />
+       
       </Helmet>
 
 

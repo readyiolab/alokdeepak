@@ -282,10 +282,8 @@ const BlogPage = () => {
           name="keywords"
           content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips"
         />
-        <link rel="canonical" href="https://sownmark.com/blog" />
-        <meta property="og:title" content="Digital Marketing & Tech Blog | Sownmark" />
-        <meta property="og:url" content="https://sownmark.com/blog" />
-        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://www.sownmark.com/blog" />
+        
       </Helmet>
 
       {/* Hero Section - Dark Theme */}
