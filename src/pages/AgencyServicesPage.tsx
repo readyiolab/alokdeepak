@@ -25,47 +25,54 @@ const AgencyServicesPage: React.FC = () => {
   const services = [
     {
       id: 'seo',
-      icon: <Search className="w-10 h-10 text-white" />,
+      icon: '/gifs/seo-min.gif',
       title: 'Search Engine Optimization (SEO)',
-      description: 'Boost organic rankings and drive qualified traffic with our comprehensive SEO expertise and proven methodologies.',
+      description:
+        'Boost organic rankings and drive qualified traffic with our comprehensive SEO expertise and proven methodologies.',
       benefits: ['Technical SEO Audit', 'Content Strategy', 'Link Building', 'Local SEO Optimization'],
     },
     {
       id: 'ppc',
-      icon: <LineChart className="w-10 h-10 text-white" />,
+      icon: '/gifs/PPC-min.gif',
       title: 'Pay-Per-Click (PPC) Advertising',
-      description: 'Maximize your ad spend ROI with targeted campaigns across Google, Bing, and social media platforms.',
+      description:
+        'Maximize your ad spend ROI with targeted campaigns across Google, Bing, and social media platforms.',
       benefits: ['Campaign Strategy', 'Creative Ad Design', 'Bid Management', 'Performance Analytics'],
     },
     {
       id: 'social',
-      icon: <MessageCircle className="w-10 h-10 text-white" />,
+      icon: '/gifs/social-media-min.gif',
       title: 'Social Media Marketing',
-      description: 'Build meaningful connections and drive conversions across all major social media channels.',
+      description:
+        'Build meaningful connections and drive conversions across all major social media channels.',
       benefits: ['Content Creation', 'Community Management', 'Social Media Ads', 'Influencer Partnerships'],
     },
     {
       id: 'email',
-      icon: <Mail className="w-10 h-10 text-white" />,
+      icon: '/gifs/email-marketing-min.gif',
       title: 'Email Marketing',
-      description: 'Nurture leads and build customer loyalty with personalized, high-converting email campaigns.',
+      description:
+        'Nurture leads and build customer loyalty with personalized, high-converting email campaigns.',
       benefits: ['Campaign Strategy', 'Email Design', 'Marketing Automation', 'List Segmentation'],
     },
     {
       id: 'analytics',
-      icon: <BarChart className="w-10 h-10 text-white" />,
+      icon: '/gifs/Reporting-min.gif',
       title: 'Analytics & Reporting',
-      description: 'Gain actionable insights to continuously optimize your website and campaign performance.',
+      description:
+        'Gain actionable insights to continuously optimize your website and campaign performance.',
       benefits: ['Data Analysis', 'Custom Dashboards', 'KPI Tracking', 'Strategic Recommendations'],
     },
     {
       id: 'reputation',
-      icon: <Shield className="w-10 h-10 text-white" />,
+      icon: '/gifs/post_16903619-min.gif',
       title: 'Online Reputation Management',
-      description: 'Protect and enhance your brand’s digital reputation across all online channels and platforms.',
+      description:
+        'Protect and enhance your brand’s digital reputation across all online channels and platforms.',
       benefits: ['Review Management', 'Brand Monitoring', 'Crisis Management', 'Reputation Building'],
     },
   ];
+
 
   const processSteps = [
     {
@@ -128,7 +135,7 @@ const AgencyServicesPage: React.FC = () => {
           content="digital marketing agency India, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
         />
         <link rel="canonical" href="https://www.sownmark.com/digital-marketing-agency" />
-        
+
       </Helmet>
 
 
@@ -238,11 +245,12 @@ const AgencyServicesPage: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative z-10 flex-1 flex flex-col">
                     <div
-                      className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                      className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg overflow-hidden"
                       style={{ background: 'linear-gradient(135deg, #1a2957, #3b82f6, #60a5fa)' }}
                     >
-                      {service.icon}
+                      <img src={service.icon} alt={service.title} className="w-12 h-12 rounded-md" />
                     </div>
+
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 leading-tight">{service.title}</h3>
                     <p className="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed flex-1">{service.description}</p>
                     <ul className="space-y-3">

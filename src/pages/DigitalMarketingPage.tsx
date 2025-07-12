@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import ProjectsSection from './ProjectsSection';
+import DigitalMarketingToolsSection from './DigitalMarketingToolsSection';
+
 const DigitalMarketingPage = () => {
   useEffect(() => {
     if (location.hash === '#courses') {
@@ -48,7 +50,7 @@ const DigitalMarketingPage = () => {
           content="best digital marketing course, digital marketing course with certificate, online digital marketing training, digital marketing course for beginners, SEO course online"
         />
         <link rel="canonical" href="https://www.sownmark.com/digital-marketing-mastery" />
-       
+
       </Helmet>
 
       {/* Hero Section - Dark Theme */}
@@ -137,23 +139,23 @@ const DigitalMarketingPage = () => {
           >
             {[
               {
-                icon: <Book className="w-7 h-7" />,
+                icon: '/gifs/practical curiculm-min.gif',
                 title: 'Practical Curriculum',
                 description:
                   'Real-world scenarios and actionable strategies you can implement immediately in your campaigns.',
               },
               {
-                icon: <Users className="w-7 h-7" />,
+                icon: '/gifs/expert instru-min.gif',
                 title: 'Expert Instructors',
                 description: 'Learn from professionals with proven track records and years of industry success.',
               },
               {
-                icon: <Award className="w-7 h-7" />,
+                icon: '/gifs/Industry Certification-min.gif',
                 title: 'Industry Certification',
                 description: 'Earn recognized certifications that validate your expertise to potential employers.',
               },
               {
-                icon: <BarChart className="w-7 h-7" />,
+                icon: '/gifs/Career Advancement-min.gif',
                 title: 'Career Advancement',
                 description: 'Comprehensive career support to help you land your dream digital marketing role.',
               },
@@ -163,10 +165,10 @@ const DigitalMarketingPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 overflow-hidden"
                       style={{ background: 'linear-gradient(135deg, #1a2957, #90abff)' }}
                     >
-                      <div className="text-white">{feature.icon}</div>
+                      <img src={feature.icon} alt={feature.title} className="w-10 h-10 rounded-md " />
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-3">{feature.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
@@ -174,6 +176,7 @@ const DigitalMarketingPage = () => {
                 </div>
               </motion.div>
             ))}
+
           </motion.div>
         </div>
       </section>
@@ -184,7 +187,7 @@ const DigitalMarketingPage = () => {
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Choose Your Path to
-              <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
+              <span className="block pb-5 bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
                 Digital Mastery
               </span>
             </h2>
@@ -284,7 +287,7 @@ const DigitalMarketingPage = () => {
 
                     <div className="flex items-center justify-between mb-5">
                       <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                       Diet {course.duration}
+                        Diet {course.duration}
                       </span>
                     </div>
 
@@ -307,187 +310,8 @@ const DigitalMarketingPage = () => {
       </section>
 
       {/* Digital Marketing Tools & Projects Section - Light Theme */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container px-4 sm:px-6 md:px-8">
-          <motion.div {...fadeInUp} className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Master Industry-Leading
-              <span
-                className="block text-transparent bg-clip-text"
-                style={{ backgroundImage: 'linear-gradient(135deg, #1a2957, #90abff)' }}
-              >
-                Digital Marketing Tools
-              </span>
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Gain hands-on experience with top tools trusted by marketing professionals worldwide. Our focus is on teaching core strategies and mindsets that drive results, ensuring you’re ready for any tool evolution.
-            </p>
-          </motion.div>
-
-          {/* Tools List */}
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-16"
-          >
-            {[
-              { name: 'Google Keyword Planner', icon: <Search className="w-6 h-6" /> },
-              { name: 'Google Search Console', icon: <Globe className="w-6 h-6" /> },
-              { name: 'Google Ads', icon: <Target className="w-6 h-6" /> },
-              { name: 'Performance Max', icon: <BarChart className="w-6 h-6" /> },
-              { name: 'Open AI', icon: <Code className="w-6 h-6" /> },
-              { name: 'Google Trends', icon: <BarChart className="w-6 h-6" /> },
-              { name: 'Amazon Ads', icon: <Target className="w-6 h-6" /> },
-              { name: 'Semrush', icon: <Search className="w-6 h-6" /> },
-              { name: 'Moz', icon: <Globe className="w-6 h-6" /> },
-              { name: 'Ubersuggest', icon: <Search className="w-6 h-6" /> },
-              { name: 'Ahrefs', icon: <Globe className="w-6 h-6" /> },
-              { name: 'Canva', icon: <Layout className="w-6 h-6" /> },
-              { name: 'Screaming Frog', icon: <Search className="w-6 h-6" /> },
-              { name: 'Meta Ads Manager', icon: <Target className="w-6 h-6" /> },
-              { name: 'Google Shopping', icon: <Target className="w-6 h-6" /> },
-              { name: 'YouTube Advertising', icon: <Play className="w-6 h-6" /> },
-              { name: 'ChatGPT', icon: <Code className="w-6 h-6" /> },
-            ].map((tool, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="group flex items-center gap-3 bg-white p-4 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200"
-              >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                  style={{ background: 'linear-gradient(135deg, #1a2957, #90abff)' }}
-                >
-                  <div className="text-white">{tool.icon}</div>
-                </div>
-                <span className="text-sm font-medium text-gray-900">{tool.name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Projects Section */}
-          {/* <motion.div {...fadeInUp} className="text-center mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-              Real-World Projects
-            </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Apply your skills in hands-on projects designed to simulate real marketing challenges, guided by industry experts.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-6"
-          >
-            {[
-              {
-                title: 'Meta Ads Campaign',
-                duration: '15 Hours (Over 6 Days)',
-                description:
-                  'Create and execute a live Facebook and Instagram campaign for Sownmark. Define business objectives, identify target audiences, build media plans, design ads, and optimize performance.',
-                tools: ['Meta Ads Manager', 'Meta Business Suite', 'Facebook Pixel', 'Canva', 'Google Sheets'],
-                features: [
-                  'Project Briefing',
-                  'Meeting with Industry Experts',
-                  'Campaign Setup & Launch with Budget',
-                  'Media Strategy Submission & Live Optimization',
-                  'Presentations and Mock Interviews',
-                ],
-                icon: <Target className="w-7 h-7" />,
-              },
-              {
-                title: 'Google Ads Campaign',
-                duration: '15 Hours (Over 6 Days)',
-                description:
-                  'Plan and run a Google Search campaign for Sownmark. Define goals, select keywords, craft ad copies, and build an efficient bidding strategy, with active campaign optimization.',
-                tools: [
-                  'Google Ads',
-                  'Google Ads Keyword Planner',
-                  'Google Analytics',
-                  'Google Tag Manager',
-                  'Google Ads Transparency Center',
-                  'OpenAI',
-                ],
-                features: [
-                  'Project Briefing',
-                  'Meeting with Industry Experts',
-                 'real-time Campaign Setup & Launch with Budget',
-                  'Media Strategy Submission & Campaign Optimization',
-                  'Presentations and Mock Interviews',
-                ],
-                icon: <Search className="w-7 h-7" />,
-              },
-              {
-                title: 'SEO Strategy Project',
-                duration: '12 Hours (Over 6 Days)',
-                description:
-                  'Build an SEO strategy for Sownmark’s website. Conduct on-page and technical SEO audits, evaluate backlinks, craft a content strategy, and publish SEO-optimized blogs using WordPress.',
-                tools: ['Google Search Console', 'Google Analytics', 'Ahrefs/Semrush', 'WordPress', 'Screaming Frog', 'Canva'],
-                features: [
-                  'Project Briefing',
-                  'SEO Audit + Content Strategy Creation',
-                  'Blog Publishing Using WordPress',
-                  'Performance Tracking',
-                  'Presentations and Mock Interviews',
-                ],
-                icon: <Globe className="w-7 h-7" />,
-              },
-            ].map((project, index) => (
-              <motion.div key={index} variants={fadeInUp} className="group">
-                <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-gray-100 group-hover:border-blue-200 h-full">
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
-                    style={{ background: 'linear-gradient(135deg, #1a2957, #90abff)' }}
-                  >
-                    <div className="text-white">{project.icon}</div>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">{project.description}</p>
-                  <div className="mb-4">
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                      {project.duration}
-                    </span>
-                  </div>
-                  <div className="space-y-2 mb-5">
-                    <h4 className="text-sm font-semibold text-gray-900">Tools Used:</h4>
-                    {project.tools.map((tool, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-gray-700 text-sm">{tool}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="space-y-2 mb-5">
-                    <h4 className="text-sm font-semibold text-gray-900">What You’ll Do:</h4>
-                    {project.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-gray-700 text-sm">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <button
-                    className="w-full py-3 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                    style={{
-                      background: 'linear-gradient(135deg, #1a2957, #90abff)',
-                      color: 'white',
-                    }}
-                    onClick={() => navigate('/contact#contact-form')}
-                  >
-                    Join Project
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div> */}
-          <ProjectsSection />
-        </div>
-      </section>
+      <DigitalMarketingToolsSection/>
+      <ProjectsSection/>
 
       {/* Testimonials Section - Light Theme */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-white to-gray-50">
