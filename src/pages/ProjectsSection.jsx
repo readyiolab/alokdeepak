@@ -206,7 +206,7 @@ const ProjectsSection = () => {
       tools: [
         "Google Search Console",
         "Google Analytics",
-        "Ahrefs/Semrush",
+        "Ahrefs",
         "WordPress",
         "Screaming Frog",
         "Canva",
