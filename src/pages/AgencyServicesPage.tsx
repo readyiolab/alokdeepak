@@ -125,18 +125,21 @@ const AgencyServicesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Digital Marketing Agency | Sownmark Solutions</title>
-        <meta
-          name="description"
-          content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence."
-        />
-        <meta
-          name="keywords"
-          content="digital marketing agency India, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
-        />
-        <link rel="canonical" href="https://www.sownmark.com/digital-marketing-agency" />
-
-      </Helmet>
+  <title>Digital Marketing Agency | Sownmark Solutions</title>
+  <meta
+    name="description"
+    content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence."
+  />
+  <meta
+    name="keywords"
+    content="digital marketing agency India, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
+  />
+  <link rel="canonical" href="https://sownmark.com/digital-marketing-agency" />
+  <meta property="og:title" content="Digital Marketing Agency | Sownmark Solutions" />
+  <meta property="og:description" content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence." />
+  <meta property="og:url" content="https://sownmark.com/digital-marketing-agency" />
+  <meta property="og:type" content="website" />
+</Helmet>
 
 
       {/* Hero Section */}

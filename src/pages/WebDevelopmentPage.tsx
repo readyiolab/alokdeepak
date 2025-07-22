@@ -154,18 +154,21 @@ const WebDevelopmentPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Custom Web Development Services | Sownmark</title>
-        <meta
-          name="description"
-          content="Get responsive, high-converting websites with Sownmark's web design services. We build websites that turn visitors into loyal customers"
-        />
-        <meta
-          name="keywords"
-          content="web design services, responsive website design, ecommerce website development, custom website design, UI UX design agency"
-        />
-        <link rel="canonical" href="https://www.sownmark.com/website-development" />
-        
-      </Helmet>
+  <title>Professional Website Development | Sownmark</title>
+  <meta
+    name="description"
+    content="Get stunning, responsive websites that convert visitors into customers. Expert web development services tailored to your business needs."
+  />
+  <meta
+    name="keywords"
+    content="website development, web design services, responsive website design, custom web development, professional website company"
+  />
+  <link rel="canonical" href="https://sownmark.com/website-development" />
+  <meta property="og:title" content="Professional Website Development | Sownmark" />
+  <meta property="og:description" content="Get stunning, responsive websites that convert visitors into customers. Expert web development services tailored to your business needs." />
+  <meta property="og:url" content="https://sownmark.com/website-development" />
+  <meta property="og:type" content="website" />
+</Helmet>
 
 
       {/* Hero Section */}

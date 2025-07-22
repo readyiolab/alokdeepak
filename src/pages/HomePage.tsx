@@ -11,18 +11,21 @@ const HomePage: React.FC = () => {
     <>
 
       <Helmet>
-        <title>Sownmark: Your Partner in Digital Growth</title>
-        <meta
-          name="description"
-          content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career"
-        />
-        <meta
-          name="keywords"
-          content="digital marketing agency, website development company, best digital marketing course, social media marketing agency, SEO company USA"
-        />
-        <link rel="canonical" href="https://www.sownmark.com" />
-        
-      </Helmet>
+  <title>Sownmark: Your Partner in Digital Growth</title>
+  <meta
+    name="description"
+    content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career"
+  />
+  <meta
+    name="keywords"
+    content="digital marketing agency, website development company, best digital marketing course, social media marketing agency, SEO company USA"
+  />
+  <link rel="canonical" href="https://sownmark.com/" />
+  <meta property="og:title" content="Sownmark: Your Partner in Digital Growth" />
+  <meta property="og:description" content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career" />
+  <meta property="og:url" content="https://sownmark.com/" />
+  <meta property="og:type" content="website" />
+</Helmet>
 
       <div className="bg-white">
         <HeroSection />
