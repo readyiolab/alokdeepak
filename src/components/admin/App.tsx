@@ -32,6 +32,7 @@ import JobApplicationsPage from '../admin/JobApplicationsPage';
 import PublicJobsPage from '../../pages/PublicJobsPage';
 import JobDetailPage from '../../pages/JobDetailPage';
 import JobApplicationForm from '../../pages/JobApplicationForm';
+import CancellationRefundPolicy from '../../pages/CancellationRefundPolicy';
 
 
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          <Route path="/cancellation-refund-policy" element={<CancellationRefundPolicy />} />
           <Route path="/unsubscribe" element={<UnsubscribeForm />} />
         </Route>
         <Route path="/admin/login" element={<AdminLoginPage />} />

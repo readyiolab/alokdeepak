@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Contact2, Menu, UserRound, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
@@ -102,9 +102,9 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           </NavLink>
           <NavLink
             to="/contact"
-            className="text-sm font-medium bg-[#1a2957] text-white rounded-md hover:bg-[#142145] shadow-sm transition-colors duration-300 px-4 py-2"
+            className="text-sm flex justify-center items-center gap-2 font-medium bg-[#1a2957] text-white rounded-full hover:bg-[#142145] shadow-sm transition-colors duration-300 px-4 py-2"
           >
-            Contact
+            Contact <UserRound className='w-4 h-4' />
           </NavLink>
         </nav>
 

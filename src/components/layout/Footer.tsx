@@ -67,6 +67,7 @@ const Footer: React.FC = () => {
                 { to: '/contact', label: 'Contact Us' },
                 { to: '/privacy-policy', label: 'Privacy Policy' },
                 { to: '/terms-conditions', label: 'Terms & Conditions' },
+                { to: '/cancellation-refund-policy', label: 'Cancellation & Refund Policy' },
               ].map((link, index) => (
                 <li key={index}>
                   <Link

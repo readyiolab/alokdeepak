@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, Clock, MapPin, Star, CheckCircle, ChevronDown } from 'lucide-react';
+import { Mail, Clock, Star, CheckCircle, ChevronDown } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import ContactForm from '../components/ui/ContactForm';
 import { useLocation } from 'react-router-dom';
 
 const ContactPage = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const location = useLocation();
 
   const faqs = [
     {
@@ -71,6 +72,11 @@ const ContactPage = () => {
     },
   ];
 
+  // Split FAQs into two groups
+  const midPoint = Math.ceil(faqs.length / 2);
+  const leftFaqs = faqs.slice(0, midPoint);
+  const rightFaqs = faqs.slice(midPoint);
+
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -107,22 +113,21 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-  <title>Contact Sownmark | Get Digital Solutions Today</title>
-  <meta
-    name="description"
-    content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!"
-  />
-  <meta
-    name="keywords"
-    content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
-  />
-  <link rel="canonical" href="https://sownmark.com/contact" />
-  <meta property="og:title" content="Contact Sownmark | Get Digital Solutions Today" />
-  <meta property="og:description" content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!" />
-  <meta property="og:url" content="https://sownmark.com/contact" />
-  <meta property="og:type" content="website" />
-</Helmet>
-
+        <title>Contact Sownmark | Get Digital Solutions Today</title>
+        <meta
+          name="description"
+          content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!"
+        />
+        <meta
+          name="keywords"
+          content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
+        />
+        <link rel="canonical" href="https://sownmark.com/contact" />
+        <meta property="og:title" content="Contact Sownmark | Get Digital Solutions Today" />
+        <meta property="og:description" content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!" />
+        <meta property="og:url" content="https://sownmark.com/contact" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
       {/* Hero Section - Dark Theme */}
       <section
@@ -275,39 +280,75 @@ const ContactPage = () => {
             initial="initial"
             whileInView="whileInView"
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto"
           >
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20 overflow-hidden"
-              >
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none transition-colors duration-200 hover:bg-white/20"
+            {/* Left Column FAQs */}
+            <div>
+              {leftFaqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20 overflow-hidden"
                 >
-                  <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
-                  <ChevronDown
-                    className={`w-5 h-5 text-blue-200 transform transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
-                      }`}
-                  />
-                </button>
-                <AnimatePresence>
-                  {openIndex === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="px-6 pb-4"
-                    >
-                      <p className="text-blue-100">{faq.answer}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none transition-colors duration-200 hover:bg-white/20"
+                  >
+                    <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                    <ChevronDown
+                      className={`w-5 h-5 text-blue-200 transform transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {openIndex === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="px-6 pb-4"
+                      >
+                        <p className="text-blue-100">{faq.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right Column FAQs */}
+            <div>
+              {rightFaqs.map((faq, index) => (
+                <motion.div
+                  key={index + midPoint}
+                  variants={fadeInUp}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20 overflow-hidden"
+                >
+                  <button
+                    onClick={() => toggleFAQ(index + midPoint)}
+                    className="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none transition-colors duration-200 hover:bg-white/20"
+                  >
+                    <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                    <ChevronDown
+                      className={`w-5 h-5 text-blue-200 transform transition-transform duration-200 ${openIndex === index + midPoint ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {openIndex === index + midPoint && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="px-6 pb-4"
+                      >
+                        <p className="text-blue-100">{faq.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
