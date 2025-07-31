@@ -52,22 +52,33 @@ const DigitalMarketingPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+  setSuccess(null);
 
-    try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/marketing/apply`, formData);
-      setSuccess(response.data.message);
-      setFormData({ name: '', email: '', phone: '', referralCode: '' });
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to submit application. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/marketing/apply`,
+      formData
+    );
+
+    // Backend success message
+    const message = response.data.message;
+    const referralCode = response.data.referralCode;
+
+    setSuccess(`${message} Your referral code is: ${referralCode}`);
+    setFormData({ name: '', email: '', phone: '', referralCode: '' });
+  } catch (err) {
+    // Display backend error message
+    const errorMessage = err.response?.data?.error || 'Failed to submit application. Please try again.';
+    setError(errorMessage);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -176,23 +187,23 @@ const DigitalMarketingPage = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
               <motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  onClick={scrollToForm}
-  className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
->
-  Apply Now 
-  <ArrowRight className="w-5 h-5" />
-</motion.button>
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToForm}
+                className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
+              >
+                Apply Now
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
 
-<motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  onClick={scrollToForm}
-  className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
->
-  Get Free Consultation
-</motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={scrollToForm}
+                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
+              >
+                Get Free Consultation
+              </motion.button>
             </div>
           </motion.div>
         </div>
@@ -586,59 +597,59 @@ const DigitalMarketingPage = () => {
               {success && <p className="text-green-500 text-center mb-4">{success}</p>}
               {error && <p className="text-red-500 text-center mb-4">{error}</p>}
               <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name *"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email *"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-          <div>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number *"
-              value={formData.phone}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="referralCode"
-              placeholder="Referral Code (Optional)"
-              value={formData.referralCode}
-              onChange={handleInputChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-          <motion.button
-            type="submit"
-            disabled={loading}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`w-full bg-[#1a2957] text-white py-3 rounded-lg font-semibold hover:bg-[#1a2958] transition-all duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-          >
-            {loading ? 'Submitting...' : 'Apply Now'}
-          </motion.button>
-        </form>
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name *"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email *"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number *"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="referralCode"
+                    placeholder="Referral Code (Optional)"
+                    value={formData.referralCode}
+                    onChange={handleInputChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <motion.button
+                  type="submit"
+                  disabled={loading}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`w-full bg-[#1a2957] text-white py-3 rounded-lg font-semibold hover:bg-[#1a2958] transition-all duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {loading ? 'Submitting...' : 'Apply Now'}
+                </motion.button>
+              </form>
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Doubt?{' '}
