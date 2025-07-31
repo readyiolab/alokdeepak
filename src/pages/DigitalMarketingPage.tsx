@@ -6,21 +6,11 @@ import { Helmet } from 'react-helmet';
 import ProjectsSection from './ProjectsSection';
 import DigitalMarketingToolsSection from './DigitalMarketingToolsSection';
 import axios from 'axios';
+import useScrollToHashTargets from '../customhooks/useScrollToHashTargets';
 
 
 const DigitalMarketingPage = () => {
-  useEffect(() => {
-    if (location.hash === '#courses') {
-      const scrollToForm = () => {
-        const element = document.getElementById('courses');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      };
-      const timer = setTimeout(scrollToForm, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [location]);
+
 
   const navigate = useNavigate();
   const fadeInUp = {
@@ -44,6 +34,14 @@ const DigitalMarketingPage = () => {
     email: '',
     phone: '',
   });
+  const scrollToForm = () => {
+    const element = document.getElementById('contact-form-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', '#contact-form-section');
+    }
+  };
+  useScrollToHashTargets(['courses', 'contact-form-section'], 500);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -176,13 +174,24 @@ const DigitalMarketingPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-              <Link
-                to="/contact#contact-form"
-                className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[180px] justify-center"
-              >
-                Apply Now
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={scrollToForm}
+  className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
+>
+  Apply Now 
+  <ArrowRight className="w-5 h-5" />
+</motion.button>
+
+<motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={scrollToForm}
+  className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
+>
+  Get Free Consultation
+</motion.button>
             </div>
           </motion.div>
         </div>
@@ -568,6 +577,7 @@ const DigitalMarketingPage = () => {
             <motion.div
               {...fadeInUp}
               className="bg-white p-8 rounded-2xl shadow-lg max-w-lg mx-auto lg:mx-0"
+              id='contact-form-section'
             >
               <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
                 Apply for the Digital Marketing Mastery Program
@@ -613,9 +623,8 @@ const DigitalMarketingPage = () => {
                   disabled={loading}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-full bg-[#1a2957] text-white py-3 rounded-lg font-semibold hover:bg-[#1a2958] transition-all duration-300 ${
-                    loading ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
+                  className={`w-full bg-[#1a2957] text-white py-3 rounded-lg font-semibold hover:bg-[#1a2958] transition-all duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
                 >
                   {loading ? 'Submitting...' : 'Apply Now'}
                 </motion.button>
@@ -623,9 +632,15 @@ const DigitalMarketingPage = () => {
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Doubt?{' '}
-                  <a href="tel:+1234567890" className="text-blue-600 hover:underline">
+                  <a
+                    href="https://wa.me/919792166702?text=Hi%20I%20would%20like%20to%20speak%20to%20a%20counsellor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
                     Speak to Our Counsellor Now
                   </a>
+
                 </p>
                 <p className="text-sm text-gray-600">
                   <a href="mailto:hello@sownmark.com" className="text-blue-600 hover:underline">
