@@ -32,6 +32,7 @@ import JobApplicationsPage from '../admin/JobApplicationsPage';
 import PublicJobsPage from '../../pages/PublicJobsPage';
 import JobDetailPage from '../../pages/JobDetailPage';
 import JobApplicationForm from '../../pages/JobApplicationForm';
+import DigitalMarketingApplicationsPage from './admin/DigitalMarketingApplicationsPage';
 import CancellationRefundPolicy from '../../pages/CancellationRefundPolicy';
 
 
@@ -69,6 +70,7 @@ function App() {
           <Route path="jobs/create" element={<JobForm />} />
           <Route path="jobs/edit/:jobId" element={<JobForm />} />
           <Route path="jobs/:jobId/applications" element={<JobApplicationsPage />} />
+           <Route path="jobs/:jobId/applications" element={<JobApplicationsPage />} />
         </Route>
         <Route path="/careers" element={<PublicJobsPage />} />
         
