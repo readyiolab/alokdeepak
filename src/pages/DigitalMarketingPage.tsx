@@ -53,31 +53,53 @@ const DigitalMarketingPage = () => {
   };
 
  const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setError(null);
-  setSuccess(null);
+    e.preventDefault();
+    if (loading) return; // Prevent duplicate submissions
 
-  try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/marketing/apply`,
-      formData
-    );
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
-    // Backend success message
-    const message = response.data.message;
-    const referralCode = response.data.referralCode;
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/marketing/apply`,
+        formData,
+        {
+          timeout: 10000, // Set a reasonable timeout (10 seconds)
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-    setSuccess(`${message} Your referral code is: ${referralCode}`);
-    setFormData({ name: '', email: '', phone: '', referralCode: '' });
-  } catch (err) {
-    // Display backend error message
-    const errorMessage = err.response?.data?.error || 'Failed to submit application. Please try again.';
-    setError(errorMessage);
-  } finally {
-    setLoading(false);
-  }
-};
+      
+
+      // Backend success message
+      const message = response.data.message;
+      const referralCode = response.data.referralCode;
+
+      setSuccess(`${message} Your referral code is: ${referralCode}`);
+      setFormData({ name: '', email: '', phone: '', referralCode: '' });
+    } catch (err) {
+      
+
+      // Handle specific error cases
+      let errorMessage = 'Failed to submit application. Please try again.';
+      if (err.response) {
+        // Backend returned an error response (e.g., 409 for duplicate email)
+        errorMessage = err.response.data?.error || errorMessage;
+      } else if (err.request) {
+        // No response received (e.g., network error)
+        errorMessage = 'Network error. Please check your connection and try again.';
+      } else {
+        // Other errors (e.g., request setup error)
+        errorMessage = 'An unexpected error occurred. Please try again.';
+      }
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -871,7 +893,7 @@ const DigitalMarketingPage = () => {
                         background: 'linear-gradient(135deg, #1a2957, #90abff)',
                         color: 'white',
                       }}
-                      onClick={() => navigate('/apply')}
+                      onClick={scrollToForm}
                     >
                       Enroll Now
                     </button>
@@ -1013,7 +1035,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate('/apply')}
+                onClick={scrollToForm}
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
               >
                 Apply Now & Secure Your Future
@@ -1023,7 +1045,7 @@ const DigitalMarketingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate('/contact#contact-form')}
+                onClick={scrollToForm}
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation
