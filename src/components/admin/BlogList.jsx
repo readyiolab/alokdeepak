@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAllBlogs, deleteBlog } from '../../../services/api';
 import { motion } from 'framer-motion';
+import { FileText, Edit, Eye, Trash2 } from 'lucide-react';
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -42,55 +43,66 @@ const BlogList = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="max-w-7xl mx-auto"
+      className="max-w-7xl mx-auto p-4 sm:p-6"
     >
-      <h1 className="text-3xl font-bold text-[#1a2957] mb-6">All Blogs</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 tracking-tight">All Blogs</h1>
+      {error && <p className="text-red-600 bg-red-50 p-3 rounded-lg mb-6 text-sm font-medium">{error}</p>}
       <Link
         to="/admin/blog/create"
-        className="inline-block mb-6 bg-[#1a2957] text-white px-6 py-3 rounded-md hover:bg-[#142145]"
+        className="inline-flex items-center mb-6 bg-gray-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
       >
+        <FileText className="w-5 h-5 mr-2" />
         Create New Blog
       </Link>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-[#1a2957] text-white">
+      <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-800 text-white">
             <tr>
-              <th className="p-3 text-left">Title</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left">Categories</th>
-              <th className="p-3 text-left">Tags</th>
-              <th className="p-3 text-left">Actions</th>
+              {['Title', 'Status', 'Categories', 'Tags', 'Actions'].map((header) => (
+                <th key={header} className="p-3 sm:p-4 text-left font-medium tracking-wide text-xs sm:text-sm">
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {blogs.map((blog) => (
-              <tr key={blog.id} className="border-b">
-                <td className="p-3">{blog.title}</td>
-                <td className="p-3">{blog.status}</td>
-                <td className="p-3">{blog.categories.join(', ')}</td>
-                <td className="p-3">{blog.tags.join(', ')}</td>
-                <td className="p-3">
+              <motion.tr
+                key={blog.id}
+                className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150"
+                whileHover={{ backgroundColor: '#f9fafb' }}
+              >
+                <td className="p-3 sm:p-4 text-gray-800 text-xs sm:text-sm">{blog.title}</td>
+                <td className="p-3 sm:p-4 text-gray-600 capitalize text-xs sm:text-sm">{blog.status}</td>
+                <td className="p-3 sm:p-4 text-gray-600 text-xs sm:text-sm">{blog.categories.join(', ')}</td>
+                <td className="p-3 sm:p-4 text-gray-600 text-xs sm:text-sm">{blog.tags.join(', ')}</td>
+                <td className="p-3 sm:p-4 flex space-x-2">
                   <Link
                     to={`/admin/blog/edit/${blog.id}`}
-                    className="text-[#1a2957] hover:underline mr-2"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-xs sm:text-sm transition-colors duration-150 flex items-center"
+                    aria-label={`Edit ${blog.title}`}
                   >
+                    <Edit className="w-4 h-4 mr-1" />
                     Edit
                   </Link>
                   <Link
                     to={`/admin/blog/${blog.id}`}
-                    className="text-[#1a2957] hover:underline mr-2"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-xs sm:text-sm transition-colors duration-150 flex items-center"
+                    aria-label={`View ${blog.title}`}
                   >
+                    <Eye className="w-4 h-4 mr-1" />
                     View
                   </Link>
                   <button
                     onClick={() => handleDelete(blog.id)}
-                    className="text-red-500 hover:underline"
+                    className="text-red-600 hover:text-red-800 font-medium text-xs sm:text-sm transition-colors duration-150 flex items-center"
+                    aria-label={`Delete ${blog.title}`}
                   >
+                    <Trash2 className="w-4 h-4 mr-1" />
                     Delete
                   </button>
                 </td>
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>

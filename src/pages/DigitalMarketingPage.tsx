@@ -65,7 +65,7 @@ const DigitalMarketingPage = () => {
         `${import.meta.env.VITE_API_URL}/api/marketing/apply`,
         formData,
         {
-          timeout: 10000, // Set a reasonable timeout (10 seconds)
+          timeout: 3000, // Set a reasonable timeout (10 seconds)
           headers: {
             'Content-Type': 'application/json',
           },

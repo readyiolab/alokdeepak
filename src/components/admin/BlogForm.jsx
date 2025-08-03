@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-// import { createBlog, updateBlog, getBlogById } from from '../../../services/api';
 import { createBlog, updateBlog, getBlogById } from '../../../services/api';
-
 import { motion } from 'framer-motion';
+import { Save } from 'lucide-react';
 
 const BlogForm = ({ isEdit = false }) => {
   const [formData, setFormData] = useState({
@@ -91,89 +90,91 @@ const BlogForm = ({ isEdit = false }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="max-w-7xl mx-auto"
+      className="max-w-7xl mx-auto p-4 sm:p-6"
     >
-      <h1 className="text-3xl font-bold text-[#1a2957] mb-6">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 tracking-tight">
         {isEdit ? 'Edit Blog' : 'Create Blog'}
       </h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Title</label>
+      {error && <p className="text-red-600 bg-red-50 p-3 rounded-lg mb-6 text-sm font-medium">{error}</p>}
+      <form onSubmit={handleSubmit} className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-100 space-y-4">
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Title</label>
           <input
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
             required
+            aria-required="true"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Author</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Author</label>
           <input
             type="text"
             name="author"
             value={formData.author}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
             required
+            aria-required="true"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Status</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Status</label>
           <select
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
           >
             <option value="draft">Draft</option>
             <option value="published">Published</option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Categories (comma-separated)</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Categories (comma-separated)</label>
           <input
             type="text"
             name="categories"
             value={formData.categories}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Tags (comma-separated)</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Tags (comma-separated)</label>
           <input
             type="text"
             name="tags"
             value={formData.tags}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Meta Description</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Meta Description</label>
           <input
             type="text"
             name="meta_description"
             value={formData.meta_description}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Featured Image</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Featured Image</label>
           <input
             type="file"
             name="featured_image"
             accept="image/*"
             onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:border-[#1a2957]"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-[#1a2957] mb-2">Content</label>
+        <div>
+          <label className="block text-gray-900 mb-2 text-sm font-medium">Content</label>
           <ReactQuill
             theme="snow"
             value={formData.content}
@@ -187,13 +188,14 @@ const BlogForm = ({ isEdit = false }) => {
                 ['link'],
               ],
             }}
-            className="bg-white"
+            className="bg-white rounded-lg border"
           />
         </div>
         <button
           type="submit"
-          className="bg-[#1a2957] text-white px-6 py-3 rounded-md hover:bg-[#142145]"
+          className="inline-flex items-center bg-gray-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
         >
+          <Save className="w-5 h-5 mr-2" />
           {isEdit ? 'Update Blog' : 'Create Blog'}
         </button>
       </form>
