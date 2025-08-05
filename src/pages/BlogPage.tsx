@@ -1,11 +1,260 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Search, Calendar, Clock, User, ArrowRight, Tag, TrendingUp, BookOpen, Users, Target, Lightbulb, Star, Play, CheckCircle } from 'lucide-react';
+import { Search, Calendar, Clock, User, ArrowRight, Tag, TrendingUp, BookOpen, Users, Target, Lightbulb, Star, CheckCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import NewsletterForm from './NewsletterForm';
 
-const BlogPage = () => {
+// Types
+interface BlogPost {
+  id: number;
+  title: string;
+  excerpt: string;
+  metaDescription: string;
+  content: string;
+  featuredImageUrl: string;
+  author: string;
+  author_bio: string;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+}
+
+const blogPosts: BlogPost[] = [
+  {
+    id: 1,
+    title: '5 Essential Digital Marketing Skills for 2025',
+    excerpt: 'Discover the most in-demand digital marketing skills that will define success in 2025 and beyond.',
+    metaDescription: 'Learn the top 5 digital marketing skills for 2025: data, AI, content, social media, and SEO. Start with Sownmark!',
+    content: `
+      <h2>Introduction</h2>
+      <p>As the digital landscape evolves, staying ahead requires mastering key skills that drive results. Here are the top five digital marketing skills you need for 2025.</p>
+      <h3>1. Data-Driven Marketing</h3>
+      <p>Understanding analytics tools like Google Analytics 4 and leveraging data to optimize campaigns is crucial. Marketers must interpret data-driven strategies.</p>
+      <h3>2. AI and Automation</h3>
+      <p>Artificial intelligence is transforming campaigns. Use AI for content creation, ad targeting, and segmentation.</p>
+      <h3>3. Content Strategy</h3>
+      <p>High-quality content remains king. Master storytelling, video, and SEO to capture audiences.</p>
+      <h3>4. Social Media Expertise</h3>
+      <p>Platforms like TikTok and Instagram demand creative strategies tailored to diverse audiences.</p>
+      <h3>5. Technical SEO</h3>
+      <p>Optimize websites for speed, mobile-friendliness, and crawlability to rank higher.</p>
+      <h2>Conclusion</h2>
+      <p>Master these skills to lead in digital marketing. Start with Sownmark's courses today.</p>
+    `,
+    featuredImageUrl: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+    author: 'Sarah Johnson',
+    author_bio: 'Sarah is a digital marketing expert with over 10 years of experience in SEO and content strategy.',
+    date: '2025-06-15',
+    readTime: '5 min read',
+    category: 'Marketing Tips',
+    tags: ['Skills', 'Trends', '2025'],
+  },
+  {
+    id: 2,
+    title: 'SEO Checklist: How to Rank Higher on Google',
+    excerpt: 'A comprehensive guide to optimizing your website for better search engine rankings.',
+    metaDescription: 'Boost your Google rankings with our SEO checklist: keywords, on-page, technical SEO, and backlinks. Join Sownmark!',
+    content: `
+      <h2>Introduction</h2>
+      <p>Ranking higher on Google requires strategic SEO. This checklist covers essential steps.</p>
+      <h3>1. Keyword Research</h3>
+      <p>Identify high-intent keywords using Ahrefs or SEMrush, focusing on long-tail terms.</p>
+      <h3>2. On-Page Optimization</h3>
+      <p>Optimize titles, meta descriptions, and headers with keywords for relevance.</p>
+      <h3>3. Technical SEO</h3>
+      <p>Enhance site speed, mobile responsiveness, and fix broken links for better crawling.</p>
+      <h3>4. Backlink Building</h3>
+      <p>Earn quality backlinks through guest posts and partnerships, avoiding spammy links.</p>
+      <h3>5. Content Updates</h3>
+      <p>Refresh content regularly to stay relevant, monitoring via Google Search Console.</p>
+      <h2>Conclusion</h2>
+      <p>Use this checklist to boost rankings and traffic. Join our SEO course for more.</p>
+    `,
+    featuredImageUrl: 'https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800',
+    author: 'Michael Chen',
+    author_bio: 'Michael is an SEO specialist passionate about helping businesses grow online.',
+    date: '2025-06-10',
+    readTime: '8 min read',
+    category: 'SEO',
+    tags: ['SEO', 'Google', 'Rankings'],
+  },
+  {
+    id: 3,
+    title: 'The Ultimate Guide to Social Media Content Planning',
+    excerpt: 'Learn to create engaging social media content to drive engagement and brand growth.',
+    metaDescription: 'Master social media planning with our guide: set goals, know your audience, and optimize content. Join Sownmark!',
+    content: `
+      <h2>Introduction</h2>
+      <p>Effective social media planning builds a strong online presence. This guide shows how.</p>
+      <h3>1. Define Goals</h3>
+      <p>Set objectives like increasing engagement, traffic, or brand awareness.</p>
+      <h3>2. Know Your Audience</h3>
+      <p>Understand demographics using analytics to tailor content effectively.</p>
+      <h3>3. Content Calendar</h3>
+      <p>Plan posts with a calendar, balancing promotional and educational content.</p>
+      <h3>4. Platform Strategies</h3>
+      <p>Customize content for Instagram Stories, LinkedIn articles, or Twitter threads.</p>
+      <h3>5. Analyze & Optimize</h3>
+      <p>Track metrics and adjust strategies based on audience resonance.</p>
+      <h2>Conclusion</h2>
+      <p>Strategic planning transforms social media. Master it with our course.</p>
+    `,
+    featuredImageUrl: 'https://images.pexels.com/photos/1549280/pexels-photo-1549280.jpeg?auto=compress&cs=tinysrgb&w=800',
+    author: 'Emma Davis',
+    author_bio: 'Emma is a social media strategist who loves crafting engaging content.',
+    date: '2025-06-05',
+    readTime: '6 min read',
+    category: 'Social Media',
+    tags: ['Content', 'Planning', 'Engagement'],
+  },
+  {
+    id: 4,
+    title: 'Hiring Your First Digital Marketing Manager: What to Look For',
+    excerpt: 'Key qualities to consider when hiring your first digital marketing team member.',
+    metaDescription: 'Hire the right digital marketing manager with skills in strategy, SEO, and creativity. Find talent with Sownmark!',
+    content: `
+      <h2>Introduction</h2>
+      <p>Hiring a digital marketing manager is vital for growth. Here’s what to seek.</p>
+      <h3>1. Strategic Thinking</h3>
+      <p>Choose candidates who align marketing strategies with business goals.</p>
+      <h3>2. Technical Expertise</h3>
+      <p>Proficiency in SEO, PPC, and tools like Google Analytics is crucial.</p>
+      <h3>3. Creativity</h3>
+      <p>Look for innovative campaign ideas that stand out digitally.</p>
+      <h3>4. Leadership</h3>
+      <p>Ensure they can inspire teams and collaborate cross-departmentally.</p>
+      <h3>5. Adaptability</h3>
+      <p>Select someone who keeps up with digital trends and adapts fast.</p>
+      <h2>Conclusion</h2>
+      <p>The right manager transforms your business. Find talent with Sownmark.</p>
+    `,
+    featuredImageUrl: 'https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=800',
+    author: 'David Wilson',
+    author_bio: 'David is a hiring consultant specializing in digital marketing roles.',
+    date: '2025-05-30',
+    readTime: '7 min read',
+    category: 'Hiring',
+    tags: ['Hiring', 'Team Building', 'Management'],
+  },
+  {
+    id: 5,
+    title: 'Why Responsive Web Design is Non-Negotiable Today',
+    excerpt: 'Understand the critical role of responsive design in modern web development.',
+    metaDescription: 'Discover why responsive web design is key for SEO, UX, and mobile traffic. Learn with Sownmark’s course!',
+    content: `
+      <h2>Introduction</h2>
+      <p>Responsive design ensures sites look great on all devices. Here’s why it matters.</p>
+      <h3>1. Mobile Traffic</h3>
+      <p>Over 60% of traffic is mobile. Responsive sites offer seamless experiences.</p>
+      <h3>2. SEO Benefits</h3>
+      <p>Google favors mobile-friendly sites, boosting rankings with responsive design.</p>
+      <h3>3. User Experience</h3>
+      <p>Consistent UX across devices lowers bounce rates and boosts engagement.</p>
+      <h3>4. Cost Efficiency</h3>
+      <p>One responsive site is cheaper than separate desktop/mobile versions.</p>
+      <h3>5. Future-Proofing</h3>
+      <p>Responsive design adapts to new devices, keeping sites relevant.</p>
+      <h2>Conclusion</h2>
+      <p>Invest in responsive design to stay competitive. Learn with Sownmark.</p>
+    `,
+    featuredImageUrl: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+    author: 'Lisa Parker',
+    author_bio: 'Lisa is a web developer advocating for user-friendly design.',
+    date: '2025-05-25',
+    readTime: '4 min read',
+    category: 'Web Dev',
+    tags: ['Responsive', 'UX', 'Mobile'],
+  },
+  {
+    id: 6,
+    title: 'Understanding Google Analytics 4: A Beginner\'s Guide',
+    excerpt: 'Master GA4 basics to track website performance effectively.',
+    metaDescription: 'Learn Google Analytics 4 basics: setup, events, and reports for better tracking. Join Sownmark’s course!',
+    content: `
+      <h2>Introduction</h2>
+      <p>Google Analytics 4 (GA4) is the latest tool for tracking performance. Learn the basics.</p>
+      <h3>1. Setting Up GA4</h3>
+      <p>Create a GA4 property and integrate via Google Tag Manager.</p>
+      <h3>2. Understanding Events</h3>
+      <p>GA4 uses event-based tracking. Set up custom events for interactions.</p>
+      <h3>3. Analyzing Reports</h3>
+      <p>Use GA4 reports to track behavior, traffic, and conversions.</p>
+      <h3>4. Custom Dashboards</h3>
+      <p>Build dashboards tailored to your business goals.</p>
+      <h3>5. Data Privacy</h3>
+      <p>Ensure GDPR compliance when collecting data.</p>
+      <h2>Conclusion</h2>
+      <p>GA4 powers data-driven marketing. Learn it with Sownmark’s course.</p>
+    `,
+    featuredImageUrl: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
+    author: 'James Rodriguez',
+    author_bio: 'James is a data analyst with expertise in Google Analytics.',
+    date: '2025-05-20',
+    readTime: '9 min read',
+    category: 'SEO',
+    tags: ['Analytics', 'Google', 'Data'],
+  },
+  {
+    id: 9,
+    title: 'Digital Marketing Course in India with Job Guarantee',
+    excerpt: 'Join India’s top-rated digital marketing course with 100% job guarantee. Learn live ads, SEO, and get placed fast.',
+    metaDescription: 'Join India\'s top-rated digital marketing course with 100% job guarantee. Learn live ads, SEO, and get placed fast. Enroll now at Sownmark!',
+    content: `
+      <h2>Why Digital Marketing is Booming in India</h2>
+      <p>The digital economy is growing rapidly. With over 800 million internet users in India, businesses are moving online, creating a huge demand for skilled digital marketers. Companies across Delhi, Mumbai, Bangalore, and Tier 2 cities are hiring professionals for SEO, paid ads, traffic, and lead generation.</p>
+      <h3>Best Digital Marketing Course in Delhi with Job Guarantee</h3>
+      <p>Sownmark’s Digital Marketing Mastery Course stands out with its 100% practical training. Designed for job seekers, students, entrepreneurs, and freelancers, it offers live project-based learning. You’ll run real campaigns, analyze live data, and create results.</p>
+      <h3>Short-Term Courses with Long-Term Benefits</h3>
+      <p>Sownmark’s 3-month course covers Google Ads, Meta Ads, SEO, keyword research, email/WhatsApp marketing, e-commerce ads, landing page design, and analytics. It includes interview training and guaranteed job assistance.</p>
+      <h3>Why Choose an Online Course?</h3>
+      <p>Sownmark’s online course offers hands-on training and placement support for learners across India. Learn from experts, practice on real tools, and attend doubt-clearing sessions from home.</p>
+      <h3>Student Success Stories</h3>
+      <p>“I was jobless for 6 months until I joined Sownmark. Within 2 months, I cracked an interview at a Delhi-based agency.” – Radhika Sharma<br>“The live ads training helped me run Amazon Ads for US clients.” – Ankit Tiwari</p>
+      <h2>Conclusion</h2>
+      <p>In 2025, digital marketing skills are invaluable. Sownmark’s course offers real projects, job support, and confidence. Enroll at <a href="https://sownmark.com">Sownmark</a> today.</p>
+    `,
+    featuredImageUrl: 'https://res.cloudinary.com/dbyjiqjui/image/upload/v1754372724/Blog_1_ciuj5z.png',
+    author: 'Priya Mehra',
+    author_bio: 'Priya is a digital marketing trainer passionate about empowering careers.',
+    date: '2025-08-01',
+    readTime: '6 min read',
+    category: 'Marketing Tips',
+    tags: ['digital marketing course in india', 'job guaranteed digital marketing course', 'digital marketing course delhi', 'short term digital marketing course', 'online digital marketing course', 'sownmark digital marketing course'],
+  },
+  {
+    id: 10,
+    title: 'Want to Land a ₹9 LPA Job? Start With These Digital Marketing Courses in India',
+    excerpt: 'Join India’s top digital marketing course with 100% job guarantee. Learn SEO, PPC, and analytics to secure high-paying roles.',
+    metaDescription: 'Join India\'s top-rated digital marketing course with 100% job guarantee. Learn live ads, SEO, and get placed fast. Enroll now at Sownmark!',
+    content: `
+      <h2>Why Digital Marketing Is the Career of the Future</h2>
+      <p>With over 800 million internet users in India, businesses from startups to MNCs need digital marketers. Over 250,000 job listings on Naukri and LinkedIn seek skills in SEO, PPC, content, and analytics.</p>
+      <h3>What Makes a Course Worth Your Time?</h3>
+      <p>Top courses offer hands-on experience with live campaigns, training in tools like Google Ads, Meta Ads Manager, Ahrefs, SEMrush, and HubSpot, plus mentorship and placement support.</p>
+      <h3>Sownmark Digital Marketing Course: The Job-Ready Choice</h3>
+      <p>Sownmark’s course provides 100% placement support, live campaign execution, certifications (Google, Meta, HubSpot), and 1-on-1 mentorship. Students secure jobs at Lenskart, BigBasket, and D2C brands with packages from ₹4.5 LPA to ₹9 LPA.</p>
+      <h3>Why Choose Digital Marketing Classes in Delhi?</h3>
+      <p>Delhi offers access to tech companies, experienced trainers, and networking. Sownmark’s Delhi courses blend quality education with career support.</p>
+      <h3>What You Will Learn</h3>
+      <p>Master SEO, PPC, social media marketing, content strategy, email marketing, Google Analytics, and automation tools.</p>
+      <h3>Real Results</h3>
+      <p>“I went from a ₹12,000/month BPO job to a ₹8.5 LPA Performance Marketer role.” – Rahul Sharma<br>“The mentorship gave me confidence to manage campaigns.” – Pooja Verma</p>
+      <h2>Final Thoughts</h2>
+      <p>Digital marketing skills open doors to high-paying careers. Enroll in Sownmark’s course at <a href="https://sownmark.com">Sownmark</a> to start your journey.</p>
+    `,
+    featuredImageUrl: 'https://res.cloudinary.com/dbyjiqjui/image/upload/v1754372852/WhatsApp_Image_2025-08-05_at_11.15.55_0882c8a0_wmcuvn.jpg',
+    author: 'Vikram Singh',
+    author_bio: 'Vikram is a digital marketing expert focused on career growth strategies.',
+    date: '2025-08-03',
+    readTime: '7 min read',
+    category: 'Marketing Tips',
+    tags: ['digital marketing course in india', 'job guaranteed digital marketing course', 'digital marketing course delhi', 'online digital marketing course', 'sownmark digital marketing course'],
+  },
+];
+
+const BlogPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -25,269 +274,55 @@ const BlogPage = () => {
     },
   };
 
-  // Function to generate URL-friendly slug from title
-  const generateSlug = (title) => {
-    return title
+  const generateSlug = (title: string): string =>
+    title
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
-  };
 
   const categories = [
     { name: 'All', icon: <BookOpen className="w-4 h-4" />, count: 8 },
     { name: 'SEO', icon: <TrendingUp className="w-4 h-4" />, count: 2 },
-    { name: 'Social Media', icon: <Users className="w-4 h-4" />, count: 2 },
+    { name: 'Social Media', icon: <Users className="w-4 h-4" />, count: 1 },
     { name: 'Web Dev', icon: <Target className="w-4 h-4" />, count: 1 },
     { name: 'Hiring', icon: <User className="w-4 h-4" />, count: 1 },
-    { name: 'Marketing Tips', icon: <Lightbulb className="w-4 h-4" />, count: 2 },
+    { name: 'Marketing Tips', icon: <Lightbulb className="w-4 h-4" />, count: 3 },
   ];
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: '5 Essential Digital Marketing Skills for 2025',
-      excerpt: 'Discover the most in-demand digital marketing skills that will define success in 2025 and beyond.',
-      content: `
-        <h2>Introduction</h2>
-        <p>As the digital landscape evolves, staying ahead requires mastering key skills that drive results. Here are the top five digital marketing skills you need for 2025.</p>
-        <h3>1. Data-Driven Marketing</h3>
-        <p>Understanding analytics tools like Google Analytics 4 and leveraging data to optimize campaigns is crucial. Marketers must interpret data to make informed decisions.</p>
-        <h3>2. AI and Automation</h3>
-        <p>Artificial intelligence is transforming how campaigns are created and optimized. Learn to use AI tools for content creation, ad targeting, and customer segmentation.</p>
-        <h3>3. Content Strategy</h3>
-        <p>High-quality, engaging content remains king. Master storytelling, video content, and SEO-driven content to capture audience attention.</p>
-        <h3>4. Social Media Expertise</h3>
-        <p>Platforms like TikTok and Instagram demand creative strategies. Learn to craft platform-specific campaigns that resonate with diverse audiences.</p>
-        <h3>5. Technical SEO</h3>
-        <p>Optimize websites for speed, mobile-friendliness, and crawlability to rank higher on search engines. Stay updated on algorithm changes.</p>
-        <h2>Conclusion</h2>
-        <p>Mastering these skills will position you as a leader in the digital marketing field. Start learning today with Sownmark's comprehensive courses.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Sarah Johnson',
-      date: '2025-06-15',
-      readTime: '5 min read',
-      category: 'Marketing Tips',
-      tags: ['Skills', 'Trends', '2025'],
-    },
-    {
-      id: 2,
-      title: 'SEO Checklist: How to Rank Higher on Google',
-      excerpt: 'A comprehensive guide to optimizing your website for better search engine rankings and organic traffic.',
-      content: `
-        <h2>Introduction</h2>
-        <p>Ranking higher on Google requires a strategic approach to SEO. This checklist covers essential steps to boost your site's visibility.</p>
-        <h3>1. Keyword Research</h3>
-        <p>Identify high-intent keywords using tools like Ahrefs or SEMrush. Focus on long-tail keywords for better targeting.</p>
-        <h3>2. On-Page Optimization</h3>
-        <p>Optimize title tags, meta descriptions, and headers with target keywords. Ensure content is relevant and high-quality.</p>
-        <h3>3. Technical SEO</h3>
-        <p>Improve site speed, mobile responsiveness, and fix broken links. Use XML sitemaps and robots.txt for better crawling.</p>
-        <h3>4. Backlink Building</h3>
-        <p>Earn high-quality backlinks through guest posting and partnerships. Avoid spammy links to maintain credibility.</p>
-        <h3>5. Content Updates</h3>
-        <p>Regularly update content to keep it fresh and relevant. Monitor performance using Google Search Console.</p>
-        <h2>Conclusion</h2>
-        <p>Follow this checklist to improve your Google rankings and drive organic traffic. Enroll in our SEO course for deeper insights.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Michael Chen',
-      date: '2025-06-10',
-      readTime: '8 min read',
-      category: 'SEO',
-      tags: ['SEO', 'Google', 'Rankings'],
-    },
-    {
-      id: 3,
-      title: 'The Ultimate Guide to Social Media Content Planning',
-      excerpt: 'Learn how to create engaging social media content that drives engagement and builds your brand.',
-      content: `
-        <h2>Introduction</h2>
-        <p>Effective social media content planning is key to building a strong online presence. This guide walks you through the process.</p>
-        <h3>1. Define Your Goals</h3>
-        <p>Set clear objectives, such as increasing engagement, driving traffic, or boosting brand awareness.</p>
-        <h3>2. Know Your Audience</h3>
-        <p>Understand your target demographic using analytics tools. Tailor content to their preferences and behaviors.</p>
-        <h3>3. Content Calendar Creation</h3>
-        <p>Plan posts in advance using a content calendar. Balance promotional, educational, and entertaining content.</p>
-        <h3>4. Platform-Specific Strategies</h3>
-        <p>Customize content for each platform, leveraging Instagram Stories, LinkedIn articles, or Twitter threads.</p>
-        <h3>5. Analyze and Optimize</h3>
-        <p>Track performance metrics and adjust your strategy based on what resonates with your audience.</p>
-        <h2>Conclusion</h2>
-        <p>Strategic content planning can transform your social media presence. Join our course to master these techniques.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/1549280/pexels-photo-1549280.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Emma Davis',
-      date: '2025-06-05',
-      readTime: '6 min read',
-      category: 'Social Media',
-      tags: ['Content', 'Planning', 'Engagement'],
-    },
-    {
-      id: 4,
-      title: 'Hiring Your First Digital Marketing Manager: What to Look For',
-      excerpt: 'Essential qualities and skills to consider when hiring your first digital marketing team member.',
-      content: `
-        <h2>Introduction</h2>
-        <p>Hiring a digital marketing manager is a critical step for business growth. Here’s what to look for in a candidate.</p>
-        <h3>1. Strategic Thinking</h3>
-        <p>Look for candidates who can develop and execute comprehensive marketing strategies aligned with business goals.</p>
-        <h3>2. Technical Expertise</h3>
-        <p>Proficiency in SEO, PPC, and analytics tools like Google Analytics is essential for measurable results.</p>
-        <h3>3. Creativity</h3>
-        <p>A great manager brings creative ideas for campaigns that stand out in a crowded digital space.</p>
-        <h3>4. Leadership Skills</h3>
-        <p>They should inspire and manage teams, collaborating effectively with other departments.</p>
-        <h3>5. Adaptability</h3>
-        <p>The digital landscape changes rapidly. Choose someone who stays updated on trends and adapts quickly.</p>
-        <h2>Conclusion</h2>
-        <p>Hiring the right digital marketing manager can transform your business. Partner with Sownmark for top talent.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'David Wilson',
-      date: '2025-05-30',
-      readTime: '7 min read',
-      category: 'Hiring',
-      tags: ['Hiring', 'Team Building', 'Management'],
-    },
-    {
-      id: 5,
-      title: 'Why Responsive Web Design is Non-Negotiable Today',
-      excerpt: 'Understanding the critical importance of responsive design in modern web development.',
-      content: `
-        <h2>Introduction</h2>
-        <p>Responsive web design ensures your site looks great on all devices. Here’s why it’s essential today.</p>
-        <h3>1. Mobile Traffic Dominance</h3>
-        <p>Over 60% of web traffic comes from mobile devices. A responsive site ensures a seamless user experience.</p>
-        <h3>2. SEO Benefits</h3>
-        <p>Google prioritizes mobile-friendly websites, boosting your rankings with responsive design.</p>
-        <h3>3. User Experience</h3>
-        <p>A consistent experience across devices reduces bounce rates and increases engagement.</p>
-        <h3>4. Cost Efficiency</h3>
-        <p>Maintaining one responsive site is more cost-effective than separate desktop and mobile versions.</p>
-        <h3>5. Future-Proofing</h3>
-        <p>Responsive design adapts to new devices and screen sizes, keeping your site relevant.</p>
-        <h2>Conclusion</h2>
-        <p>Invest in responsive design to stay competitive. Learn web development with Sownmark’s courses.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Lisa Parker',
-      date: '2025-05-25',
-      readTime: '4 min read',
-      category: 'Web Dev',
-      tags: ['Responsive', 'UX', 'Mobile'],
-    },
-    {
-      id: 6,
-      title: 'Understanding Google Analytics 4: A Beginner\'s Guide',
-      excerpt: 'Master the basics of GA4 and learn how to track your website\'s performance effectively.',
-      content: `
-        <h2>Introduction</h2>
-        <p>Google Analytics 4 (GA4) is the latest tool for tracking website performance. This guide covers the basics for beginners.</p>
-        <h3>1. Setting Up GA4</h3>
-        <p>Create a GA4 property and integrate it with your website using Google Tag Manager.</p>
-        <h3>2. Understanding Events</h3>
-        <p>GA4 focuses on event-based tracking. Learn to set up custom events for user interactions.</p>
-        <h3>3. Analyzing Reports</h3>
-        <p>Use GA4’s reports to track user behavior, traffic sources, and conversion rates.</p>
-        <h3>4. Custom Dashboards</h3>
-        <p>Create dashboards tailored to your business goals for quick insights.</p>
-        <h3>5. Data Privacy</h3>
-        <p>Ensure compliance with GDPR and other regulations when collecting data.</p>
-        <h2>Conclusion</h2>
-        <p>GA4 is a powerful tool for data-driven marketing. Master it with Sownmark’s analytics course.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'James Rodriguez',
-      date: '2025-05-20',
-      readTime: '9 min read',
-      category: 'SEO',
-      tags: ['Analytics', 'Google', 'Data'],
-    },
-    {
-      id: 7,
-      title: 'Leveraging AI in Digital Marketing: Trends to Watch',
-      excerpt: 'Explore how artificial intelligence is transforming digital marketing strategies and execution.',
-      content: `
-        <h2>Introduction</h2>
-        <p>AI is revolutionizing digital marketing. Discover key trends to watch in this space.</p>
-        <h3>1. AI-Powered Advertising</h3>
-        <p>Use AI to optimize ad targeting, bidding, and creative generation for better ROI.</p>
-        <h3>2. Content Creation</h3>
-        <p>AI tools like chatbots and content generators streamline content production at scale.</p>
-        <h3>3. Personalization</h3>
-        <p>Deliver hyper-personalized user experiences using AI-driven insights and recommendations.</p>
-        <h3>4. Predictive Analytics</h3>
-        <p>Predict customer behavior and campaign performance with AI-powered analytics.</p>
-        <h3>5. Automation</h3>
-        <p>Automate repetitive tasks like email marketing and social media scheduling with AI.</p>
-        <h2>Conclusion</h2>
-        <p>AI is the future of digital marketing. Stay ahead with Sownmark’s AI marketing course.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Anna Thompson',
-      date: '2025-05-15',
-      readTime: '6 min read',
-      category: 'Marketing Tips',
-      tags: ['AI', 'Innovation', 'Future'],
-    },
-    {
-      id: 8,
-      title: 'Social Media ROI: Measuring What Matters',
-      excerpt: 'Learn how to measure and optimize your social media return on investment with actionable metrics.',
-      content: `
-        <h2>Introduction</h2>
-        <p>Measuring social media ROI is critical for justifying your marketing spend. Here’s how to do it effectively.</p>
-        <h3>1. Define KPIs</h3>
-        <p>Identify key performance indicators like engagement, conversions, and click-through rates.</p>
-        <h3>2. Track Revenue</h3>
-        <p>Use attribution models to link social media efforts to sales and revenue.</p>
-        <h3>3. Measure Engagement</h3>
-        <p>Analyze likes, shares, and comments to gauge audience interaction.</p>
-        <h3>4. Optimize Campaigns</h3>
-        <p>Use A/B testing to refine content and improve ROI over time.</p>
-        <h3>5. Use Analytics Tools</h3>
-        <p>Leverage tools like Sprout Social or Hootsuite for comprehensive ROI tracking.</p>
-        <h2>Conclusion</h2>
-        <p>Effective ROI measurement drives smarter social media strategies. Learn more with Sownmark’s courses.</p>
-      `,
-      featuredImage: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-      author: 'Robert Kim',
-      date: '2025-05-10',
-      readTime: '7 min read',
-      category: 'Social Media',
-      tags: ['ROI', 'Metrics', 'Strategy'],
-    },
-  ];
-
-  const filteredPosts = blogPosts.filter(post => {
+  const filteredPosts = blogPosts.filter((post) => {
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
-  const recentPosts = blogPosts.slice(0, 3);
+  const recentPosts = blogPosts
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-  <title>Digital Marketing & Tech Blog | Sownmark</title>
-  <meta
-    name="description"
-    content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies"
-  />
-  <meta
-    name="keywords"
-    content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips"
-  />
-  <link rel="canonical" href="https://sownmark.com/blog" />
-  <meta property="og:title" content="Digital Marketing & Tech Blog | Sownmark" />
-  <meta property="og:description" content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies" />
-  <meta property="og:url" content="https://sownmark.com/blog" />
-  <meta property="og:type" content="website" />
-</Helmet>
+        <title>Digital Marketing & Tech Blog | Sownmark</title>
+        <meta
+          name="description"
+          content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies"
+        />
+        <meta
+          name="keywords"
+          content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips"
+        />
+        <link rel="canonical" href="https://sownmark.com/blog" />
+        <meta property="og:title" content="Digital Marketing & Tech Blog | Sownmark" />
+        <meta
+          property="og:description"
+          content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies"
+        />
+        <meta property="og:url" content="https://sownmark.com/blog" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
       {/* Hero Section - Dark Theme */}
       <section
@@ -342,11 +377,7 @@ const BlogPage = () => {
                 Explore Blogs
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
-
-
             </div>
-
-
           </motion.div>
         </div>
       </section>
@@ -394,10 +425,11 @@ const BlogPage = () => {
                 key={index}
                 variants={fadeInUp}
                 onClick={() => setSelectedCategory(category.name)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 group relative ${selectedCategory === category.name
-                  ? 'bg-white text-gray-900 shadow-lg border border-blue-200'
-                  : 'bg-white text-gray-600 hover:bg-blue-50 border border-gray-200'
-                  }`}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 group relative ${
+                  selectedCategory === category.name
+                    ? 'bg-white text-gray-900 shadow-lg border border-blue-200'
+                    : 'bg-white text-gray-600 hover:bg-blue-50 border border-gray-200'
+                }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 flex items-center gap-2">
@@ -445,7 +477,7 @@ const BlogPage = () => {
                   <div className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-2 h-full">
                     <div className="relative overflow-hidden">
                       <img
-                        src={post.featuredImage}
+                        src={post.featuredImageUrl}
                         alt={post.title}
                         className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
@@ -505,7 +537,10 @@ const BlogPage = () => {
               <div className="sticky top-8 space-y-8">
                 <NewsletterForm />
 
-                <motion.div {...fadeInUp} className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                <motion.div
+                  {...fadeInUp}
+                  className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
                     <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Posts</h3>
@@ -517,7 +552,7 @@ const BlogPage = () => {
                           className="flex gap-4 group hover:bg-gray-50 p-2 rounded-xl transition-colors duration-300 w-full text-left"
                         >
                           <img
-                            src={post.featuredImage}
+                            src={post.featuredImageUrl}
                             alt={post.title}
                             className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
                           />
@@ -536,12 +571,15 @@ const BlogPage = () => {
                   </div>
                 </motion.div>
 
-                <motion.div {...fadeInUp} className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                <motion.div
+                  {...fadeInUp}
+                  className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
                     <h3 className="text-xl font-bold text-gray-900 mb-4">Popular Tags</h3>
                     <div className="flex flex-wrap gap-2">
-                      {['SEO', 'Social Media', 'Content Marketing', 'Web Development', 'Analytics', 'Strategy', 'AI', 'Trends'].map((tag, index) => (
+                      {['SEO', 'Social Media', 'Content Marketing', 'Web Development', 'Analytics', 'Digital Marketing Course', 'Job Guarantee'].map((tag, index) => (
                         <span
                           key={index}
                           className="bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-600 px-3 py-2 rounded-full text-sm cursor-pointer transition-colors duration-300"
@@ -603,17 +641,15 @@ const BlogPage = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <Link
-
                 className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-base hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center shadow-2xl"
-                to='/contact#contact-form'
+                to="/contact#contact-form"
               >
                 Get Started Today
                 <ArrowRight className="w-5 h-5" />
               </Link>
 
               <Link
-
-                to='/contact#contact-form'
+                to="/contact#contact-form"
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2 min-w-[220px] justify-center"
               >
                 Get Free Consultation

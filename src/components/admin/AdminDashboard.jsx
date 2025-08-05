@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAllBlogs } from '../../../services/api';
+import { 
+  getAllBlogs,
+  getAllJobApplications,
+  getAllDigitalMarketingApplications,
+} from '../../../services/api';
 import { motion } from 'framer-motion';
 import { 
   FileText, 
@@ -17,6 +21,17 @@ import {
   RefreshCw,
   Plus
 } from 'lucide-react';
+import { 
+  Card, 
+  CardContent, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription 
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -32,8 +47,8 @@ const AdminDashboard = () => {
       pendingJobApplications: 0,
       rejectedJobApplications: 0,
       totalDigitalMarketingApplications: 0,
-      recentApplications: 0
-    }
+      recentApplications: 0,
+    },
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -60,8 +75,8 @@ const AdminDashboard = () => {
     try {
       const [blogsResponse, jobApplicationsResponse, digitalMarketingResponse] = await Promise.allSettled([
         getAllBlogs(),
-        fetchJobApplications(),
-        fetchDigitalMarketingApplications()
+        getAllJobApplications(),
+        getAllDigitalMarketingApplications(),
       ]);
 
       let blogs = [];
@@ -75,13 +90,13 @@ const AdminDashboard = () => {
       }
 
       if (jobApplicationsResponse.status === 'fulfilled') {
-        jobApplications = jobApplicationsResponse.value || [];
+        jobApplications = jobApplicationsResponse.value.data.applications || [];
       } else {
         console.error('Failed to fetch job applications:', jobApplicationsResponse.reason);
       }
 
       if (digitalMarketingResponse.status === 'fulfilled') {
-        digitalMarketingApplications = digitalMarketingResponse.value || [];
+        digitalMarketingApplications = digitalMarketingResponse.value.data.applications || [];
       } else {
         console.error('Failed to fetch digital marketing applications:', digitalMarketingResponse.reason);
       }
@@ -92,9 +107,8 @@ const AdminDashboard = () => {
         blogs,
         jobApplications,
         digitalMarketingApplications,
-        stats
+        stats,
       });
-
     } catch (err) {
       setError('Failed to fetch dashboard data. Please try again.');
       console.error('Dashboard fetch error:', err);
@@ -102,42 +116,6 @@ const AdminDashboard = () => {
       setLoading(false);
       setRefreshing(false);
     }
-  };
-
-  const fetchJobApplications = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/job-applications`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        localStorage.removeItem('adminToken');
-        navigate('/admin/login');
-        return [];
-      }
-      throw new Error('Failed to fetch job applications');
-    }
-    
-    const data = await response.json();
-    return data.applications || [];
-  };
-
-  const fetchDigitalMarketingApplications = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/digital-marketing-applications`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        localStorage.removeItem('adminToken');
-        navigate('/admin/login');
-        return [];
-      }
-      throw new Error('Failed to fetch digital marketing applications');
-    }
-    
-    const data = await response.json();
-    return data.applications || [];
   };
 
   const calculateStats = (blogs, jobApplications, digitalMarketingApplications) => {
@@ -155,8 +133,8 @@ const AdminDashboard = () => {
       totalDigitalMarketingApplications: digitalMarketingApplications.length,
       recentApplications: [
         ...jobApplications.filter(app => new Date(app.createdAt) > oneWeekAgo),
-        ...digitalMarketingApplications.filter(app => new Date(app.createdAt) > oneWeekAgo)
-      ].length
+        ...digitalMarketingApplications.filter(app => new Date(app.createdAt) > oneWeekAgo),
+      ].length,
     };
   };
 
@@ -182,7 +160,7 @@ const AdminDashboard = () => {
       icon: FileText,
       color: 'bg-blue-500',
       description: `${dashboardData.stats.publishedBlogs} published, ${dashboardData.stats.draftBlogs} drafts`,
-      link: '/admin/blogs'
+      link: '/admin/blogs',
     },
     {
       title: 'Job Applications',
@@ -190,7 +168,7 @@ const AdminDashboard = () => {
       icon: Briefcase,
       color: 'bg-green-500',
       description: `${dashboardData.stats.pendingJobApplications} pending review`,
-      link: '/admin/jobs'
+      link: '/admin/jobs',
     },
     {
       title: 'Marketing Applications',
@@ -198,7 +176,7 @@ const AdminDashboard = () => {
       icon: TrendingUp,
       color: 'bg-purple-500',
       description: 'Digital marketing inquiries',
-      link: '/admin/marketing-applications'
+      link: '/admin/marketing-applications',
     },
     {
       title: 'Recent Applications',
@@ -206,8 +184,8 @@ const AdminDashboard = () => {
       icon: Calendar,
       color: 'bg-orange-500',
       description: 'Last 7 days',
-      link: '/admin/jobs'
-    }
+      link: '/admin/jobs',
+    },
   ];
 
   const applicationStatusCards = [
@@ -215,20 +193,20 @@ const AdminDashboard = () => {
       title: 'Approved',
       value: dashboardData.stats.approvedJobApplications,
       icon: CheckCircle,
-      color: 'text-green-600 bg-green-50'
+      color: 'bg-green-50 text-green-600',
     },
     {
       title: 'Pending',
       value: dashboardData.stats.pendingJobApplications,
       icon: Clock,
-      color: 'text-yellow-600 bg-yellow-50'
+      color: 'bg-yellow-50 text-yellow-600',
     },
     {
       title: 'Rejected',
       value: dashboardData.stats.rejectedJobApplications,
       icon: XCircle,
-      color: 'text-red-600 bg-red-50'
-    }
+      color: 'bg-red-50 text-red-600',
+    },
   ];
 
   return (
@@ -240,15 +218,17 @@ const AdminDashboard = () => {
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-2">
-        
-        <button
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+        <Button
           onClick={handleRefresh}
           disabled={refreshing}
-          className="inline-flex items-center px-3 py-2 bg-gray-900 text-white text-xs md:text-sm font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+          variant="default"
+          size="sm"
+          className="inline-flex items-center"
         >
           <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
           {refreshing ? 'Refreshing...' : 'Refresh'}
-        </button>
+        </Button>
       </div>
 
       {/* Error Message */}
@@ -256,18 +236,23 @@ const AdminDashboard = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center"
+          transition={{ duration: 0.3 }}
         >
-          <AlertCircle className="w-5 h-5 text-red-600 mr-3 flex-shrink-0" />
-          <div>
-            <p className="text-red-800 text-sm font-medium">{error}</p>
-            <button
-              onClick={() => fetchDashboardData()}
-              className="text-red-600 hover:text-red-800 text-xs md:text-sm font-medium underline mt-1"
-            >
-              Try again
-            </button>
-          </div>
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              {error}
+              <Button
+                variant="link"
+                size="sm"
+                onClick={() => fetchDashboardData()}
+                className="ml-2 p-0 h-auto text-red-600 hover:text-red-800"
+              >
+                Try again
+              </Button>
+            </AlertDescription>
+          </Alert>
         </motion.div>
       )}
 
@@ -280,166 +265,157 @@ const AdminDashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.02 }}
-            className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
           >
-            <div className="p-4 md:p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <p className="text-xs md:text-sm font-medium text-gray-600 mb-1">{stat.title}</p>
-                  <p className="text-xl md:text-3xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-xs text-gray-500 mt-1">{stat.description}</p>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                <div className={`w-10 h-10 ${stat.color} rounded-lg flex items-center justify-center`}>
+                  <stat.icon className="w-5 h-5 text-white" />
                 </div>
-                <div className={`w-10 h-10 md:w-12 md:h-12 ${stat.color} rounded-lg flex items-center justify-center`}>
-                  <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                </div>
-              </div>
-              {stat.link && (
-                <Link
-                  to={stat.link}
-                  className="mt-3 md:mt-4 text-xs md:text-sm text-gray-900 hover:text-gray-700 font-medium inline-flex items-center transition-colors duration-200"
-                >
-                  View details
-                  <Eye className="w-4 h-4 ml-1" />
-                </Link>
-              )}
-            </div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stat.value}</div>
+                <CardDescription className="text-xs">{stat.description}</CardDescription>
+                {stat.link && (
+                  <Button variant="link" size="sm" asChild className="mt-2 p-0 h-auto">
+                    <Link to={stat.link} className="flex items-center">
+                      View details
+                      <Eye className="w-4 h-4 ml-1" />
+                    </Link>
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
           </motion.div>
         ))}
       </div>
 
       {/* Application Status Overview */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6">
-        <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-4">Job Application Status</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {applicationStatusCards.map((status, index) => (
-            <motion.div
-              key={status.title}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`${status.color} rounded-lg p-4 flex items-center`}
-            >
-              <status.icon className="w-6 h-6 md:w-8 md:h-8 mr-3" />
-              <div>
-                <p className="text-lg md:text-2xl font-bold">{status.value}</p>
-                <p className="text-xs md:text-sm font-medium">{status.title}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Job Application Status</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {applicationStatusCards.map((status, index) => (
+              <motion.div
+                key={status.title}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className={status.color}>
+                  <CardContent className="flex items-center p-4">
+                    <status.icon className="w-6 h-6 mr-3" />
+                    <div>
+                      <div className="text-2xl font-bold">{status.value}</div>
+                      <p className="text-sm font-medium">{status.title}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6">
-        <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link
-            to="/admin/blog/create"
-            className="flex items-center p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 group"
-          >
-            <Plus className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-900 mr-3" />
-            <div>
-              <p className="text-sm md:text-base font-medium text-gray-900">Create New Blog</p>
-              <p className="text-xs text-gray-600">Write and publish content</p>
-            </div>
-          </Link>
-          <Link
-            to="/admin/jobs"
-            className="flex items-center p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 group"
-          >
-            <Briefcase className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-900 mr-3" />
-            <div>
-              <p className="text-sm md:text-base font-medium text-gray-900">Manage Jobs</p>
-              <p className="text-xs text-gray-600">Review applications</p>
-            </div>
-          </Link>
-          <Link
-            to="/admin/marketing-applications"
-            className="flex items-center p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 group"
-          >
-            <Users className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-900 mr-3" />
-            <div>
-              <p className="text-sm md:text-base font-medium text-gray-900">Marketing Apps</p>
-              <p className="text-xs text-gray-600">Digital marketing inquiries</p>
-            </div>
-          </Link>
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Quick Actions</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                link: '/admin/blog/create',
+                title: 'Create New Blog',
+                description: 'Write and publish content',
+                icon: Plus,
+              },
+              {
+                link: '/admin/jobs',
+                title: 'Manage Jobs',
+                description: 'Review applications',
+                icon: Briefcase,
+              },
+              {
+                link: '/admin/marketing-applications',
+                title: 'Marketing Apps',
+                description: 'Digital marketing inquiries',
+                icon: Users,
+              },
+            ].map((action) => (
+              <Button key={action.title} variant="ghost" asChild className="justify-start h-auto p-4">
+                <Link to={action.link} className="flex items-center w-full">
+                  <action.icon className="w-6 h-6 mr-3 text-gray-600 group-hover:text-gray-900" />
+                  <div className="text-left">
+                    <p className="text-sm font-medium">{action.title}</p>
+                    <p className="text-xs text-gray-600">{action.description}</p>
+                  </div>
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Recent Blogs Table */}
       {dashboardData.blogs.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="px-4 py-4 md:px-6 border-b border-gray-200 flex items-center justify-between">
-            <h2 className="text-base md:text-lg font-semibold text-gray-900">Recent Blogs</h2>
-            <Link
-              to="/admin/blogs"
-              className="text-xs md:text-sm text-gray-600 hover:text-gray-900 font-medium"
-            >
-              View all
-            </Link>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px]">
-              <thead className="bg-gray-50">
-                <tr>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-lg">Recent Blogs</CardTitle>
+            <Button variant="link" size="sm" asChild>
+              <Link to="/admin/blogs">View all</Link>
+            </Button>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
                   {['Title', 'Status', 'Categories', 'Tags', 'Actions'].map((header) => (
-                    <th key={header} className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {header}
-                    </th>
+                    <TableHead key={header}>{header}</TableHead>
                   ))}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {dashboardData.blogs.slice(0, 5).map((blog) => (
                   <motion.tr
                     key={blog.id}
-                    className="hover:bg-gray-50 transition-colors duration-150"
+                    className="hover:bg-gray-50"
                     whileHover={{ backgroundColor: '#f9fafb' }}
                   >
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900 truncate max-w-[200px] md:max-w-xs">
-                        {blog.title}
-                      </div>
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        blog.status === 'published' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}>
+                    <TableCell className="font-medium truncate max-w-[200px] md:max-w-xs">{blog.title}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={blog.status === 'published' ? 'default' : 'secondary'}
+                        className={blog.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}
+                      >
                         {blog.status}
-                      </span>
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {blog.categories?.join(', ') || 'No categories'}
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {blog.tags?.join(', ') || 'No tags'}
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      </Badge>
+                    </TableCell>
+                    <TableCell>{blog.categories?.join(', ') || 'No categories'}</TableCell>
+                    <TableCell>{blog.tags?.join(', ') || 'No tags'}</TableCell>
+                    <TableCell>
                       <div className="flex space-x-3">
-                        <Link
-                          to={`/admin/blog/edit/${blog.id}`}
-                          className="text-gray-600 hover:text-gray-900 transition-colors duration-150"
-                          aria-label={`Edit ${blog.title}`}
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Link>
-                        <Link
-                          to={`/admin/blog/${blog.id}`}
-                          className="text-gray-600 hover:text-gray-900 transition-colors duration-150"
-                          aria-label={`View ${blog.title}`}
-                        >
-                          <Eye className="w-4 h-4" />
-                        </Link>
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link to={`/admin/blog/edit/${blog.id}`} aria-label={`Edit ${blog.title}`}>
+                            <Edit className="w-4 h-4" />
+                          </Link>
+                        </Button>
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link to={`/admin/blog/${blog.id}`} aria-label={`View ${blog.title}`}>
+                            <Eye className="w-4 h-4" />
+                          </Link>
+                        </Button>
                       </div>
-                    </td>
+                    </TableCell>
                   </motion.tr>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
       )}
     </motion.div>
   );

@@ -1,50 +1,13 @@
-// import axios from 'axios';
 
-// const api = axios.create({
-// //   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
-//   baseURL: 'http://localhost:3000/api',
-// });
-
-// export const loginAdmin = async (username, password) => {
-//   return api.post('/admin/auth/login', { username, password });
-// };
-
-// export const createBlog = async (formData, token) => {
-//   return api.post('/blogs', formData, {
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-// };
-
-// export const updateBlog = async (id, formData, token) => {
-//   return api.put(`/blogs/${id}`, formData, {
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-// };
-
-// export const deleteBlog = async (id, token) => {
-//   return api.delete(`/blogs/${id}`, {
-//     headers: { Authorization: `Bearer ${token}` },
-//   });
-// };
-
-// export const getAllBlogs = async () => {
-//   return api.get('/blogs');
-// };
-
-// export const getBlogById = async (id) => {
-//   return api.get(`/blogs/${id}`);
-// };
 
 import axios from 'axios';
 
+// const api = axios.create({
+//   baseURL: `${import.meta.env.VITE_API_URL}/api`,
+// });
 const api = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api`,
+  baseURL: 'http://localhost:3002/api', // Hardcoded backend URL
+  withCredentials: true, // Only if you use cookies/session/auth
 });
 
 // Interceptor to automatically add Authorization header with token from localStorage
@@ -58,43 +21,109 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
-// Login API call (public, no token required)
+// --- Admin Authentication ---
 export const loginAdmin = async (username, password) => {
   return api.post('/admin/auth/login', { username, password });
 };
 
-// Create a blog (protected, token added by interceptor)
-export const createBlog = async (formData) => {
-  return api.post('/blogs', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-};
-
-// Update a blog (protected, token added by interceptor)
-export const updateBlog = async (id, formData) => {
-  return api.put(`/blogs/${id}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-};
-
-// Delete a blog (protected, token added by interceptor)
-export const deleteBlog = async (id) => {
-  return api.delete(`/blogs/${id}`);
-};
-
-// Get all blogs (protected or public, token added if needed)
+// --- Blog Routes ---
+// Public routes
 export const getAllBlogs = async () => {
   return api.get('/blogs');
 };
 
-// Get a blog by ID (protected or public, token added if needed)
 export const getBlogById = async (id) => {
   return api.get(`/blogs/${id}`);
 };
 
+export const getCommentsByBlogId = async (id) => {
+  return api.get(`/blogs/${id}/comments`);
+};
+
+export const incrementLikes = async (id) => {
+  return api.post(`/blogs/${id}/likes`);
+};
+
+export const incrementShares = async (id) => {
+  return api.post(`/blogs/${id}/shares`);
+};
+
+// Authenticated routes
+export const createComment = async (id, data) => {
+  return api.post(`/blogs/${id}/comments`, data);
+};
+
+// Admin routes
+export const createBlog = async (data) => {
+  return api.post('/blogs', data);
+};
+
+export const updateBlog = async (id, data) => {
+  return api.put(`/blogs/${id}`, data);
+};
+
+export const deleteBlog = async (id) => {
+  return api.delete(`/blogs/${id}`);
+};
+
+export const deleteComment = async (id, commentId) => {
+  return api.delete(`/blogs/${id}/comments/${commentId}`);
+};
+
+// --- Job Routes ---
+// Public routes
+export const getJobs = async () => {
+  return api.get('/jobs');
+};
+
+export const getJobById = async (id) => {
+  return api.get(`/jobs/${id}`);
+};
+
+export const submitApplication = async (data) => {
+  return api.post('/jobs/apply', data);
+};
+
+// Admin routes
+export const createJob = async (data) => {
+  return api.post('/jobs', data);
+};
+
+export const updateJob = async (id, data) => {
+  return api.put(`/jobs/${id}`, data);
+};
+
+export const deleteJob = async (id) => {
+  return api.delete(`/jobs/${id}`);
+};
+
+export const getApplications = async (job_id) => {
+  return api.get(`/jobs/${job_id}/applications`);
+};
+
+export const updateApplicationStatus = async (id, status) => {
+  return api.put(`/jobs/applications/${id}/status`, { status });
+};
+
+
+
+/// --- Digital Marketing Routes ---
+export const applyForDigitalMarketing = async (data) => {
+  return api.post('/marketing/apply', data);
+};
+
+// --- Combined Applications Route ---
+export const getAllApplications = async (filters = {}) => {
+  const query = new URLSearchParams(filters).toString();
+  return api.get(`/admin/applications?${query}`);
+};
+
+// --- Specific Application Fetchers ---
+export const getAllJobApplications = async (filters = {}) => {
+  return api.get(`/admin/applications?type=job&${new URLSearchParams(filters).toString()}`);
+};
+
+export const getAllDigitalMarketingApplications = async (filters = {}) => {
+  return api.get(`/admin/applications?type=digital-marketing&${new URLSearchParams(filters).toString()}`);
+};
 export default api;

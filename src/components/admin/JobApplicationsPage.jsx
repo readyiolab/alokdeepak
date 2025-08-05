@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Briefcase, CheckCircle, XCircle, ArrowLeft } from 'lucide-react';
+import { Briefcase,ArrowLeft } from 'lucide-react';
 
 const JobApplicationsPage = () => {
   const { jobId } = useParams();

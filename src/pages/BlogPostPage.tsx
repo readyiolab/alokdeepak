@@ -2,16 +2,18 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, User, Tag, Send, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 
 // Types
 interface BlogPost {
   id: number;
   title: string;
   excerpt: string;
+  metaDescription: string;
   content: string;
   featuredImageUrl: string;
   author: string;
-  author_bio: string; // Now included in blogPosts data
+  author_bio: string;
   date: string;
   readTime: string;
   category: string;
@@ -30,6 +32,7 @@ const blogPosts: BlogPost[] = [
     id: 1,
     title: '5 Essential Digital Marketing Skills for 2025',
     excerpt: 'Discover the most in-demand digital marketing skills that will define success in 2025 and beyond.',
+    metaDescription: 'Learn the top 5 digital marketing skills for 2025: data, AI, content, social media, and SEO. Start with Sownmark!',
     content: `
       <h2>Introduction</h2>
       <p>As the digital landscape evolves, staying ahead requires mastering key skills that drive results. Here are the top five digital marketing skills you need for 2025.</p>
@@ -58,6 +61,7 @@ const blogPosts: BlogPost[] = [
     id: 2,
     title: 'SEO Checklist: How to Rank Higher on Google',
     excerpt: 'A comprehensive guide to optimizing your website for better search engine rankings.',
+    metaDescription: 'Boost your Google rankings with our SEO checklist: keywords, on-page, technical SEO, and backlinks. Join Sownmark!',
     content: `
       <h2>Introduction</h2>
       <p>Ranking higher on Google requires strategic SEO. This checklist covers essential steps.</p>
@@ -86,6 +90,7 @@ const blogPosts: BlogPost[] = [
     id: 3,
     title: 'The Ultimate Guide to Social Media Content Planning',
     excerpt: 'Learn to create engaging social media content to drive engagement and brand growth.',
+    metaDescription: 'Master social media planning with our guide: set goals, know your audience, and optimize content. Join Sownmark!',
     content: `
       <h2>Introduction</h2>
       <p>Effective social media planning builds a strong online presence. This guide shows how.</p>
@@ -114,6 +119,7 @@ const blogPosts: BlogPost[] = [
     id: 4,
     title: 'Hiring Your First Digital Marketing Manager: What to Look For',
     excerpt: 'Key qualities to consider when hiring your first digital marketing team member.',
+    metaDescription: 'Hire the right digital marketing manager with skills in strategy, SEO, and creativity. Find talent with Sownmark!',
     content: `
       <h2>Introduction</h2>
       <p>Hiring a digital marketing manager is vital for growth. Here’s what to seek.</p>
@@ -142,6 +148,7 @@ const blogPosts: BlogPost[] = [
     id: 5,
     title: 'Why Responsive Web Design is Non-Negotiable Today',
     excerpt: 'Understand the critical role of responsive design in modern web development.',
+    metaDescription: 'Discover why responsive web design is key for SEO, UX, and mobile traffic. Learn with Sownmark’s course!',
     content: `
       <h2>Introduction</h2>
       <p>Responsive design ensures sites look great on all devices. Here’s why it matters.</p>
@@ -170,6 +177,7 @@ const blogPosts: BlogPost[] = [
     id: 6,
     title: 'Understanding Google Analytics 4: A Beginner\'s Guide',
     excerpt: 'Master GA4 basics to track website performance effectively.',
+    metaDescription: 'Learn Google Analytics 4 basics: setup, events, and reports for better tracking. Join Sownmark’s course!',
     content: `
       <h2>Introduction</h2>
       <p>Google Analytics 4 (GA4) is the latest tool for tracking performance. Learn the basics.</p>
@@ -195,62 +203,63 @@ const blogPosts: BlogPost[] = [
     tags: ['Analytics', 'Google', 'Data'],
   },
   {
-    id: 7,
-    title: 'Leveraging AI in Digital Marketing: Trends to Watch',
-    excerpt: 'Explore how AI is transforming digital marketing strategies.',
+    id: 9,
+    title: 'Digital Marketing Course in India with Job Guarantee',
+    excerpt: 'Join India’s top-rated digital marketing course with 100% job guarantee. Learn live ads, SEO, and get placed fast.',
+    metaDescription: 'Join India\'s top-rated digital marketing course with 100% job guarantee. Learn live ads, SEO, and get placed fast. Enroll now at Sownmark!',
     content: `
-      <h2>Introduction</h2>
-      <p>AI is revolutionizing digital marketing. Discover key trends.</p>
-      <h3>1. AI-Powered Ads</h3>
-      <p>Optimize ad targeting, bidding, and creatives with AI for better ROI.</p>
-      <h3>2. Content Creation</h3>
-      <p>Use AI tools for scalable content production, like chatbots and generators.</p>
-      <h3>3. Personalization</h3>
-      <p>Deliver personalized experiences with AI-driven insights.</p>
-      <h3>4. Predictive Analytics</h3>
-      <p>Predict behavior and campaign performance with AI analytics.</p>
-      <h3>5. Automation</h3>
-      <p>Automate email marketing and social scheduling with AI.</p>
+      <h2>Why Digital Marketing is Booming in India</h2>
+      <p>The digital economy is growing rapidly. With over 800 million internet users in India, businesses are moving online, creating a huge demand for skilled digital marketers. Companies across Delhi, Mumbai, Bangalore, and Tier 2 cities are hiring professionals for SEO, paid ads, traffic, and lead generation.</p>
+      <h3>Best Digital Marketing Course in Delhi with Job Guarantee</h3>
+      <p>Sownmark’s Digital Marketing Mastery Course stands out with its 100% practical training. Designed for job seekers, students, entrepreneurs, and freelancers, it offers live project-based learning. You’ll run real campaigns, analyze live data, and create results.</p>
+      <h3>Short-Term Courses with Long-Term Benefits</h3>
+      <p>Sownmark’s 3-month course covers Google Ads, Meta Ads, SEO, keyword research, email/WhatsApp marketing, e-commerce ads, landing page design, and analytics. It includes interview training and guaranteed job assistance.</p>
+      <h3>Why Choose an Online Course?</h3>
+      <p>Sownmark’s online course offers hands-on training and placement support for learners across India. Learn from experts, practice on real tools, and attend doubt-clearing sessions from home.</p>
+      <h3>Student Success Stories</h3>
+      <p>“I was jobless for 6 months until I joined Sownmark. Within 2 months, I cracked an interview at a Delhi-based agency.” – Radhika Sharma<br>“The live ads training helped me run Amazon Ads for US clients.” – Ankit Tiwari</p>
       <h2>Conclusion</h2>
-      <p>AI is the future of marketing. Stay ahead with Sownmark’s course.</p>
+      <p>In 2025, digital marketing skills are invaluable. Sownmark’s course offers real projects, job support, and confidence. Enroll at <a href="https://sownmark.com">Sownmark</a> today.</p>
     `,
-    featuredImageUrl: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    author: 'Anna Thompson',
-    author_bio: 'Anna is an AI enthusiast and marketing innovator.',
-    date: '2025-05-15',
+    featuredImageUrl: 'https://res.cloudinary.com/dbyjiqjui/image/upload/v1754372724/Blog_1_ciuj5z.png',
+    author: 'Priya Mehra',
+    author_bio: 'Priya is a digital marketing trainer passionate about empowering careers.',
+    date: '2025-08-01',
     readTime: '6 min read',
     category: 'Marketing Tips',
-    tags: ['AI', 'Innovation', 'Future'],
+    tags: ['digital marketing course in india', 'job guaranteed digital marketing course', 'digital marketing course delhi', 'short term digital marketing course', 'online digital marketing course', 'sownmark digital marketing course'],
   },
   {
-    id: 8,
-    title: 'Social Media ROI: Measuring What Matters',
-    excerpt: 'Learn to measure and optimize social media ROI with key metrics.',
+    id: 10,
+    title: 'Want to Land a ₹9 LPA Job? Start With These Digital Marketing Courses in India',
+    excerpt: 'Join India’s top digital marketing course with 100% job guarantee. Learn SEO, PPC, and analytics to secure high-paying roles.',
+    metaDescription: 'Join India\'s top-rated digital marketing course with 100% job guarantee. Learn live ads, SEO, and get placed fast. Enroll now at Sownmark!',
     content: `
-      <h2>Introduction</h2>
-      <p>Measuring social media ROI justifies marketing spend. Here’s how.</p>
-      <h3>1. Define KPIs</h3>
-      <p>Track engagement, conversions, and click-through rates as KPIs.</p>
-      <h3>2. Track Revenue</h3>
-      <p>Link social efforts to sales using attribution models.</p>
-      <h3>3. Measure Engagement</h3>
-      <p>Analyze likes, shares, and comments for audience interaction.</p>
-      <h3>4. Optimize Campaigns</h3>
-      <p>Refine content with A/B testing to improve ROI.</p>
-      <h3>5. Use Analytics Tools</h3>
-      <p>Use Sprout Social or Hootsuite for ROI tracking.</p>
-      <h2>Conclusion</h2>
-<p>Smart ROI measurement drives strategies. Learn with Sownmark.</p>
-`,
-    featuredImageUrl: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-    author: 'Robert Kim',
-    author_bio: 'Robert is a social media expert specializing in analytics.',
-    date: '2025-05-10',
+      <h2>Why Digital Marketing Is the Career of the Future</h2>
+      <p>With over 800 million internet users in India, businesses from startups to MNCs need digital marketers. Over 250,000 job listings on Naukri and LinkedIn seek skills in SEO, PPC, content, and analytics.</p>
+      <h3>What Makes a Course Worth Your Time?</h3>
+      <p>Top courses offer hands-on experience with live campaigns, training in tools like Google Ads, Meta Ads Manager, Ahrefs, SEMrush, and HubSpot, plus mentorship and placement support.</p>
+      <h3>Sownmark Digital Marketing Course: The Job-Ready Choice</h3>
+      <p>Sownmark’s course provides 100% placement support, live campaign execution, certifications (Google, Meta, HubSpot), and 1-on-1 mentorship. Students secure jobs at Lenskart, BigBasket, and D2C brands with packages from ₹4.5 LPA to ₹9 LPA.</p>
+      <h3>Why Choose Digital Marketing Classes in Delhi?</h3>
+      <p>Delhi offers access to tech companies, experienced trainers, and networking. Sownmark’s Delhi courses blend quality education with career support.</p>
+      <h3>What You Will Learn</h3>
+      <p>Master SEO, PPC, social media marketing, content strategy, email marketing, Google Analytics, and automation tools.</p>
+      <h3>Real Results</h3>
+      <p>“I went from a ₹12,000/month BPO job to a ₹8.5 LPA Performance Marketer role.” – Rahul Sharma<br>“The mentorship gave me confidence to manage campaigns.” – Pooja Verma</p>
+      <h2>Final Thoughts</h2>
+      <p>Digital marketing skills open doors to high-paying careers. Enroll in Sownmark’s course at <a href="https://sownmark.com">Sownmark</a> to start your journey.</p>
+    `,
+    featuredImageUrl: 'https://res.cloudinary.com/dbyjiqjui/image/upload/v1754372852/WhatsApp_Image_2025-08-05_at_11.15.55_0882c8a0_wmcuvn.jpg',
+    author: 'Vikram Singh',
+    author_bio: 'Vikram is a digital marketing expert focused on career growth strategies.',
+    date: '2025-08-03',
     readTime: '7 min read',
-    category: 'Social Media',
-    tags: ['ROI', 'Metrics', 'Strategy'],
+    category: 'Marketing Tips',
+    tags: ['digital marketing course in india', 'job guaranteed digital marketing course', 'digital marketing course delhi', 'online digital marketing course', 'sownmark digital marketing course'],
   },
 ];
+
 
 // Utility Functions
 const generateSlug = (title: string): string =>
@@ -317,321 +326,334 @@ const BlogPostPage: React.FC = () => {
     e.currentTarget.reset();
   };
 
-  if (!post) {
-    return (
-      <motion.section
-        className="py-12 bg-gray-100 text-center min-h-screen flex flex-col justify-center"
-        variants={fadeInUp}
-        initial="initial"
-        animate="animate"
-      >
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Blog Post Not Found</h2>
-        <p className="text-gray-600 mb-6">The requested blog post does not exist.</p>
-        <Link
-          to="/blog"
-          className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
-          aria-label="Return to blog homepage"
-        >
-          Back to Blog
-        </Link>
-      </motion.section>
-    );
-  }
-
-  const { bg: categoryBg, text: categoryText } = getCategoryColor(post.category);
-
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Header Section */}
-        <motion.header variants={fadeInUp} initial="initial" animate="animate">
-          <Link
-            to="/blog"
-            className="mb-6 inline-flex items-center text-gray-900 text-base hover:text-blue-600 transition-colors"
-            aria-label="Return to blog homepage"
-          >
-            <ArrowLeft className="h-5 w-5 mr-2" /> Back to Blog
-          </Link>
-          <div className="relative">
-            <img
-              src={post.featuredImageUrl}
-              alt={`${post.title} - Blog cover`}
-              className="w-full h-80 sm:h-96 object-cover rounded-2xl shadow-lg"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <span
-                className={`inline-block ${categoryBg} ${categoryText} text-sm font-medium py-1 px-3 rounded-full mb-2 shadow-sm`}
+    <>
+      <Helmet>
+        <title>{post ? post.title : 'Blog Post Not Found'} | Sownmark Blog</title>
+        <meta
+          name="description"
+          content={
+            post
+              ? post.metaDescription
+              : 'Explore digital marketing insights and tips at Sownmark Blog.'
+          }
+        />
+      </Helmet>
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+          {!post ? (
+            <motion.section
+              className="py-12 bg-gray-100 text-center min-h-screen flex flex-col justify-center"
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+            >
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Blog Post Not Found</h2>
+              <p className="text-gray-600 mb-6">The requested blog post does not exist.</p>
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+                aria-label="Return to blog homepage"
               >
-                {post.category}
-              </span>
-              <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">{post.title}</h1>
-            </div>
-          </div>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-6">
-            <div className="flex items-center gap-1">
-              <Calendar className="h-4 w-4" />
-              {new Date(post.date).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              {post.readTime}
-            </div>
-            <div className="flex items-center gap-1">
-              <User className="h-4 w-4" />
-              {post.author}
-            </div>
-          </div>
-        </motion.header>
-
-        {/* Main Content and Sidebar */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-          <div className="lg:col-span-2">
-            {/* Blog Content */}
-            <motion.div variants={fadeInUp} initial="initial" animate="animate">
-              <div className="prose prose-sm sm:prose-base max-w-none text-gray-700">
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              </div>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="flex items-center gap-1 text-sm text-gray-600 bg-gray-100 py-1 px-3 rounded-full shadow-sm"
-                  >
-                    <Tag className="h-4 w-4" />
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          <aside>
-            {/* Author Card */}
-            <motion.div
-              className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm mb-6"
-              variants={fadeInUp}
-              initial="initial"
-              animate="animate"
-            >
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">About the Author</h2>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                  <User className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-900">{post.author}</p>
-                  <p className="text-xs text-gray-600">
-                    {post.author_bio || 'No bio available.'}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Comment Section */}
-            <motion.div
-              id="comment-section"
-              className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm"
-              variants={fadeInUp}
-              initial="initial"
-              animate="animate"
-            >
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Leave a Comment</h2>
-              <form className="space-y-4 mb-6" onSubmit={handleCommentSubmit}>
-                <div>
-                  <label htmlFor="name" className="sr-only">
-                    Your Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    className="w-full h-10 px-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                    required
-                    aria-label="Your Name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="sr-only">
-                    Your Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    className="w-full h-10 px-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                    required
-                    aria-label="Your Email"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="comment" className="sr-only">
-                    Your Comment
-                  </label>
-                  <textarea
-                    id="comment"
-                    name="comment"
-                    placeholder="Your Comment"
-                    className="w-full h-24 px-3 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                    required
-                    aria-label="Your Comment"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition"
+                Back to Blog
+              </Link>
+            </motion.section>
+          ) : (
+            <>
+              {/* Header Section */}
+              <motion.header variants={fadeInUp} initial="initial" animate="animate">
+                <Link
+                  to="/blog"
+                  className="mb-6 inline-flex items-center text-gray-900 text-base hover:text-blue-600 transition-colors"
+                  aria-label="Return to blog homepage"
                 >
-                  Submit <Send className="h-4 w-4" />
-                </button>
-              </form>
-              <p className="text-xs text-gray-500 mb-6">Comments are moderated and will appear after approval.</p>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Comments ({comments.length})</h2>
-              {comments.length > 0 ? (
-                <div className="space-y-4">
-                  {comments.map((comment) => (
-                    <div key={comment.id} className="border-t border-gray-200 pt-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                          <User className="h-4 w-4 text-blue-600" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{comment.author}</p>
-                          <p className="text-xs text-gray-500">{comment.date}</p>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-700">{comment.text}</p>
-                    </div>
-                  ))}
+                  <ArrowLeft className="h-5 w-5 mr-2" /> Back to Blog
+                </Link>
+                <div className="relative">
+                  <img
+                    src={post.featuredImageUrl}
+                    alt={`${post.title} - Blog cover`}
+                    className="w-full h-80 sm:h-96 object-cover rounded-2xl shadow-lg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <span
+                      className={`inline-block ${getCategoryColor(post.category).bg} ${
+                        getCategoryColor(post.category).text
+                      } text-sm font-medium py-1 px-3 rounded-full mb-2 shadow-sm`}
+                    >
+                      {post.category}
+                    </span>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+                      {post.title}
+                    </h1>
+                  </div>
                 </div>
-              ) : (
-                <p className="text-sm text-gray-600">No comments yet. Be the first!</p>
-              )}
-            </motion.div>
-          </aside>
-        </div>
+                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mt-6">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    {new Date(post.date).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    {post.readTime}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <User className="h-4 w-4" />
+                    {post.author}
+                  </div>
+                </div>
+              </motion.header>
 
-        {/* Related Posts Section */}
-        {relatedPosts.length > 0 && (
-          <motion.section
-            className="mb-10"
-            variants={staggerContainer}
-            initial="initial"
-            animate="animate"
-          >
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Explore More Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedPosts.map((relatedPost) => {
-                const { bg, text } = getCategoryColor(relatedPost.category);
-                return (
-                  <motion.article
-                    key={relatedPost.id}
-                    className="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
-                    variants={fadeInUp}
-                  >
-                    <Link
-                      to={`/blog/${generateSlug(relatedPost.title)}`}
-                      aria-label={`Read ${relatedPost.title}`}
-                    >
-                      <div className="relative">
-                        <img
-                          src={relatedPost.featuredImageUrl}
-                          alt={`${relatedPost.title} - Related blog post`}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+              {/* Main Content and Sidebar */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+                <div className="lg:col-span-2">
+                  {/* Blog Content */}
+                  <motion.div variants={fadeInUp} initial="initial" animate="animate">
+                    <div className="prose prose-sm sm:prose-base max-w-none text-gray-700">
+                      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-6">
+                      {post.tags.map((tag) => (
                         <span
-                          className={`absolute top-3 left-3 ${bg} ${text} text-xs font-medium py-1 px-2 rounded-full shadow-sm`}
+                          key={tag}
+                          className="flex items-center gap-1 text-sm text-gray-600 bg-gray-100 py-1 px-3 rounded-full shadow-sm"
                         >
-                          {relatedPost.category}
+                          <Tag className="h-4 w-4" />
+                          {tag}
                         </span>
-                      </div>
-                      <div className="p-5">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                          {relatedPost.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm line-clamp-2">{relatedPost.excerpt}</p>
-                      </div>
-                    </Link>
-                  </motion.article>
-                );
-              })}
-            </div>
-          </motion.section>
-        )}
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
 
-        {/* Discover More Section */}
-        {relatedPosts.length > 0 && (
-          <motion.section
-            className="py-16 sm:py-24"
-            style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)' }}
-            variants={staggerContainer}
-            initial="initial"
-            animate="animate"
-          >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div variants={fadeInUp} className="text-center mb-12">
-                <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
-                  Discover More
-                  <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
-                    Insights
-                  </span>
-                </h2>
-                <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-                  Explore more articles to elevate your digital marketing expertise.
-                </p>
-              </motion.div>
-              <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {relatedPosts.map((relatedPost) => {
-                  const { bg, text } = getCategoryColor(relatedPost.category);
-                  return (
-                    <motion.article
-                      key={relatedPost.id}
-                      variants={fadeInUp}
-                      className="group relative"
-                    >
-                      <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                        <div className="relative overflow-hidden">
-                          <img
-                            src={relatedPost.featuredImageUrl}
-                            alt={relatedPost.title}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                          <span
-                            className={`absolute top-4 right-4 ${bg} ${text} px-3 py-1 rounded-full text-xs font-semibold`}
-                          >
-                            {relatedPost.category}
-                          </span>
-                        </div>
-                        <div className="p-6 flex flex-col flex-grow">
-                          <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                            {relatedPost.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm mb-5 line-clamp-3">
-                            {relatedPost.excerpt}
-                          </p>
+                <aside>
+                  {/* Author Card */}
+                  <motion.div
+                    className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm mb-6"
+                    variants={fadeInUp}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">About the Author</h2>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <User className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">{post.author}</p>
+                        <p className="text-xs text-gray-600">{post.author_bio}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Comment Section */}
+                  <motion.div
+                    id="comment-section"
+                    className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm"
+                    variants={fadeInUp}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Leave a Comment</h2>
+                    <form className="space-y-4 mb-6" onSubmit={handleCommentSubmit}>
+                      <div>
+                        <label htmlFor="name" className="sr-only">
+                          Your Name
+                        </label>
+                        <input
+                          id="name"
+                          type="text"
+                          name="name"
+                          placeholder="Your Name"
+                          className="w-full h-10 px-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                          required
+                          aria-label="Your Name"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="sr-only">
+                          Your Email
+                        </label>
+                        <input
+                          id="email"
+                          type="email"
+                          name="email"
+                          placeholder="Your Email"
+                          className="w-full h-10 px-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                          required
+                          aria-label="Your Email"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="comment" className="sr-only">
+                          Your Comment
+                        </label>
+                        <textarea
+                          id="comment"
+                          name="comment"
+                          placeholder="Your Comment"
+                          className="w-full h-24 px-3 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                          required
+                          aria-label="Your Comment"
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition"
+                      >
+                        Submit <Send className="h-4 w-4" />
+                      </button>
+                    </form>
+                    <p className="text-xs text-gray-500 mb-6">Comments are moderated and will appear after approval.</p>
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Comments ({comments.length})</h2>
+                    {comments.length > 0 ? (
+                      <div className="space-y-4">
+                        {comments.map((comment) => (
+                          <div key={comment.id} className="border-t border-gray-200 pt-4">
+                            <div className="flex items-center gap-3 mb-2">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                <User className="h-4 w-4 text-blue-600" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-900">{comment.author}</p>
+                                <p className="text-xs text-gray-500">{comment.date}</p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-gray-700">{comment.text}</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-600">No comments yet. Be the first!</p>
+                    )}
+                  </motion.div>
+                </aside>
+              </div>
+
+              {/* Related Posts Section */}
+              {relatedPosts.length > 0 && (
+                <motion.section
+                  className="mb-10"
+                  variants={staggerContainer}
+                  initial="initial"
+                  animate="animate"
+                >
+                  <h2 className="text-2xl font-semibold text-gray-900 mb-6">Explore More Articles</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {relatedPosts.map((relatedPost) => {
+                      const { bg, text } = getCategoryColor(relatedPost.category);
+                      return (
+                        <motion.article
+                          key={relatedPost.id}
+                          className="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                          variants={fadeInUp}
+                        >
                           <Link
                             to={`/blog/${generateSlug(relatedPost.title)}`}
-                            className="mt-auto inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300"
+                            aria-label={`Read ${relatedPost.title}`}
                           >
-                            Read More <ArrowRight className="w-4 h-4" />
+                            <div className="relative">
+                              <img
+                                src={relatedPost.featuredImageUrl}
+                                alt={`${relatedPost.title} - Related blog post`}
+                                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              <span
+                                className={`absolute top-3 left-3 ${bg} ${text} text-xs font-medium py-1 px-2 rounded-full shadow-sm`}
+                              >
+                                {relatedPost.category}
+                              </span>
+                            </div>
+                            <div className="p-5">
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                {relatedPost.title}
+                              </h3>
+                              <p className="text-gray-600 text-sm line-clamp-2">{relatedPost.excerpt}</p>
+                            </div>
                           </Link>
-                        </div>
-                      </div>
-                    </motion.article>
-                  );
-                })}
-              </motion.div>
-            </div>
-          </motion.section>
-        )}
-      </div>
-    </section>
+                        </motion.article>
+                      );
+                    })}
+                  </div>
+                </motion.section>
+              )}
+
+              {/* Discover More Section */}
+              {relatedPosts.length > 0 && (
+                <motion.section
+                  className="py-16 sm:py-24"
+                  style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)' }}
+                  variants={staggerContainer}
+                  initial="initial"
+                  animate="animate"
+                >
+                  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <motion.div variants={fadeInUp} className="text-center mb-12">
+                      <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+                        Discover More
+                        <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
+                          Insights
+                        </span>
+                      </h2>
+                      <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+                        Explore more articles to elevate your digital marketing expertise.
+                      </p>
+                    </motion.div>
+                    <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {relatedPosts.map((relatedPost) => {
+                        const { bg, text } = getCategoryColor(relatedPost.category);
+                        return (
+                          <motion.article
+                            key={relatedPost.id}
+                            variants={fadeInUp}
+                            className="group relative"
+                          >
+                            <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                              <div className="relative overflow-hidden">
+                                <img
+                                  src={relatedPost.featuredImageUrl}
+                                  alt={relatedPost.title}
+                                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                <span
+                                  className={`absolute top-4 right-4 ${bg} ${text} px-3 py-1 rounded-full text-xs font-semibold`}
+                                >
+                                  {relatedPost.category}
+                                </span>
+                              </div>
+                              <div className="p-6 flex flex-col flex-grow">
+                                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                                  {relatedPost.title}
+                                </h3>
+                                <p className="text-gray-600 text-sm mb-5 line-clamp-3">
+                                  {relatedPost.excerpt}
+                                </p>
+                                <Link
+                                  to={`/blog/${generateSlug(relatedPost.title)}`}
+                                  className="mt-auto inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300"
+                                >
+                                  Read More <ArrowRight className="w-4 h-4" />
+                                </Link>
+                              </div>
+                            </div>
+                          </motion.article>
+                        );
+                      })}
+                    </motion.div>
+                  </div>
+                </motion.section>
+              )}
+            </>
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 
