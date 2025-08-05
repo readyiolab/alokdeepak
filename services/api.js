@@ -2,13 +2,13 @@
 
 import axios from 'axios';
 
-// const api = axios.create({
-//   baseURL: `${import.meta.env.VITE_API_URL}/api`,
-// });
 const api = axios.create({
-  baseURL: 'http://localhost:3002/api', // Hardcoded backend URL
-  withCredentials: true, // Only if you use cookies/session/auth
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
 });
+// const api = axios.create({
+//   baseURL: 'http://localhost:3002/api', // Hardcoded backend URL
+//   withCredentials: true, // Only if you use cookies/session/auth
+// });
 
 // Interceptor to automatically add Authorization header with token from localStorage
 api.interceptors.request.use(
