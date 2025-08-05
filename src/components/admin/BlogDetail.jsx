@@ -105,7 +105,7 @@ const BlogDetail = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="max-w-7xl mx-auto p-4 sm:p-6"
+      className=" p-4 sm:p-6"
     >
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 tracking-tight">{blog.title}</h1>
       {error && (

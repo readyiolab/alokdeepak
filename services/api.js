@@ -50,7 +50,12 @@ export const incrementShares = async (id) => {
 
 // Authenticated routes
 export const createComment = async (id, data) => {
-  return api.post(`/blogs/${id}/comments`, data);
+  return api.post(`/blogs/${id}/comments`, {
+    user_name: data.name || 'Anonymous', // Map frontend 'name' to backend 'user_name'
+    user_email: data.email || null, // Map frontend 'email' to backend 'user_email'
+    content: data.content,
+    user_id: data.user_id || undefined, // Include only for authenticated users
+  });
 };
 
 // Admin routes

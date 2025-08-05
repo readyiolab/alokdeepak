@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Save, Plus, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const JobForm = () => {
   const { jobId } = useParams();
@@ -115,243 +121,260 @@ const JobForm = () => {
   };
 
   return (
-    <motion.div
-      {...fadeInUp}
-      className="max-w-4xl mx-auto p-4 sm:p-6 bg-white rounded-xl shadow-md border border-gray-100"
-    >
-      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 tracking-tight">
-        {isEdit ? 'Edit Job Posting' : 'Create Job Posting'}
-      </h2>
-      {error && <p className="text-red-600 bg-red-50 p-3 rounded-lg mb-6 text-sm font-medium">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Job Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-            required
-            aria-required="true"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Department</label>
-          <input
-            type="text"
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-            required
-            aria-required="true"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Job Type</label>
-          <select
-            name="job_type"
-            value={formData.job_type}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-            required
-            aria-required="true"
-          >
-            <option value="">Select Job Type</option>
-            <option value="full-time">Full-Time</option>
-            <option value="part-time">Part-Time</option>
-            <option value="freelance">Freelance</option>
-            <option value="internship">Internship</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Location</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-            required
-            aria-required="true"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Experience Level</label>
-          <select
-            name="experience_level"
-            value={formData.experience_level}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-            required
-            aria-required="true"
-          >
-            <option value="">Select Experience Level</option>
-            <option value="entry">Entry</option>
-            <option value="mid">Mid</option>
-            <option value="senior">Senior</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Summary</label>
-          <textarea
-            name="summary"
-            value={formData.summary}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-            rows="4"
-            required
-            aria-required="true"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Responsibilities</label>
-          {formData.responsibilities.map((item, index) => (
-            <div key={index} className="flex gap-2 mt-1">
-              <input
+    <motion.div {...fadeInUp}>
+      <Card >
+        <CardHeader>
+          <CardTitle className="text-2xl sm:text-3xl">
+            {isEdit ? 'Edit Job Posting' : 'Create Job Posting'}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {error && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-foreground">Job Title</label>
+              <Input
                 type="text"
-                value={item}
-                onChange={(e) => handleArrayChange(index, 'responsibilities', e.target.value)}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
                 required
                 aria-required="true"
+                className="mt-1"
               />
-              {formData.responsibilities.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeArrayField('responsibilities', index)}
-                  className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
-                  aria-label="Remove responsibility"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
-              )}
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={() => addArrayField('responsibilities')}
-            className="mt-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm font-medium"
-          >
-            <Plus className="w-5 h-5 inline-block mr-1" />
-            Add Responsibility
-          </button>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Qualifications</label>
-          {formData.qualifications.map((item, index) => (
-            <div key={index} className="flex gap-2 mt-1">
-              <input
+            <div>
+              <label className="block text-sm font-medium text-foreground">Department</label>
+              <Input
                 type="text"
-                value={item}
-                onChange={(e) => handleArrayChange(index, 'qualifications', e.target.value)}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
                 required
                 aria-required="true"
+                className="mt-1"
               />
-              {formData.qualifications.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeArrayField('qualifications', index)}
-                  className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
-                  aria-label="Remove qualification"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
-              )}
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={() => addArrayField('qualifications')}
-            className="mt-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm font-medium"
-          >
-            <Plus className="w-5 h-5 inline-block mr-1" />
-            Add Qualification
-          </button>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Preferred Skills (Optional)</label>
-          {formData.preferred_skills.map((item, index) => (
-            <div key={index} className="flex gap-2 mt-1">
-              <input
+            <div>
+              <label className="block text-sm font-medium text-foreground">Job Type</label>
+              <Select
+                name="job_type"
+                value={formData.job_type}
+                onValueChange={(value) => setFormData({ ...formData, job_type: value })}
+                required
+                aria-required="true"
+              >
+                <SelectTrigger className="mt-1">
+                  <SelectValue placeholder="Select Job Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="full-time">Full-Time</SelectItem>
+                  <SelectItem value="part-time">Part-Time</SelectItem>
+                  <SelectItem value="freelance">Freelance</SelectItem>
+                  <SelectItem value="internship">Internship</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Location</label>
+              <Input
                 type="text"
-                value={item}
-                onChange={(e) => handleArrayChange(index, 'preferred_skills', e.target.value)}
-                className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                required
+                aria-required="true"
+                className="mt-1"
               />
-              {formData.preferred_skills.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeArrayField('preferred_skills', index)}
-                  className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
-                  aria-label="Remove preferred skill"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
-              )}
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={() => addArrayField('preferred_skills')}
-            className="mt-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm font-medium"
-          >
-            <Plus className="w-5 h-5 inline-block mr-1" />
-            Add Preferred Skill
-          </button>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Compensation (Optional)</label>
-          <input
-            type="text"
-            name="compensation"
-            value={formData.compensation}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Timezone (Optional)</label>
-          <input
-            type="text"
-            name="timezone"
-            value={formData.timezone}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Status</label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-          >
-            <option value="open">Open</option>
-            <option value="closed">Closed</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Expiry Date (Optional)</label>
-          <input
-            type="date"
-            name="expiry_date"
-            value={formData.expiry_date}
-            onChange={handleChange}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-gray-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
-        >
-          <Save className="w-5 h-5 inline-block mr-2" />
-          {isEdit ? 'Update Job' : 'Create Job'}
-        </button>
-      </form>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Experience Level</label>
+              <Select
+                name="experience_level"
+                value={formData.experience_level}
+                onValueChange={(value) => setFormData({ ...formData, experience_level: value })}
+                required
+                aria-required="true"
+              >
+                <SelectTrigger className="mt-1">
+                  <SelectValue placeholder="Select Experience Level" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="entry">Entry</SelectItem>
+                  <SelectItem value="mid">Mid</SelectItem>
+                  <SelectItem value="senior">Senior</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Summary</label>
+              <Textarea
+                name="summary"
+                value={formData.summary}
+                onChange={handleChange}
+                required
+                aria-required="true"
+                className="mt-1"
+                rows={4}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Responsibilities</label>
+              {formData.responsibilities.map((item, index) => (
+                <div key={index} className="flex gap-2 mt-1">
+                  <Input
+                    type="text"
+                    value={item}
+                    onChange={(e) => handleArrayChange(index, 'responsibilities', e.target.value)}
+                    required
+                    aria-required="true"
+                  />
+                  {formData.responsibilities.length > 1 && (
+                    <Button
+                      type="button"
+                      onClick={() => removeArrayField('responsibilities', index)}
+                      variant="destructive"
+                      size="icon"
+                      aria-label="Remove responsibility"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                onClick={() => addArrayField('responsibilities')}
+                variant="outline"
+                className="mt-2"
+              >
+                <Plus className="w-5 h-5 mr-1" />
+                Add Responsibility
+              </Button>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Qualifications</label>
+              {formData.qualifications.map((item, index) => (
+                <div key={index} className="flex gap-2 mt-1">
+                  <Input
+                    type="text"
+                    value={item}
+                    onChange={(e) => handleArrayChange(index, 'qualifications', e.target.value)}
+                    required
+                    aria-required="true"
+                  />
+                  {formData.qualifications.length > 1 && (
+                    <Button
+                      type="button"
+                      onClick={() => removeArrayField('qualifications', index)}
+                      variant="destructive"
+                      size="icon"
+                      aria-label="Remove qualification"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                onClick={() => addArrayField('qualifications')}
+                variant="outline"
+                className="mt-2"
+              >
+                <Plus className="w-5 h-5 mr-1" />
+                Add Qualification
+              </Button>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Preferred Skills (Optional)</label>
+              {formData.preferred_skills.map((item, index) => (
+                <div key={index} className="flex gap-2 mt-1">
+                  <Input
+                    type="text"
+                    value={item}
+                    onChange={(e) => handleArrayChange(index, 'preferred_skills', e.target.value)}
+                  />
+                  {formData.preferred_skills.length > 1 && (
+                    <Button
+                      type="button"
+                      onClick={() => removeArrayField('preferred_skills', index)}
+                      variant="destructive"
+                      size="icon"
+                      aria-label="Remove preferred skill"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                onClick={() => addArrayField('preferred_skills')}
+                variant="outline"
+                className="mt-2"
+              >
+                <Plus className="w-5 h-5 mr-1" />
+                Add Preferred Skill
+              </Button>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Compensation (Optional)</label>
+              <Input
+                type="text"
+                name="compensation"
+                value={formData.compensation}
+                onChange={handleChange}
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Timezone (Optional)</label>
+              <Input
+                type="text"
+                name="timezone"
+                value={formData.timezone}
+                onChange={handleChange}
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Status</label>
+              <Select
+                name="status"
+                value={formData.status}
+                onValueChange={(value) => setFormData({ ...formData, status: value })}
+              >
+                <SelectTrigger className="mt-1">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="open">Open</SelectItem>
+                  <SelectItem value="closed">Closed</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground">Expiry Date (Optional)</label>
+              <Input
+                type="date"
+                name="expiry_date"
+                value={formData.expiry_date}
+                onChange={handleChange}
+                className="mt-1"
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              <Save className="w-5 h-5 mr-2" />
+              {isEdit ? 'Update Job' : 'Create Job'}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </motion.div>
   );
 };
