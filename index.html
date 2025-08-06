@@ -4,18 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- Remove these meta tags as they will be handled by Helmet -->
-    <!-- Default title will be overridden by Helmet -->
     <title>Sownmark</title>
-    
-    <!-- Keep only basic meta tags that won't conflict -->
+
+    <!-- Basic meta tags -->
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Sownmark" />
     <meta property="og:site_name" content="Sownmark" />
     <meta property="og:image" content="https://sownmark.com/og-image.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://sownmark.com/og-image.jpg" />
+
+    <!-- Google Ads Global Site Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17005532217"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -23,8 +24,33 @@
       gtag('js', new Date());
       gtag('config', 'AW-17005532217');
     </script>
+
+    <!-- Meta Pixel Code (Facebook Pixel) -->
+    <script>
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq) return;
+        n = f.fbq = function(){ n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
+        if(!f._fbq) f._fbq = n;
+        n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s);
+      }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1486668442357854');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
+    <!-- Meta Pixel Fallback for NoScript -->
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1486668442357854&ev=PageView&noscript=1"
+      />
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
