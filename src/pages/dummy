@@ -1,0 +1,315 @@
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Calendar, Clock, User, Tag, Send } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
+import { getAllBlogs, getBlogById, getCommentsByBlogId } from '../../services/api';
+
+// Types and other functions (editorJSToHtml, getCategoryColor, variants) remain unchanged
+// ... (Keep your existing interfaces, editorJSToHtml, getCategoryColor, fadeInUp, staggerContainer)
+
+const BlogPostPage: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [comments, setComments] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // useEffect for fetching data remains unchanged
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const { data: blogs } = await getAllBlogs();
+        if (!Array.isArray(blogs)) {
+          setError('Failed to load blog data');
+          setLoading(false);
+          return;
+        }
+        const foundPost = blogs.find((p) => p.slug === slug);
+        if (!foundPost) {
+          setError('Blog post not found');
+          setLoading(false);
+          return;
+        }
+        const { data: postData } = await getBlogById(foundPost.id);
+        setPost({
+          ...postData,
+          category: Array.isArray(postData.category)
+            ? postData.category
+            : JSON.parse(postData.category || '[]'),
+          tags: Array.isArray(postData.tags) ? postData.tags : JSON.parse(postData.tags || '[]'),
+          slug: postData.slug || slug,
+        });
+        try {
+          const { data: commentsData } = await getCommentsByBlogId(foundPost.id);
+          setComments(Array.isArray(commentsData) ? commentsData : []);
+        } catch (err) {
+          setComments([]);
+        }
+        const related = blogs
+          .filter((p) => p.id !== foundPost.id && p.category.some((cat) => foundPost.category.includes(cat)))
+          .slice(0, 3);
+        setRelatedPosts(related);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load blog post');
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="animate-pulse">
+            <div className="h-10 w-48 bg-gray-200 rounded mb-6"></div>
+            <div className="h-96 w-full bg-gray-200 rounded-2xl mb-6"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 space-y-4">
+                <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-6 bg-gray-200 rounded w-5/6"></div>
+                <div className="h-6 bg-gray-200 rounded w-2/3"></div>
+              </div>
+              <div className="space-y-4">
+                <div className="h-48 bg-gray-200 rounded-lg"></div>
+                <div className="h-64 bg-gray-200 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !post) {
+    return (
+      <motion.section
+        className="py-12 bg-gray-100 text-center min-h-screen flex flex-col justify-center"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+      >
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Blog Post Not Found</h2>
+        <p className="text-gray-600 mb-6">{error || 'The requested blog post does not exist.'}</p>
+        <Link
+          to="/blog"
+          className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+          aria-label="Return to blog homepage"
+        >
+          Back to Blog
+        </Link>
+      </motion.section>
+    );
+  }
+
+  const htmlContent = typeof post.content === 'string' ? editorJSToHtml(post.content) : editorJSToHtml(post.content);
+
+  return (
+    <>
+      <Helmet>
+        <title>{post.title} | Sownmark Blog</title>
+        <meta name="description" content={post.meta_description} />
+      </Helmet>
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+          <motion.header variants={fadeInUp} initial="initial" animate="animate">
+            <Link
+              to="/blog"
+              className="mb-6 inline-flex items-center text-gray-900 text-base hover:text-blue-600 transition-colors"
+              aria-label="Return to blog homepage"
+            >
+              <ArrowLeft className="h-5 w-5 mr-2" /> Back to Blog
+            </Link>
+            <div className="relative">
+              <img
+                src={post.image}
+                alt={`${post.title} - Blog cover`}
+                className="w-full h-80 sm:h-96 object-cover rounded-2xl shadow-lg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <span
+                  className={`inline-block ${getCategoryColor(post.category[0] || 'Uncategorized').bg} ${
+                    getCategoryColor(post.category[0] || 'Uncategorized').text
+                  } text-sm font-medium py-1 px-3 rounded-full mb-2 shadow-sm`}
+                >
+                  {post.category[0] || 'Uncategorized'}
+                </span>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
+                  {post.title}
+                </h1>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-gray-500 mt-6">
+              <div className="flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                {new Date(post.created_at).toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })}
+              </div>
+              <div className="flex items-center gap-1">
+                <Clock className="h-4 w-4" />
+                {post.read_time} min read
+              </div>
+              <div className="flex items-center gap-1">
+                <User className="h-4 w-4" />
+                {post.author}
+              </div>
+            </div>
+          </motion.header>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mt-8">
+            <div className="lg:col-span-2 overflow-y-auto">
+              <motion.div variants={fadeInUp} initial="initial" animate="animate">
+                <div className="prose prose-sm sm:prose-base max-w-none text-gray-700">
+                  <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                </div>
+                <div className="flex flex-wrap gap-2 mt-6">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="flex items-center gap-1 text-sm text-gray-600 bg-gray-100 py-1 px-3 rounded-full shadow-sm"
+                    >
+                      <Tag className="h-4 w-4" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            <aside className="lg:sticky lg:top-6 space-y-6">
+              <motion.div
+                className="bg-white border border-gray-100 rounded-lg p-4 sm:p-6 shadow-sm"
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+              >
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">About the Author</h2>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                    <User className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">{post.author}</p>
+                    <p className="text-xs text-gray-600">{post.author_bio}</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                id="comment-section"
+                className="bg-white border border-gray-100 rounded-lg p-4 sm:p-6 shadow-sm lg:sticky lg:top-6"
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+              >
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Leave a Comment</h2>
+                <form className="space-y-4 mb-6" onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      className="w-full h-10 px-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                      aria-label="Your Name"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      className="w-full h-10 px-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                      aria-label="Your Email"
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      placeholder="Your Comment"
+                      className="w-full h-24 px-3 py-2 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                      aria-label="Your Comment"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition"
+                  >
+                    Submit <Send className="h-4 w-4" />
+                  </button>
+                </form>
+                <p className="text-xs text-gray-500 mb-6">Comments are moderated and will appear after approval.</p>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Comments ({comments.length})</h2>
+                {comments.length > 0 ? (
+                  <div className="space-y-4 max-h-60 sm:max-h-80 overflow-y-auto">
+                    {comments.map((comment) => (
+                      <div key={comment.id} className="border-t border-gray-200 pt-4">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                            <User className="h-4 w-4 text-blue-600" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-900">{comment.author || 'Anonymous'}</p>
+                            <p className="text-xs text-gray-500">{new Date(comment.created_at).toLocaleDateString()}</p>
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-700">{comment.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-600">No comments yet. Be the first!</p>
+                )}
+              </motion.div>
+            </aside>
+          </div>
+
+          {relatedPosts.length > 0 && (
+            <motion.section className="mt-10" variants={staggerContainer} initial="initial" animate="animate">
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-6">Explore More Articles</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {relatedPosts.map((relatedPost) => {
+                  const { bg, text } = getCategoryColor(relatedPost.category[0] || 'Uncategorized');
+                  return (
+                    <motion.article
+                      key={relatedPost.id}
+                      className="group bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                      variants={fadeInUp}
+                    >
+                      <Link to={`/blog/${relatedPost.slug}`} aria-label={`Read ${relatedPost.title}`}>
+                        <div className="relative">
+                          <img
+                            src={relatedPost.image}
+                            alt={`${relatedPost.title} - Related blog post`}
+                            className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <span
+                            className={`absolute top-3 left-3 ${bg} ${text} text-xs font-medium py-1 px-2 rounded-full shadow-sm`}
+                          >
+                            {relatedPost.category[0] || 'Uncategorized'}
+                          </span>
+                        </div>
+                        <div className="p-4 sm:p-5">
+                          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            {relatedPost.title}
+                          </h3>
+                          <p className="text-gray-600 text-xs sm:text-sm line-clamp-2">{relatedPost.excerpt}</p>
+                        </div>
+                      </Link>
+                    </motion.article>
+                  );
+                })}
+              </div>
+            </motion.section>
+          )}
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default BlogPostPage;

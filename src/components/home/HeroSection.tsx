@@ -22,30 +22,30 @@ const HeroSection: React.FC = () => {
               Master digital marketing, hire top talent, and drive online success with our expert solutions.
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-  <Link
-    to="/digital-marketing-mastery#courses"
-    className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-medium bg-[#1a2957] text-white rounded-full hover:bg-[#142145] shadow-sm transition-colors duration-300"
-  >
-    <GraduationCap size={18} />
-    Explore Courses
-  </Link>
+              <Link
+                to="/digital-marketing-mastery#courses"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-medium bg-[#1a2957] text-white rounded-full hover:bg-[#142145] shadow-sm transition-colors duration-300"
+              >
+                <GraduationCap size={18} />
+                Explore Courses
+              </Link>
 
-  <Link
-    to="/hiring-solutions#hire-top-talent"
-    className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-medium bg-white border-2 border-[#1a2957] text-[#1a2957] rounded-full hover:bg-[#1a2957] hover:text-white shadow-sm transition-colors duration-300"
-  >
-    <Users size={18} />
-    Hire Top Talent
-  </Link>
+              <Link
+                to="/hiring-solutions#hire-top-talent"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-medium bg-white border-2 border-[#1a2957] text-[#1a2957] rounded-full hover:bg-[#1a2957] hover:text-white shadow-sm transition-colors duration-300"
+              >
+                <Users size={18} />
+                Hire Top Talent
+              </Link>
 
-  <Link
-    to="/contact#contact-form"
-    className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-medium bg-[#1a2957] text-white rounded-full hover:bg-[#142145] shadow-sm transition-colors duration-300"
-  >
-    <MessageSquare size={18} />
-    Get a Free Consultation
-  </Link>
-</div>
+              <Link
+                to="/contact#contact-form"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-medium bg-[#1a2957] text-white rounded-full hover:bg-[#142145] shadow-sm transition-colors duration-300"
+              >
+                <MessageSquare size={18} />
+                Get a Free Consultation
+              </Link>
+            </div>
           </motion.div>
 
           <motion.div
