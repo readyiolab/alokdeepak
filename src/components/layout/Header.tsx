@@ -60,9 +60,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        isScrolled ? 'shadow-md' : 'shadow-sm'
-      } py-4`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${isScrolled ? 'shadow-md' : 'shadow-sm'
+        } py-4`}
     >
       <div className="container mx-auto px-4 max-w-7xl flex justify-between items-center">
         <Link to="/" onClick={closeMenu}>
@@ -75,21 +74,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
+
           <NavLink
-            to="/"
+            to="/digital-marketing-agency"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
-              }`
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/digital-marketing-mastery"
-            className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
               }`
             }
           >
@@ -98,38 +87,34 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           <NavLink
             to="/hiring-solutions"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
               }`
             }
           >
             Hiring Solutions
           </NavLink>
           <NavLink
-            to="/digital-marketing-agency"
-            className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
-              }`
-            }
-          >
-            Agency
-          </NavLink>
-          <NavLink
             to="/website-development"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
               }`
             }
           >
             Web Development
           </NavLink>
           <NavLink
+            to="/influencer-marketing"
+            className={({ isActive }) =>
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              }`
+            }
+          >
+            Influencer Marketing
+          </NavLink>
+          <NavLink
             to="/blog"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
               }`
             }
           >
@@ -138,12 +123,20 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors hover:text-[#90abff] ${
-                isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
               }`
             }
           >
             About
+          </NavLink>
+          <NavLink
+            to="/case-studies"
+            className={({ isActive }) =>
+              `text-sm font-medium transition-colors hover:text-[#90abff] ${isActive ? 'text-[#90abff] font-semibold' : 'text-[#1a2957]'
+              }`
+            }
+          >
+            Case Studies
           </NavLink>
           <NavLink
             to="/contact"
@@ -185,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                 transition={{ duration: 0.3 }}
                 onClick={closeMenu}
               />
-              
+
               {/* Mobile Menu */}
               <motion.div
                 className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl z-50 lg:hidden"
@@ -221,13 +214,14 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                   >
                     <div className="space-y-2">
                       {[
-                        { to: '/', label: 'Home' },
-                        { to: '/digital-marketing-mastery', label: 'Digital Marketing' },
+
+                        { to: '/digital-marketing-agency', label: 'Digital Marketing' },
                         { to: '/hiring-solutions', label: 'Hiring Solutions' },
-                        { to: '/digital-marketing-agency', label: 'Agency' },
                         { to: '/website-development', label: 'Web Development' },
+                        { to: '/influencer-marketing', label: 'Influencer Marketing' },
                         { to: '/blog', label: 'Blog' },
-                        { to: '/about', label: 'About' }
+                        { to: '/about', label: 'About' },
+                        { to: '/case-studies', label: 'Case Studies' }
                       ].map((item, index) => (
                         <motion.div
                           key={item.to}
@@ -237,10 +231,9 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                           <NavLink
                             to={item.to}
                             className={({ isActive }) =>
-                              `block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
-                                isActive
-                                  ? 'text-[#90abff] bg-[#90abff]/10 font-semibold border-l-4 border-[#90abff]'
-                                  : 'text-[#1a2957] hover:bg-gray-50 hover:text-[#90abff]'
+                              `block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${isActive
+                                ? 'text-[#90abff] bg-[#90abff]/10 font-semibold border-l-4 border-[#90abff]'
+                                : 'text-[#1a2957] hover:bg-gray-50 hover:text-[#90abff]'
                               }`
                             }
                             onClick={closeMenu}

@@ -12,6 +12,8 @@ import DigitalMarketingPage from '../../pages/DigitalMarketingPage';
 import HiringSolutionsPage from '../../pages/HiringSolutionsPage';
 import AgencyServicesPage from '../../pages/AgencyServicesPage';
 import WebDevelopmentPage from '../../pages/WebDevelopmentPage';
+import InfluencerMarketingPage from '../../pages/InfluencerMarketingPage';
+import CaseStudiesPage from '../../pages/CaseStudiesPage';
 import ContactPage from '../../pages/ContactPage';
 import NotFoundPage from '../../pages/NotFoundPage';
 import BlogPage from '../../pages/BlogPage';
@@ -48,6 +50,8 @@ function App() {
           <Route path="hiring-solutions" element={<HiringSolutionsPage />} />
           <Route path="digital-marketing-agency" element={<AgencyServicesPage />} />
           <Route path="website-development" element={<WebDevelopmentPage />} />
+          <Route path="influencer-marketing" element={<InfluencerMarketingPage />} />
+          <Route path="case-studies" element={<CaseStudiesPage />} />
           <Route path="/jobs/:id" element={<JobDetailPage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<BlogPostPage />} />
@@ -70,10 +74,10 @@ function App() {
           <Route path="jobs/create" element={<JobForm />} />
           <Route path="jobs/edit/:jobId" element={<JobForm />} />
           <Route path="jobs/:jobId/applications" element={<JobApplicationsPage />} />
-            <Route path="marketing-applications" element={<DigitalMarketingApplicationsPage />} />
+          <Route path="marketing-applications" element={<DigitalMarketingApplicationsPage />} />
         </Route>
         <Route path="/careers" element={<PublicJobsPage />} />
-        
+
         <Route path="/careers/:jobId/apply" element={<JobApplicationForm />} />
       </Routes>
     </AnimatePresence>

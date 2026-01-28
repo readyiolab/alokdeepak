@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {  Instagram, Linkedin, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -18,9 +18,9 @@ const Footer: React.FC = () => {
             <div className="flex space-x-4 mt-6">
               {[
                 { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/company/sownmark/posts/?feedView=all', label: 'LinkedIn' },
-              
+
                 { icon: <Instagram size={20} />, href: 'https://www.instagram.com/sownmarkofficial/', label: 'Instagram' },
-               
+
               ].map((social, index) => (
                 <a
                   key={index}

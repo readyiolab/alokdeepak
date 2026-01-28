@@ -52,53 +52,53 @@ const DigitalMarketingPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (loading) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return;
 
-  setLoading(true);
-  setError(null);
-  setSuccess(null);
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
-  // Indian phone validation
-  const indianPhoneRegex = /^[6-9]\d{9}$/;
-  if (!indianPhoneRegex.test(formData.phone)) {
-    setError('Please enter a valid 10-digit Indian mobile number starting with 6-9.');
-    setLoading(false);
-    return;
-  }
-
-  try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/marketing/apply`,
-      formData,
-      {
-        timeout: 3000,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    const message = response.data.message;
-    const referralCode = response.data.referralCode;
-
-    setSuccess(`${message} Your referral code is: ${referralCode}`);
-    setFormData({ name: '', email: '', phone: '', referralCode: '' });
-  } catch (err) {
-    let errorMessage = 'Failed to submit application. Please try again.';
-    if (err.response) {
-      errorMessage = err.response.data?.error || errorMessage;
-    } else if (err.request) {
-      errorMessage = 'Network error. Please check your connection and try again.';
-    } else {
-      errorMessage = 'An unexpected error occurred. Please try again.';
+    // Indian phone validation
+    const indianPhoneRegex = /^[6-9]\d{9}$/;
+    if (!indianPhoneRegex.test(formData.phone)) {
+      setError('Please enter a valid 10-digit Indian mobile number starting with 6-9.');
+      setLoading(false);
+      return;
     }
-    setError(errorMessage);
-  } finally {
-    setLoading(false);
-  }
-};
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/marketing/apply`,
+        formData,
+        {
+          timeout: 3000,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const message = response.data.message;
+      const referralCode = response.data.referralCode;
+
+      setSuccess(`${message} Your referral code is: ${referralCode}`);
+      setFormData({ name: '', email: '', phone: '', referralCode: '' });
+    } catch (err) {
+      let errorMessage = 'Failed to submit application. Please try again.';
+      if (err.response) {
+        errorMessage = err.response.data?.error || errorMessage;
+      } else if (err.request) {
+        errorMessage = 'Network error. Please check your connection and try again.';
+      } else {
+        errorMessage = 'An unexpected error occurred. Please try again.';
+      }
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 
