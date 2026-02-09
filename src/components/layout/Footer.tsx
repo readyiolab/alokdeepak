@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1 - Logo & About */}
           <div>
-            <img src="./logo.webp" alt="Sownmark Logo" className="h-12 mb-6" />
+            <img src="./logo.png" alt="Sownmark Logo" className="h-12 mb-6" />
             <p className="text-gray-600 text-sm leading-relaxed">
               Empowering your digital journey with innovative marketing and talent solutions.
             </p>
