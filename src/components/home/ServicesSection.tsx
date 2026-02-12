@@ -1,24 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GraduationCap as Graduation, Users, LineChart, Globe } from 'lucide-react';
+import { GraduationCap as Graduation, Users, LineChart, Globe, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const services = [
-  {
-    icon: <Graduation size={32} className="text-white" />,
-    title: 'Digital Marketing Expertise',
-    description: 'Master cutting-edge strategies with our comprehensive courses led by industry veterans.',
-    link: '/digital-marketing-mastery',
-    linkText: 'Learn More',
-    delay: 0.1,
-  },
   {
     icon: <Users size={32} className="text-white" />,
     title: 'Top Digital Talent',
     description: 'Connect with skilled digital marketing and IT professionals to build high-performing teams.',
     link: '/hiring-solutions',
     linkText: 'Hire Now',
-    delay: 0.2,
+    delay: 0.1,
   },
   {
     icon: <LineChart size={32} className="text-white" />,
@@ -35,6 +27,14 @@ const services = [
     link: '/website-development',
     linkText: 'View Web Services',
     delay: 0.4,
+  },
+  {
+    icon: <Star size={32} className="text-white" />,
+    title: 'Influencer Marketing',
+    description: 'Amplify your brand reach with strategic influencer partnerships and campaigns.',
+    link: '/influencer-marketing',
+    linkText: 'Learn More',
+    delay: 0.5,
   },
 ];
 

@@ -17,16 +17,17 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-4 mt-6">
               {[
-                { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/company/sownmark/posts/?feedView=all', label: 'LinkedIn' },
-
-                { icon: <Instagram size={20} />, href: 'https://www.instagram.com/sownmarkofficial/', label: 'Instagram' },
-
+                { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/company/sownmark', label: 'LinkedIn' },
+                { icon: <Instagram size={20} />, href: 'https://www.instagram.com/sownmark_', label: 'Instagram' },
+                { icon: <svg size={20} viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>, href: 'https://x.com/Sownmark143641', label: 'Twitter' },
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
                   className="text-gray-500 hover:text-gray-800 transition-colors duration-300"
                   aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {social.icon}
                 </a>
@@ -40,7 +41,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm">
               {[
                 { to: '/', label: 'Home' },
-                { to: '/digital-marketing-mastery', label: 'Digital Marketing' },
+                { to: '/digital-marketing-agency', label: 'Marketing Agency' },
                 { to: '/hiring-solutions', label: 'Hiring Solutions' },
                 { to: '/digital-marketing-agency', label: 'Marketing Agency' },
                 { to: '/website-development', label: 'Website Development' },
@@ -95,7 +96,7 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li className="text-gray-600">
-                <span className="font-medium">Hours:</span> Monday - Saturday, 9 AM - 6 PM
+                <span className="font-medium">Hours:</span> 24 Hrs
               </li>
             </ul>
           </div>
