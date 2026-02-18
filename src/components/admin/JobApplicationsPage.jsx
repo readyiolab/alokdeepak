@@ -50,13 +50,15 @@ const JobApplicationsPage = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setApplications(data.applications);
-        setTotal(data.total);
+        setApplications(Array.isArray(data.applications) ? data.applications : []);
+        setTotal(typeof data.total === 'number' ? data.total : 0);
       } else {
-        console.error(data.error);
+        console.error('API Error:', data.error || 'Unknown error');
+        setApplications([]);
       }
     } catch (error) {
-      console.error('Error fetching applications:', error);
+      console.error('Fetch Error:', error);
+      setApplications([]);
     }
     setLoading(false);
   };
