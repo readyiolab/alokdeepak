@@ -10,7 +10,7 @@ const JobApplicationsPage = () => {
   const { jobId } = useParams();
   const [applications, setApplications] = useState([]);
   const [job, setJob] = useState(null);
-  const [filters, setFilters] = useState({ status: '', page: 1, limit: 10 });
+  const [filters, setFilters] = useState({ status: 'all', page: 1, limit: 10 });
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -44,7 +44,8 @@ const JobApplicationsPage = () => {
   const fetchApplications = async () => {
     setLoading(true);
     try {
-      const query = new URLSearchParams({ status: filters.status, page: filters.page, limit: filters.limit }).toString();
+      const statusFilter = filters.status === 'all' ? '' : filters.status;
+      const query = new URLSearchParams({ status: statusFilter, page: filters.page, limit: filters.limit }).toString();
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs/${jobId}/applications?${query}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -117,7 +118,7 @@ const JobApplicationsPage = () => {
               <SelectValue placeholder="All Statuses" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Statuses</SelectItem>
+              <SelectItem value="all">All Statuses</SelectItem>
               <SelectItem value="new">New</SelectItem>
               <SelectItem value="reviewed">Reviewed</SelectItem>
               <SelectItem value="interviewed">Interviewed</SelectItem>
