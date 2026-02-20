@@ -217,6 +217,48 @@ const CaseStudiesPage: React.FC = () => {
             <Helmet>
                 <title>Success Stories | Case Studies | Sownmark</title>
                 <meta name="description" content="Explore how Sownmark scales global brands across Australia and USA, from Fintech arbitrage platforms to B2B service leaders, local SEO, and high-end branding solutions." />
+                <link rel="canonical" href="https://sownmark.com/case-studies" />
+                <meta property="og:title" content="Success Stories | Case Studies | Sownmark" />
+                <meta property="og:description" content="Explore how Sownmark scales global brands across Australia and USA, from Fintech arbitrage platforms to B2B service leaders, local SEO, and high-end branding solutions." />
+                <meta property="og:url" content="https://sownmark.com/case-studies" />
+                <meta property="og:type" content="website" />
+
+                {/* Structured Data */}
+                <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "CollectionPage",
+                            "name": "Sownmark Case Studies",
+                            "description": "A collection of success stories across digital marketing, web development, and business growth.",
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "Sownmark",
+                                "url": "https://sownmark.com"
+                            },
+                            "mainEntity": {
+                                "@type": "ItemList",
+                                "itemListElement": [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Shina Kaur Branding & Performance Marketing"
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Singh Karman SEO Roadmap"
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "name": "Arbilo Crypto Arbitrage Platform"
+                                    }
+                                ]
+                            }
+                        }
+                    `}
+                </script>
             </Helmet>
 
             {/* Hero Section */}

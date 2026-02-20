@@ -29,7 +29,7 @@ const features = [
   },
 ];
 
-const FeaturesSection: React.FC = () => {
+const FeaturesSection: React.FC = React.memo(() => {
   return (
     <section className="py-16 sm:py-20 bg-slate-200">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -65,6 +65,8 @@ const FeaturesSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+FeaturesSection.displayName = 'FeaturesSection';
 
 export default FeaturesSection;

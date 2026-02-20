@@ -166,10 +166,45 @@ const WebDevelopmentPage: React.FC = () => {
           content="website development, web design services, responsive website design, custom web development, professional website company"
         />
         <link rel="canonical" href="https://sownmark.com/website-development" />
-        <meta property="og:title" content="Professional Website Development | Sownmark" />
-        <meta property="og:description" content="Get stunning, responsive websites that convert visitors into customers. Expert web development services tailored to your business needs." />
-        <meta property="og:url" content="https://sownmark.com/website-development" />
         <meta property="og:type" content="website" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "serviceType": "Web Development",
+              "provider": {
+                "@type": "Organization",
+                "name": "Sownmark",
+                "url": "https://sownmark.com"
+              },
+              "areaServed": "Worldwide",
+              "description": "Professional web development services including custom websites, e-commerce, and maintenance.",
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Web Development Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Custom Website Development"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "E-commerce Solutions"
+                    }
+                  }
+                ]
+              }
+            }
+          `}
+        </script>
       </Helmet>
 
 

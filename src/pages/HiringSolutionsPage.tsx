@@ -80,10 +80,52 @@ const HiringSolutionsPage = () => {
           content="hiring solutions, recruitment services India, job placement agency, talent acquisition"
         />
         <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
-        <meta property="og:title" content="Hiring Top Talent in India | Sownmark Solutions" />
-        <meta property="og:description" content="Build your dream team with Sownmark. We connect businesses with top-tier tech and digital talent across India." />
-        <meta property="og:url" content="https://sownmark.com/hiring-solutions" />
         <meta property="og:type" content="website" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "serviceType": "Recruitment and Hiring",
+              "provider": {
+                "@type": "Organization",
+                "name": "Sownmark",
+                "url": "https://sownmark.com"
+              },
+              "areaServed": "India",
+              "description": "Expert recruitment services connecting businesses with top-tier tech and digital talent across India.",
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Hiring Solutions",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "BPO Hiring"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "IT & Tech Recruitment"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Sales & Marketing Hiring"
+                    }
+                  }
+                ]
+              }
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* Hero Section */}

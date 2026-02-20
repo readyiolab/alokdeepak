@@ -123,10 +123,41 @@ const ContactPage = () => {
           content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
         />
         <link rel="canonical" href="https://sownmark.com/contact" />
-        <meta property="og:title" content="Contact Sownmark | Get Digital Solutions Today" />
-        <meta property="og:description" content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!" />
-        <meta property="og:url" content="https://sownmark.com/contact" />
         <meta property="og:type" content="website" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              "name": "Contact Sownmark",
+              "description": "Get in touch with Sownmark for digital marketing, web development, and hiring solutions.",
+              "url": "https://sownmark.com/contact",
+              "mainEntity": {
+                "@type": "Organization",
+                "name": "Sownmark",
+                "email": "hello@sownmark.com"
+              }
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": ${JSON.stringify(faqs.map(f => ({
+            "@type": "Question",
+            "name": f.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": f.answer
+            }
+          })))}
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* Hero Section - Dark Theme */}

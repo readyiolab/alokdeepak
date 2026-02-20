@@ -55,14 +55,12 @@ const editorJSToHtml = (content: string | { blocks: any[] }): string => {
     .map((block) => {
       switch (block.type) {
         case "paragraph":
-          return `<p class="text-gray-700 leading-relaxed">${
-            block.data.text || ""
-          }</p>`;
+          return `<p class="text-gray-700 leading-relaxed">${block.data.text || ""
+            }</p>`;
         case "header":
           const level = block.data.level || 2;
-          return `<h${level} class="text-gray-900 font-bold mt-4 mb-2 ${
-            level === 1 ? "text-3xl" : level === 2 ? "text-2xl" : "text-xl"
-          }">${block.data.text || ""}</h${level}>`;
+          return `<h${level} class="text-gray-900 font-bold mt-4 mb-2 ${level === 1 ? "text-3xl" : level === 2 ? "text-2xl" : "text-xl"
+            }">${block.data.text || ""}</h${level}>`;
         case "list":
           const tag = block.data.style === "ordered" ? "ol" : "ul";
           const items = (block.data.items || [])
@@ -71,14 +69,12 @@ const editorJSToHtml = (content: string | { blocks: any[] }): string => {
             )
             .join("");
           return items
-            ? `<${tag} class="list-${
-                block.data.style === "ordered" ? "decimal" : "disc"
-              } pl-6 my-2">${items}</${tag}>`
+            ? `<${tag} class="list-${block.data.style === "ordered" ? "decimal" : "disc"
+            } pl-6 my-2">${items}</${tag}>`
             : "";
         case "image":
-          return `<img src="${block.data.file?.url || ""}" alt="${
-            block.data.caption || "Image"
-          }" class="w-full max-w-md h-auto rounded-lg my-4 mx-auto object-cover" />`;
+          return `<img src="${block.data.file?.url || ""}" alt="${block.data.caption || "Image"
+            }" class="w-full max-w-md h-auto rounded-lg my-4 mx-auto object-cover" />`;
         default:
           return "";
       }
@@ -288,6 +284,45 @@ const BlogPostPage: React.FC = () => {
       <Helmet>
         <title>{post.title} | Sownmark Blog</title>
         <meta name="description" content={post.meta_description} />
+        <link rel="canonical" href={`https://sownmark.com/blog/${post.slug}`} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.meta_description} />
+        <meta property="og:image" content={post.image} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.meta_description} />
+        <meta name="twitter:image" content={post.image} />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "headline": "${post.title}",
+              "description": "${post.meta_description}",
+              "image": "${post.image}",
+              "author": {
+                "@type": "Person",
+                "name": "${post.author}"
+              },
+              "datePublished": "${post.created_at}",
+              "publisher": {
+                "@type": "Organization",
+                "name": "Sownmark",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://sownmark.com/logo.png"
+                }
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://sownmark.com/blog/${post.slug}"
+              }
+            }
+          `}
+        </script>
       </Helmet>
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6">
@@ -312,11 +347,9 @@ const BlogPostPage: React.FC = () => {
               <div className=" rounded-2xl" />
               <div className="absolute bottom-6 left-6 right-6">
                 <span
-                  className={`inline-block ${
-                    getCategoryColor(post.category[0] || "Uncategorized").bg
-                  } ${
-                    getCategoryColor(post.category[0] || "Uncategorized").text
-                  } text-sm font-medium py-1 px-3 rounded-full mb-2 shadow-sm`}
+                  className={`inline-block ${getCategoryColor(post.category[0] || "Uncategorized").bg
+                    } ${getCategoryColor(post.category[0] || "Uncategorized").text
+                    } text-sm font-medium py-1 px-3 rounded-full mb-2 shadow-sm`}
                 >
                   {post.category[0] || "Uncategorized"}
                 </span>

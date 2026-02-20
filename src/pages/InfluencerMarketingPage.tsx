@@ -95,10 +95,45 @@ const InfluencerMarketingPage: React.FC = () => {
                     content="influencer marketing, creator economy, social media marketing, brand ambassadors, viral marketing"
                 />
                 <link rel="canonical" href="https://sownmark.com/influencer-marketing" />
-                <meta property="og:title" content="Influencer Marketing Services | Sownmark" />
-                <meta property="og:description" content="Humanize your brand with Sownmark's influencer marketing services. We connect you with top creators to drive authentic engagement and growth." />
-                <meta property="og:url" content="https://sownmark.com/influencer-marketing" />
                 <meta property="og:type" content="website" />
+
+                {/* Structured Data */}
+                <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "Service",
+                            "serviceType": "Influencer Marketing",
+                            "provider": {
+                                "@type": "Organization",
+                                "name": "Sownmark",
+                                "url": "https://sownmark.com"
+                            },
+                            "areaServed": "Worldwide",
+                            "description": "Premium influencer marketing services connecting brands with authentic voices to drive engagement.",
+                            "hasOfferCatalog": {
+                                "@type": "OfferCatalog",
+                                "name": "Influencer Marketing Services",
+                                "itemListElement": [
+                                    {
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": "Influencer Scouting"
+                                        }
+                                    },
+                                    {
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": "Campaign Management"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    `}
+                </script>
             </Helmet>
 
             {/* Hero Section */}

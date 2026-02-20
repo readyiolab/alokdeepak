@@ -1,5 +1,5 @@
-
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -9,8 +9,16 @@ const fadeInUp = {
 
 const TermsAndConditions = () => {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
-      <div className="container px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Terms and Conditions | Sownmark Solutions</title>
+        <meta
+          name="description"
+          content="Review the terms and conditions for using Sownmark's services and website. and understand our service agreement."
+        />
+        <link rel="canonical" href="https://sownmark.com/terms-conditions" />
+      </Helmet>
+      <div className="container px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
         <motion.div {...fadeInUp} className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Terms & Conditions
@@ -118,7 +126,7 @@ const TermsAndConditions = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

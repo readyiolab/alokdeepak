@@ -60,6 +60,45 @@ const JobDetailPage = () => {
           }, Sownmark Solutions, ${job?.location || 'remote'}`}
         />
         <link rel="canonical" href={`https://www.sownmark.com/jobs/${id}`} />
+
+        {/* Structured Data */}
+        {job && (
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "JobPosting",
+                "title": "${job.title}",
+                "description": "${job.summary}",
+                "datePosted": "${job.created_at}",
+                "validThrough": "${job.expiry_date}",
+                "employmentType": "${job.job_type.toUpperCase()}",
+                "hiringOrganization": {
+                  "@type": "Organization",
+                  "name": "Sownmark",
+                  "sameAs": "https://sownmark.com"
+                },
+                "jobLocation": {
+                  "@type": "Place",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "${job.location}",
+                    "addressCountry": "India"
+                  }
+                },
+                "baseSalary": {
+                  "@type": "MonetaryAmount",
+                  "currency": "INR",
+                  "value": {
+                    "@type": "QuantitativeValue",
+                    "value": "${job.compensation}",
+                    "unitText": "YEAR"
+                  }
+                }
+              }
+            `}
+          </script>
+        )}
       </Helmet>
 
       {/* Job Details Section */}

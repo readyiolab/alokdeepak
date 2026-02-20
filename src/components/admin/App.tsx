@@ -31,7 +31,6 @@ const JobsAdminPage = lazy(() => import('../admin/JobsAdminPage'));
 const JobForm = lazy(() => import('../admin/JobForm'));
 const JobApplicationsPage = lazy(() => import('../admin/JobApplicationsPage'));
 const ContactMessagesPage = lazy(() => import('../admin/ContactMessagesPage'));
-const PublicJobsPage = lazy(() => import('../../pages/PublicJobsPage'));
 
 const JobDetailPage = lazy(() => import('../../pages/JobDetailPage'));
 const JobApplicationForm = lazy(() => import('../../pages/JobApplicationForm'));
@@ -82,15 +81,13 @@ function App() {
             <Route path="jobs/create" element={<JobForm />} />
             <Route path="jobs/edit/:jobId" element={<JobForm />} />
             <Route path="jobs/:jobId/applications" element={<JobApplicationsPage />} />
-            <Route path="contact-messages" element={<ContactMessagesPage />} />
           </Route>
 
-          <Route path="/careers" element={<PublicJobsPage />} />
 
           <Route path="/careers/:jobId/apply" element={<JobApplicationForm />} />
         </Routes>
       </Suspense>
-    </AnimatePresence>
+    </AnimatePresence >
   );
 }
 

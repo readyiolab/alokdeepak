@@ -251,6 +251,7 @@ export default function FloatingLines({
   const currentInfluenceRef = useRef(0);
   const targetParallaxRef = useRef(new Vector2(0, 0));
   const currentParallaxRef = useRef(new Vector2(0, 0));
+  const isVisibleRef = useRef(true);
 
   // Determine if we are on a mobile device
   const isMobile = useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
@@ -390,6 +391,14 @@ export default function FloatingLines({
       ro.observe(containerRef.current);
     }
 
+    const io = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    }, { threshold: 0.1 });
+
+    if (containerRef.current) {
+      io.observe(containerRef.current);
+    }
+
     const handlePointerMove = event => {
       const rect = renderer.domElement.getBoundingClientRect();
       const x = event.clientX - rect.left;
@@ -418,7 +427,19 @@ export default function FloatingLines({
     }
 
     let raf = 0;
-    const renderLoop = () => {
+    let lastTime = 0;
+    const fps = isMobile ? 30 : 60;
+    const interval = 1000 / fps;
+
+    const renderLoop = (time) => {
+      raf = requestAnimationFrame(renderLoop);
+      
+      if (!isVisibleRef.current) return;
+
+      const delta = time - lastTime;
+      if (delta < interval) return;
+      lastTime = time - (delta % interval);
+
       uniforms.iTime.value = clock.getElapsedTime();
 
       if (interactive) {
@@ -435,9 +456,8 @@ export default function FloatingLines({
       }
 
       renderer.render(scene, camera);
-      raf = requestAnimationFrame(renderLoop);
     };
-    renderLoop();
+    raf = requestAnimationFrame(renderLoop);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -445,6 +465,7 @@ export default function FloatingLines({
       if (ro && containerRef.current) {
         ro.disconnect();
       }
+      io.disconnect();
 
       if (interactive) {
         renderer.domElement.removeEventListener('pointermove', handlePointerMove);

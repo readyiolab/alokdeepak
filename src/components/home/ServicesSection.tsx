@@ -38,7 +38,7 @@ const services = [
   },
 ];
 
-const ServicesSection: React.FC = () => {
+const ServicesSection: React.FC = React.memo(() => {
   return (
     <section className="py-16 sm:py-20 bg-[#1a2957]">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -71,6 +71,7 @@ const ServicesSection: React.FC = () => {
               <Link
                 to={service.link}
                 className="inline-flex items-center text-sm font-medium text-white transition-colors duration-300"
+                aria-label={`Learn more about our ${service.title} service`}
               >
                 {service.linkText}
                 <svg
@@ -92,6 +93,8 @@ const ServicesSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+ServicesSection.displayName = 'ServicesSection';
 
 export default ServicesSection;

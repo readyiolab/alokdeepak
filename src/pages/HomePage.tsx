@@ -33,6 +33,43 @@ const HomePage: React.FC = () => {
         <meta property="og:description" content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career" />
         <meta property="og:url" content="https://sownmark.com/" />
         <meta property="og:type" content="website" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Sownmark",
+              "url": "https://sownmark.com",
+              "logo": "https://sownmark.com/logo.png",
+              "sameAs": [
+                "https://www.instagram.com/sownmark_",
+                "https://www.linkedin.com/company/sownmark",
+                "https://x.com/Sownmark143641"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-XXXXXXXXXX",
+                "contactType": "customer service"
+              }
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "https://sownmark.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://sownmark.com/blog?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+          `}
+        </script>
       </Helmet>
 
       <div className="bg-white">

@@ -8,6 +8,14 @@
     <!-- Remove these meta tags as they will be handled by Helmet -->
     <title>Sownmark</title>
 
+    <!-- Preconnect for Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" as="image" href="/logo.png" />
+
     <!-- Basic meta tags -->
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Sownmark" />
@@ -16,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://sownmark.com/og-image.jpg" />
 
-    <!-- Google Ads Global Site Tag -->
+    <!-- Tracking Scripts (Deferred) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17005532217"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -25,8 +33,7 @@
       gtag('config', 'AW-17005532217');
     </script>
 
-    <!-- Meta Pixel Code (Facebook Pixel) -->
-    <script>
+    <script defer>
       !function(f,b,e,v,n,t,s){
         if(f.fbq) return;
         n = f.fbq = function(){ n.callMethod ?
@@ -41,7 +48,6 @@
       fbq('init', '1486668442357854');
       fbq('track', 'PageView');
     </script>
-    <!-- End Meta Pixel Code -->
   </head>
   <body>
     <!-- Meta Pixel Fallback for NoScript -->

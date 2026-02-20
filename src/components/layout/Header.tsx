@@ -26,12 +26,12 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   }, [isMenuOpen]);
 
   const navLinks = [
-
     { name: 'Marketing Agency', path: '/digital-marketing-agency' },
     { name: 'Hiring Solutions', path: '/hiring-solutions' },
     { name: 'Influencer Marketing', path: '/influencer-marketing' },
-    { name: 'Case Studies', path: '/case-studies' },
     { name: 'Web Dev', path: '/website-development' },
+    { name: 'Case Studies', path: '/case-studies' },
+    { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
     { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>, href: 'https://x.com/Sownmark143641', label: 'Twitter' },
   ];
 
-  const headerBg = isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-3';
+  const headerBg = isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-1.5' : 'bg-transparent py-2.5';
   const textColor = isScrolled ? 'text-[#1a2957]' : 'text-white';
   const logoInvert = !isScrolled ? 'brightness-100 invert' : '';
 
@@ -50,22 +50,22 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
       <nav className="container mx-auto px-4 md:px-6 max-w-7xl">
         <div className="flex items-center justify-between">
-          <Link to="/" className="relative z-50 py-2" onClick={closeMenu}>
+          <Link to="/" className="relative z-50 py-6" onClick={closeMenu}>
             <img
               src="/logo.png"
               alt="Sownmark"
-              className={`h-7 sm:h-8 w-auto transition-all duration-300 ${logoInvert}`}
+              className={`h-6 sm:h-7 w-auto transition-all duration-300 ${logoInvert}`}
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `text-sm font-bold tracking-wide transition-all duration-300 hover:opacity-70 ${textColor} ${isActive ? 'opacity-100 border-b-2 border-current' : 'opacity-70'}`
+                  `text-[13px] font-bold tracking-wide transition-all duration-300 hover:opacity-70 ${textColor} ${isActive ? 'opacity-100 border-b-2 border-current' : 'opacity-70'}`
                 }
               >
                 {link.name}
@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             ))}
             <Link
               to="/contact"
-              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 ${isScrolled
+              className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all duration-300 ${isScrolled
                 ? 'bg-[#1a2957] text-white hover:bg-[#1a2957]/90'
                 : 'bg-white text-[#1a2957] hover:bg-white/90'
                 }`}
@@ -101,32 +101,32 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-[#1a2957]/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-40 bg-[#1a2957]/95 backdrop-blur-xl lg:hidden overflow-y-auto"
           >
-            <div className="flex flex-col h-full container mx-auto px-6 py-24">
-              <div className="flex flex-col gap-6">
+            <div className="flex flex-col min-h-full container mx-auto px-6 py-16">
+              <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.path}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     <Link
                       to={link.path}
                       onClick={closeMenu}
-                      className="text-3xl sm:text-4xl font-bold text-white hover:text-blue-400 transition-colors flex items-center justify-between group"
+                      className="text-xl font-bold text-white hover:text-blue-400 transition-colors flex items-center justify-between group py-2 border-b border-white/5"
                     >
                       {link.name}
-                      <ArrowRight className="w-6 h-6 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
+                      <ArrowRight className="w-5 h-5 opacity-40 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="mt-auto pt-12 border-t border-white/10">
-                <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-6">Connect With Us</p>
-                <div className="flex items-center gap-6">
+              <div className="mt-8 pt-8 border-t border-white/10 pb-8">
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-4">Connect With Us</p>
+                <div className="flex items-center gap-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={index}
@@ -135,8 +135,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                       rel="noopener noreferrer"
                       initial={{ opacity: 0, scale: 0.5 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5 + (index * 0.1) }}
-                      className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-[#1a2957] transition-all"
+                      transition={{ delay: 0.3 + (index * 0.1) }}
+                      className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-[#1a2957] transition-all"
                     >
                       {social.icon}
                     </motion.a>

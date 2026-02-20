@@ -137,10 +137,45 @@ const AgencyServicesPage: React.FC = () => {
           content="digital marketing agency India, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
         />
         <link rel="canonical" href="https://sownmark.com/digital-marketing-agency" />
-        <meta property="og:title" content="Digital Marketing Agency | Sownmark Solutions" />
-        <meta property="og:description" content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence." />
-        <meta property="og:url" content="https://sownmark.com/digital-marketing-agency" />
         <meta property="og:type" content="website" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "serviceType": "Digital Marketing",
+              "provider": {
+                "@type": "Organization",
+                "name": "Sownmark",
+                "url": "https://sownmark.com"
+              },
+              "areaServed": "Worldwide",
+              "description": "Comprehensive digital marketing services including SEO, PPC, Social Media, and Reputation Management.",
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Digital Marketing Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Search Engine Optimization"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Pay-Per-Click Advertising"
+                    }
+                  }
+                ]
+              }
+            }
+          `}
+        </script>
       </Helmet>
 
 
