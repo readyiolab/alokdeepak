@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
+
     { name: 'Marketing Agency', path: '/digital-marketing-agency' },
     { name: 'Hiring Solutions', path: '/hiring-solutions' },
     { name: 'Influencer Marketing', path: '/influencer-marketing' },
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
     { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>, href: 'https://x.com/Sownmark143641', label: 'Twitter' },
   ];
 
-  const headerBg = isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5';
+  const headerBg = isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-3';
   const textColor = isScrolled ? 'text-[#1a2957]' : 'text-white';
   const logoInvert = !isScrolled ? 'brightness-100 invert' : '';
 
@@ -54,12 +54,12 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             <img
               src="/logo.png"
               alt="Sownmark"
-              className={`h-8 sm:h-10 w-auto transition-all duration-300 ${logoInvert}`}
+              className={`h-7 sm:h-8 w-auto transition-all duration-300 ${logoInvert}`}
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             ))}
             <Link
               to="/contact"
-              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${isScrolled
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 ${isScrolled
                 ? 'bg-[#1a2957] text-white hover:bg-[#1a2957]/90'
                 : 'bg-white text-[#1a2957] hover:bg-white/90'
                 }`}
