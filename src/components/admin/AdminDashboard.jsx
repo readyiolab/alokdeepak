@@ -21,8 +21,10 @@ import {
   Clock,
   AlertCircle,
   RefreshCw,
-  Plus
+  Plus,
+  Mail
 } from 'lucide-react';
+
 import { 
   Card, 
   CardContent, 
@@ -79,12 +81,13 @@ const AdminDashboard = () => {
     setError('');
 
     try {
-      const [blogsResponse, jobApplicationsResponse, digitalMarketingResponse] = await Promise.allSettled([
+      const [blogsResponse, jobApplicationsResponse, digitalMarketingResponse, contactMessagesResponse] = await Promise.allSettled([
         getAllBlogs(),
         getAllJobApplications(),
         getAllDigitalMarketingApplications(),
         getAllContactMessages(),
       ]);
+
 
       let blogs = [];
       let jobApplications = [];
