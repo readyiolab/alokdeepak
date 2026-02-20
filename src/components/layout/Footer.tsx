@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
                 { to: '/', label: 'Home' },
                 { to: '/digital-marketing-agency', label: 'Marketing Agency' },
                 { to: '/hiring-solutions', label: 'Hiring Solutions' },
-                { to: '/digital-marketing-agency', label: 'Marketing Agency' },
+                { to: '/influencer-marketing', label: 'Influencer Marketing' },
                 { to: '/website-development', label: 'Website Development' },
               ].map((link, index) => (
                 <li key={index}>
@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
                 { to: '/contact', label: 'Contact Us' },
                 { to: '/privacy-policy', label: 'Privacy Policy' },
                 { to: '/terms-conditions', label: 'Terms & Conditions' },
-                { to: '/cancellation-refund-policy', label: 'Cancellation & Refund Policy' },
+
               ].map((link, index) => (
                 <li key={index}>
                   <Link

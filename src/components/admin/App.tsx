@@ -35,7 +35,7 @@ const PublicJobsPage = lazy(() => import('../../pages/PublicJobsPage'));
 
 const JobDetailPage = lazy(() => import('../../pages/JobDetailPage'));
 const JobApplicationForm = lazy(() => import('../../pages/JobApplicationForm'));
-const CancellationRefundPolicy = lazy(() => import('../../pages/CancellationRefundPolicy'));
+
 
 // Loading Fallback
 const PageLoader = () => (
@@ -68,7 +68,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsAndConditions />} />
-            <Route path="/cancellation-refund-policy" element={<CancellationRefundPolicy />} />
+
             <Route path="/unsubscribe" element={<UnsubscribeForm />} />
           </Route>
           <Route path="/admin/login" element={<AdminLoginPage />} />

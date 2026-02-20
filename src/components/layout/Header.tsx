@@ -29,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
     { name: 'Home', path: '/' },
     { name: 'Marketing Agency', path: '/digital-marketing-agency' },
     { name: 'Hiring Solutions', path: '/hiring-solutions' },
+    { name: 'Influencer Marketing', path: '/influencer-marketing' },
     { name: 'Case Studies', path: '/case-studies' },
     { name: 'Web Dev', path: '/website-development' },
     { name: 'About', path: '/about' },
@@ -73,8 +74,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
             <Link
               to="/contact"
               className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${isScrolled
-                  ? 'bg-[#1a2957] text-white hover:bg-[#1a2957]/90'
-                  : 'bg-white text-[#1a2957] hover:bg-white/90'
+                ? 'bg-[#1a2957] text-white hover:bg-[#1a2957]/90'
+                : 'bg-white text-[#1a2957] hover:bg-white/90'
                 }`}
             >
               Start a Project
