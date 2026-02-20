@@ -31,7 +31,9 @@ const AdminLayout = () => {
     { to: '/admin/blogs', label: 'All Blogs' },
     { to: '/admin/jobs', label: 'Manage Jobs' },
     { to: '/admin/marketing-applications', label: 'Digital Marketing Applications' },
+    { to: '/admin/contact-messages', label: 'Contact Messages' },
   ];
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 font-sans">

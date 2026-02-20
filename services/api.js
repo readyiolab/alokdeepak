@@ -131,4 +131,15 @@ export const getAllJobApplications = async (filters = {}) => {
 export const getAllDigitalMarketingApplications = async (filters = {}) => {
   return api.get(`/admin/applications?type=digital-marketing&${new URLSearchParams(filters).toString()}`);
 };
+
+// --- Contact Message Routes ---
+export const getAllContactMessages = async (filters = {}) => {
+  const query = new URLSearchParams(filters).toString();
+  return api.get(`/admin/contact-messages?${query}`);
+};
+
+export const updateContactMessageStatus = async (id, status) => {
+  return api.put(`/admin/contact-messages/${id}/status`, { status });
+};
+
 export default api;

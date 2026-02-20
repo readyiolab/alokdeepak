@@ -4,7 +4,9 @@ import {
   getAllBlogs,
   getAllJobApplications,
   getAllDigitalMarketingApplications,
+  getAllContactMessages,
 } from '../../../services/api';
+
 import { motion } from 'framer-motion';
 import { 
   FileText, 
@@ -38,6 +40,7 @@ const AdminDashboard = () => {
     blogs: [],
     jobApplications: [],
     digitalMarketingApplications: [],
+    contactMessages: [],
     stats: {
       totalBlogs: 0,
       publishedBlogs: 0,
@@ -47,8 +50,11 @@ const AdminDashboard = () => {
       pendingJobApplications: 0,
       rejectedJobApplications: 0,
       totalDigitalMarketingApplications: 0,
+      totalContactMessages: 0,
+      newContactMessages: 0,
       recentApplications: 0,
     },
+
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -77,11 +83,13 @@ const AdminDashboard = () => {
         getAllBlogs(),
         getAllJobApplications(),
         getAllDigitalMarketingApplications(),
+        getAllContactMessages(),
       ]);
 
       let blogs = [];
       let jobApplications = [];
       let digitalMarketingApplications = [];
+      let contactMessages = [];
 
       if (blogsResponse.status === 'fulfilled') {
         blogs = blogsResponse.value.data || [];
@@ -101,14 +109,22 @@ const AdminDashboard = () => {
         console.error('Failed to fetch digital marketing applications:', digitalMarketingResponse.reason);
       }
 
-      const stats = calculateStats(blogs, jobApplications, digitalMarketingApplications);
+      if (contactMessagesResponse.status === 'fulfilled') {
+        contactMessages = contactMessagesResponse.value.data.messages || [];
+      } else {
+        console.error('Failed to fetch contact messages:', contactMessagesResponse.reason);
+      }
+
+      const stats = calculateStats(blogs, jobApplications, digitalMarketingApplications, contactMessages);
 
       setDashboardData({
         blogs,
         jobApplications,
         digitalMarketingApplications,
+        contactMessages,
         stats,
       });
+
     } catch (err) {
       setError('Failed to fetch dashboard data. Please try again.');
       console.error('Dashboard fetch error:', err);
@@ -118,7 +134,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const calculateStats = (blogs, jobApplications, digitalMarketingApplications) => {
+  const calculateStats = (blogs, jobApplications, digitalMarketingApplications, contactMessages) => {
     const now = new Date();
     const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
@@ -131,12 +147,16 @@ const AdminDashboard = () => {
       pendingJobApplications: jobApplications.filter(app => app.status === 'pending').length,
       rejectedJobApplications: jobApplications.filter(app => app.status === 'rejected').length,
       totalDigitalMarketingApplications: digitalMarketingApplications.length,
+      totalContactMessages: contactMessages.length,
+      newContactMessages: contactMessages.filter(msg => msg.status === 'new').length,
       recentApplications: [
         ...jobApplications.filter(app => new Date(app.createdAt) > oneWeekAgo),
         ...digitalMarketingApplications.filter(app => new Date(app.createdAt) > oneWeekAgo),
+        ...contactMessages.filter(msg => new Date(msg.created_at) > oneWeekAgo),
       ].length,
     };
   };
+
 
   const handleRefresh = () => {
     fetchDashboardData(true);
@@ -179,14 +199,23 @@ const AdminDashboard = () => {
       link: '/admin/marketing-applications',
     },
     {
-      title: 'Recent Applications',
+      title: 'Contact Messages',
+      value: dashboardData.stats.totalContactMessages,
+      icon: Mail,
+      color: 'bg-red-500',
+      description: `${dashboardData.stats.newContactMessages} new messages`,
+      link: '/admin/contact-messages',
+    },
+    {
+      title: 'Recent Activity',
       value: dashboardData.stats.recentApplications,
       icon: Calendar,
       color: 'bg-orange-500',
       description: 'Last 7 days',
-      link: '/admin/jobs',
+      link: '/admin/contact-messages',
     },
   ];
+
 
   const applicationStatusCards = [
     {
@@ -345,7 +374,14 @@ const AdminDashboard = () => {
                 description: 'Digital marketing inquiries',
                 icon: Users,
               },
+              {
+                link: '/admin/contact-messages',
+                title: 'Contact Inquiries',
+                description: 'View customer messages',
+                icon: Mail,
+              },
             ].map((action) => (
+
               <Button key={action.title} variant="ghost" asChild className="justify-start h-auto p-4">
                 <Link to={action.link} className="flex items-center w-full">
                   <action.icon className="w-6 h-6 mr-3 text-gray-600 group-hover:text-gray-900" />
