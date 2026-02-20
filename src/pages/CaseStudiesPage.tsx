@@ -4,11 +4,13 @@ import { ArrowRight, Trophy, Target, Globe, Star, TrendingUp, Users, Code, Zap, 
 import { Helmet } from 'react-helmet';
 
 const CaseStudiesPage: React.FC = () => {
+    const isMobile = React.useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
+
     const fadeInUp = {
-        initial: { opacity: 0, y: 30 },
+        initial: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.6 },
+        viewport: { once: true, amount: isMobile ? 0.1 : 0.2 },
+        transition: { duration: isMobile ? 0.4 : 0.6 },
     };
 
     const categories = [
@@ -225,7 +227,7 @@ const CaseStudiesPage: React.FC = () => {
 
                 <div className="container max-w-7xl mx-auto px-4 relative z-10">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center max-w-4xl mx-auto"
                     >

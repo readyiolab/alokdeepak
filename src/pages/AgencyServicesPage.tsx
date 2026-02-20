@@ -5,11 +5,13 @@ import { Search, LineChart, MessageCircle, Mail, BarChart, Shield, ArrowRight } 
 import { Helmet } from 'react-helmet';
 
 const AgencyServicesPage: React.FC = () => {
+  const isMobile = React.useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
+
   const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6 },
+    viewport: { once: true, amount: isMobile ? 0.1 : 0.2 },
+    transition: { duration: isMobile ? 0.4 : 0.6 },
   };
 
   const staggerContainer = {
@@ -125,21 +127,21 @@ const AgencyServicesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-  <title>Digital Marketing Agency | Sownmark Solutions</title>
-  <meta
-    name="description"
-    content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence."
-  />
-  <meta
-    name="keywords"
-    content="digital marketing agency India, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
-  />
-  <link rel="canonical" href="https://sownmark.com/digital-marketing-agency" />
-  <meta property="og:title" content="Digital Marketing Agency | Sownmark Solutions" />
-  <meta property="og:description" content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence." />
-  <meta property="og:url" content="https://sownmark.com/digital-marketing-agency" />
-  <meta property="og:type" content="website" />
-</Helmet>
+        <title>Digital Marketing Agency | Sownmark Solutions</title>
+        <meta
+          name="description"
+          content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence."
+        />
+        <meta
+          name="keywords"
+          content="digital marketing agency India, SEO services for business, PPC management agency, content marketing agency, branding and marketing agency"
+        />
+        <link rel="canonical" href="https://sownmark.com/digital-marketing-agency" />
+        <meta property="og:title" content="Digital Marketing Agency | Sownmark Solutions" />
+        <meta property="og:description" content="Grow your business with Sownmark's digital marketing services. SEO, PPC, branding & more to fuel your online presence." />
+        <meta property="og:url" content="https://sownmark.com/digital-marketing-agency" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
 
       {/* Hero Section */}
@@ -154,9 +156,9 @@ const AgencyServicesPage: React.FC = () => {
 
         <div className="container relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: isMobile ? 0.5 : 0.8 }}
             className="max-w-5xl mx-auto"
           >
             <motion.div
@@ -251,7 +253,7 @@ const AgencyServicesPage: React.FC = () => {
                       className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg overflow-hidden"
                       style={{ background: 'linear-gradient(135deg, #1a2957, #3b82f6, #60a5fa)' }}
                     >
-                      <img src={service.icon} alt={service.title} className="w-12 h-12 rounded-md" />
+                      <img src={service.icon} alt={service.title} className="w-12 h-12 rounded-md" loading="lazy" />
                     </div>
 
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 leading-tight">{service.title}</h3>

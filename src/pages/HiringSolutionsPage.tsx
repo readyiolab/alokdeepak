@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const HiringSolutionsPage = () => {
+  const isMobile = React.useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
   const [showJobs, setShowJobs] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ const HiringSolutionsPage = () => {
           });
           setJobs(response.data.jobs);
           setLoading(false);
-        } catch (err) {
+        } catch (err: any) {
           setError(err.response?.data?.error || 'Failed to load jobs. Please try again.');
           setLoading(false);
         }
@@ -47,10 +48,10 @@ const HiringSolutionsPage = () => {
   }, [showJobs]);
 
   const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 },
+    viewport: { once: true, amount: isMobile ? 0.1 : 0.2 },
+    transition: { duration: isMobile ? 0.4 : 0.6 },
   };
 
   const staggerContainer = {
@@ -62,28 +63,28 @@ const HiringSolutionsPage = () => {
     setShowJobs(!showJobs);
   };
 
-  const handleJobClick = (jobId) => {
+  const handleJobClick = (jobId: string | number) => {
     navigate(`/jobs/${jobId}`);
   };
 
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-  <title>Hiring Top Talent in India | Sownmark Solutions</title>
-  <meta
-    name="description"
-    content="Build your dream team with Sownmark. We connect businesses with top-tier tech and digital talent across India."
-  />
-  <meta
-    name="keywords"
-    content="hiring solutions, recruitment services India, job placement agency, talent acquisition"
-  />
-  <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
-  <meta property="og:title" content="Hiring Top Talent in India | Sownmark Solutions" />
-  <meta property="og:description" content="Build your dream team with Sownmark. We connect businesses with top-tier tech and digital talent across India." />
-  <meta property="og:url" content="https://sownmark.com/hiring-solutions" />
-  <meta property="og:type" content="website" />
-</Helmet>
+        <title>Hiring Top Talent in India | Sownmark Solutions</title>
+        <meta
+          name="description"
+          content="Build your dream team with Sownmark. We connect businesses with top-tier tech and digital talent across India."
+        />
+        <meta
+          name="keywords"
+          content="hiring solutions, recruitment services India, job placement agency, talent acquisition"
+        />
+        <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
+        <meta property="og:title" content="Hiring Top Talent in India | Sownmark Solutions" />
+        <meta property="og:description" content="Build your dream team with Sownmark. We connect businesses with top-tier tech and digital talent across India." />
+        <meta property="og:url" content="https://sownmark.com/hiring-solutions" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
       {/* Hero Section */}
       <section
@@ -93,9 +94,9 @@ const HiringSolutionsPage = () => {
         <div className="absolute inset-0 opacity-15 bg-[#1a2957]"></div>
         <div className="container relative z-10 text-center text-white px-4 sm:px-6 md:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: isMobile ? 0.5 : 0.8 }}
             className="max-w-4xl mx-auto"
           >
             <motion.div
@@ -189,7 +190,7 @@ const HiringSolutionsPage = () => {
                       className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 overflow-hidden"
                       style={{ background: 'linear-gradient(135deg, #2a4365, #a3bff5)' }}
                     >
-                      <img src={feature.icon} alt={feature.title} className="w-12 h-12 rounded-md" />
+                      <img src={feature.icon} alt={feature.title} className="w-12 h-12 rounded-md" loading="lazy" />
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-3">{feature.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>

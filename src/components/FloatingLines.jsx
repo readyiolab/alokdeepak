@@ -230,17 +230,17 @@ function hexToVec3(hex) {
 export default function FloatingLines({
   linesGradient,
   enabledWaves = ['top', 'middle', 'bottom'],
-  lineCount = [6],
+  lineCount: initialLineCount = [6],
   lineDistance = [5],
   topWavePosition,
   middleWavePosition,
   bottomWavePosition = { x: 2.0, y: -0.7, rotate: -1 },
   animationSpeed = 1,
-  interactive = true,
+  interactive: initialInteractive = true,
   bendRadius = 5.0,
   bendStrength = -0.5,
   mouseDamping = 0.05,
-  parallax = true,
+  parallax: initialParallax = true,
   parallaxStrength = 0.2,
   mixBlendMode = 'screen'
 }) {
@@ -251,6 +251,14 @@ export default function FloatingLines({
   const currentInfluenceRef = useRef(0);
   const targetParallaxRef = useRef(new Vector2(0, 0));
   const currentParallaxRef = useRef(new Vector2(0, 0));
+
+  // Determine if we are on a mobile device
+  const isMobile = useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
+
+  // Reduce resources for mobile
+  const lineCount = isMobile ? (Array.isArray(initialLineCount) ? initialLineCount.map(c => Math.max(1, Math.floor(c * 0.4))) : Math.max(1, Math.floor(initialLineCount * 0.4))) : initialLineCount;
+  const interactive = isMobile ? false : initialInteractive;
+  const parallax = isMobile ? false : initialParallax;
 
   const getLineCount = waveType => {
     if (typeof lineCount === 'number') return lineCount;
@@ -282,8 +290,8 @@ export default function FloatingLines({
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const renderer = new WebGLRenderer({ antialias: !isMobile, alpha: false, precision: isMobile ? 'mediump' : 'highp' });
+    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     containerRef.current.appendChild(renderer.domElement);
@@ -363,6 +371,7 @@ export default function FloatingLines({
 
     const setSize = () => {
       const el = containerRef.current;
+      if (!el) return;
       const width = el.clientWidth || 1;
       const height = el.clientHeight || 1;
 

@@ -6,6 +6,8 @@ import { Users, ArrowRight, MessageSquare, ShieldCheck } from 'lucide-react';
 import FloatingLines from '../FloatingLines';
 
 const HeroSection: React.FC = () => {
+  const isMobile = React.useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
+
   return (
     <section className="relative overflow-hidden bg-[#1a2957] min-h-screen flex items-center justify-center pt-32 pb-20 lg:pt-40 lg:pb-32">
       {/* Dynamic Background */}
@@ -13,33 +15,33 @@ const HeroSection: React.FC = () => {
         {/* @ts-ignore */}
         <FloatingLines
           linesGradient={2}
-          mouseInteraction={true}
-          lineCount={[12, 10]}
-          lineDistance={[5, 12]}
+          mouseInteraction={!isMobile}
+          lineCount={isMobile ? [4, 3] : [12, 10]}
+          lineDistance={isMobile ? [10, 20] : [5, 12]}
         />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 max-w-5xl text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: isMobile ? 0.4 : 0.8 }}
           className="space-y-10"
         >
           <div className="space-y-6">
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0.3 : 0.6, delay: isMobile ? 0.1 : 0.2 }}
               className="text-4xl md:text-6xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] max-w-4xl mx-auto"
             >
               We Build, Market, and Scale Your Business.
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: isMobile ? 0.3 : 0.6, delay: isMobile ? 0.2 : 0.4 }}
               className="text-base md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed font-medium"
             >
               From high-converting websites to viral influencer campaigns, we provide the technical and creative fuel your brand needs to dominate.
@@ -47,9 +49,9 @@ const HeroSection: React.FC = () => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: isMobile ? 0.3 : 0.6, delay: isMobile ? 0.3 : 0.6 }}
             className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4"
           >
             <Link
@@ -70,8 +72,6 @@ const HeroSection: React.FC = () => {
               <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </Link>
           </motion.div>
-
-
         </motion.div>
       </div>
 

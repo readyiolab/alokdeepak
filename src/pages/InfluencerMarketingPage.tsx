@@ -5,11 +5,13 @@ import { Users, Megaphone, TrendingUp, Share2, Star, ArrowRight, Shield, Target,
 import { Helmet } from 'react-helmet';
 
 const InfluencerMarketingPage: React.FC = () => {
+    const isMobile = React.useRef(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)).current;
+
     const fadeInUp = {
-        initial: { opacity: 0, y: 30 },
+        initial: isMobile ? { opacity: 0 } : { opacity: 0, y: 30 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.6 },
+        viewport: { once: true, amount: isMobile ? 0.1 : 0.2 },
+        transition: { duration: isMobile ? 0.4 : 0.6 },
     };
 
     const staggerContainer = {
@@ -111,9 +113,9 @@ const InfluencerMarketingPage: React.FC = () => {
 
                 <div className="container relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                     <motion.div
-                        initial={{ opacity: 0, y: 50 }}
+                        initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: isMobile ? 0.5 : 0.8 }}
                         className="max-w-5xl mx-auto"
                     >
                         <motion.div

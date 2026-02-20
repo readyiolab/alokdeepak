@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import HeroSection from '../components/home/HeroSection';
-import ServicesSection from '../components/home/ServicesSection';
-import FeaturesSection from '../components/home/FeaturesSection';
-import TestimonialsSection from '../components/home/TestimonialsSection';
-import CtaSection from '../components/home/CtaSection';
 import { Helmet } from 'react-helmet';
+
+// Lazy load sections below the fold
+const ServicesSection = lazy(() => import('../components/home/ServicesSection'));
+const FeaturesSection = lazy(() => import('../components/home/FeaturesSection'));
+const TestimonialsSection = lazy(() => import('../components/home/TestimonialsSection'));
+const CtaSection = lazy(() => import('../components/home/CtaSection'));
+
+// Simple loading placeholder to prevent CLS
+const SectionLoader = ({ height = "400px" }: { height?: string }) => (
+  <div style={{ height, backgroundColor: 'transparent' }} className="w-full flex items-center justify-center">
+    <div className="w-8 h-8 border-4 border-[#1a2957] border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 const HomePage: React.FC = () => {
   return (
     <>
-
       <Helmet>
         <title>Sownmark: Your Partner in Digital Growth</title>
         <meta
@@ -29,10 +37,22 @@ const HomePage: React.FC = () => {
 
       <div className="bg-white">
         <HeroSection />
-        <ServicesSection />
-        <FeaturesSection />
-        <TestimonialsSection />
-        <CtaSection />
+
+        <Suspense fallback={<SectionLoader height="600px" />}>
+          <ServicesSection />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader height="500px" />}>
+          <FeaturesSection />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader height="600px" />}>
+          <TestimonialsSection />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader height="300px" />}>
+          <CtaSection />
+        </Suspense>
       </div>
     </>
   );
