@@ -79,7 +79,7 @@ const HiringSolutionsPage = () => {
           name="keywords"
           content="hiring solutions India, recruitment services for businesses, digital marketing talent, IT recruitment agency, staff augmentation services"
         />
-        <link rel="canonical" href="https://www.sownmark.com/hiring-solutions" />
+        <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}

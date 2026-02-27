@@ -28,10 +28,10 @@ const HomePage: React.FC = () => {
           name="keywords"
           content="digital marketing agency, website development company, social media marketing agency, SEO company USA"
         />
-        <link rel="canonical" href="https://www.sownmark.com/" />
+        <link rel="canonical" href="https://sownmark.com/" />
         <meta property="og:title" content="Website Development Company in India – Get More Leads" />
         <meta property="og:description" content="Looking for a website development company in India? Sownmark Digital builds fast, SEO-ready, high-converting websites that generate leads." />
-        <meta property="og:url" content="https://www.sownmark.com/" />
+        <meta property="og:url" content="https://sownmark.com/" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}
@@ -41,8 +41,8 @@ const HomePage: React.FC = () => {
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "Sownmark Digital",
-              "url": "https://www.sownmark.com",
-              "logo": "https://www.sownmark.com/logo.png",
+              "url": "https://sownmark.com",
+              "logo": "https://sownmark.com/logo.png",
               "description": "Sownmark Digital is an AI-driven digital marketing and website development company in India offering SEO, PPC, influencer marketing and hiring solutions.",
               "areaServed": {
                 "@type": "Country",
@@ -92,10 +92,10 @@ const HomePage: React.FC = () => {
             {
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "url": "https://www.sownmark.com",
+              "url": "https://sownmark.com",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://www.sownmark.com/blog?q={search_term_string}",
+                "target": "https://sownmark.com/blog?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
             }

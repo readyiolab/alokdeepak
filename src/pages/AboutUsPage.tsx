@@ -68,7 +68,7 @@ const AboutUsPage = () => {
           name="keywords"
           content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are"
         />
-        <link rel="canonical" href="https://www.sownmark.com/about" />
+        <link rel="canonical" href="https://sownmark.com/about" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}

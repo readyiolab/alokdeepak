@@ -219,7 +219,7 @@ const BlogPage: React.FC = () => {
           name="keywords"
           content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips"
         />
-        <link rel="canonical" href="https://www.sownmark.com/blog" />
+        <link rel="canonical" href="https://sownmark.com/blog" />
         <meta
           property="og:title"
           content="Digital Marketing & SEO Blog – Sownmark Digital"
@@ -228,7 +228,7 @@ const BlogPage: React.FC = () => {
           property="og:description"
           content="Read the Sownmark Digital blog for the latest expert insights on SEO, Google Ads, social media trends, and website development strategies."
         />
-        <meta property="og:url" content="https://www.sownmark.com/blog" />
+        <meta property="og:url" content="https://sownmark.com/blog" />
         <meta property="og:type" content="website" />
       </Helmet>
 

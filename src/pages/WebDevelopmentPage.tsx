@@ -165,7 +165,7 @@ const WebDevelopmentPage: React.FC = () => {
           name="keywords"
           content="website development India, custom web design services, ecommerce website development, business website development, responsive web design"
         />
-        <link rel="canonical" href="https://www.sownmark.com/website-development" />
+        <link rel="canonical" href="https://sownmark.com/website-development" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}

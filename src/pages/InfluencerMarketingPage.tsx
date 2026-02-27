@@ -94,7 +94,7 @@ const InfluencerMarketingPage: React.FC = () => {
                     name="keywords"
                     content="influencer marketing agency India, social media influencers India, brand collaboration agency, digital influencer marketing, influencer outreach services"
                 />
-                <link rel="canonical" href="https://www.sownmark.com/influencer-marketing-agency" />
+                <link rel="canonical" href="https://sownmark.com/influencer-marketing-agency" />
                 <meta property="og:type" content="website" />
 
                 {/* Structured Data */}

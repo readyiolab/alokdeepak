@@ -16,7 +16,7 @@ const TermsAndConditions = () => {
           name="description"
           content="Review the terms and conditions for using Sownmark Digital's services and website. Understand our service agreement and policies."
         />
-        <link rel="canonical" href="https://www.sownmark.com/terms-conditions" />
+        <link rel="canonical" href="https://sownmark.com/terms-conditions" />
       </Helmet>
       <div className="container px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
         <motion.div {...fadeInUp} className="text-center mb-12">
@@ -107,7 +107,7 @@ const TermsAndConditions = () => {
               Email: <a href="mailto:hello@sownmark.com" className="text-blue-600 hover:underline">hello@sownmark.com</a>
             </p>
             <p>
-              Website: <a href="https://www.sownmark.com" className="text-blue-600 hover:underline">https://www.sownmark.com</a>
+              Website: <a href="https://sownmark.com" className="text-blue-600 hover:underline">https://sownmark.com</a>
             </p>
           </div>
         </motion.div>

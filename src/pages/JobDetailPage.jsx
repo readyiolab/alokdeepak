@@ -59,7 +59,7 @@ const JobDetailPage = () => {
             job?.title || 'careers'
           }, Sownmark Solutions, ${job?.location || 'remote'}`}
         />
-        <link rel="canonical" href={`https://www.sownmark.com/jobs/${id}`} />
+        <link rel="canonical" href={`https://sownmark.com/jobs/${id}`} />
 
         {/* Structured Data */}
         {job && (

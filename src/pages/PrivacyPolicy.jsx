@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
           name="description"
           content="Read the Sownmark Digital privacy policy to understand how we collect, use, and protect your personal information."
         />
-        <link rel="canonical" href="https://www.sownmark.com/privacy-policy" />
+        <link rel="canonical" href="https://sownmark.com/privacy-policy" />
       </Helmet>
       <div className="container px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
         <motion.div {...fadeInUp} className="text-center mb-12">
