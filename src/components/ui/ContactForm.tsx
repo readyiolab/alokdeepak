@@ -146,9 +146,8 @@ const ContactForm: React.FC = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border ${
-            errors.name ? 'border-red-600' : 'border-gray-300'
-          } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
+          className={`w-full px-4 py-2 border ${errors.name ? 'border-red-600' : 'border-gray-300'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
           placeholder="Your name"
         />
         {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
@@ -164,9 +163,8 @@ const ContactForm: React.FC = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border ${
-            errors.email ? 'border-red-600' : 'border-gray-300'
-          } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
+          className={`w-full px-4 py-2 border ${errors.email ? 'border-red-600' : 'border-gray-300'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
           placeholder="Your email address"
         />
         {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
@@ -182,9 +180,8 @@ const ContactForm: React.FC = () => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border ${
-            errors.phone ? 'border-red-600' : 'border-gray-300'
-          } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
+          className={`w-full px-4 py-2 border ${errors.phone ? 'border-red-600' : 'border-gray-300'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
           placeholder="Your phone number"
         />
         {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
@@ -199,12 +196,10 @@ const ContactForm: React.FC = () => {
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border ${
-            errors.subject ? 'border-red-600' : 'border-gray-300'
-          } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
+          className={`w-full px-4 py-2 border ${errors.subject ? 'border-red-600' : 'border-gray-300'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
         >
           <option value="">Select a subject</option>
-          <option value="Digital Marketing Course Inquiry">Digital Marketing Course Inquiry</option>
           <option value="Hiring Needs">Hiring Needs</option>
           <option value="Agency Services">Agency Services</option>
           <option value="Website Development">Website Development</option>
@@ -223,9 +218,8 @@ const ContactForm: React.FC = () => {
           value={formData.message}
           onChange={handleChange}
           rows={5}
-          className={`w-full px-4 py-2 border ${
-            errors.message ? 'border-red-600' : 'border-gray-300'
-          } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
+          className={`w-full px-4 py-2 border ${errors.message ? 'border-red-600' : 'border-gray-300'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#90abff] focus:border-[#1a2957]`}
           placeholder="Your message"
         ></textarea>
         {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
@@ -261,9 +255,8 @@ const ContactForm: React.FC = () => {
         disabled={isSubmitting}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={`w-full bg-gradient-to-r from-[#1a2957] to-[#90abff] text-white px-8 py-3 rounded-xl font-bold text-base transition-all duration-300 flex items-center justify-center ${
-          isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-        }`}
+        className={`w-full bg-gradient-to-r from-[#1a2957] to-[#90abff] text-white px-8 py-3 rounded-xl font-bold text-base transition-all duration-300 flex items-center justify-center ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+          }`}
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </motion.button>

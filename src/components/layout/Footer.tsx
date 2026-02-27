@@ -95,8 +95,17 @@ const Footer: React.FC = () => {
                   hello@sownmark.com
                 </a>
               </li>
+              <li className="flex items-center text-gray-600">
+                <span className="font-medium mr-3">Call:</span>
+                <a
+                  href="tel:+919792166702"
+                  className="hover:text-gray-800 transition-colors duration-300 hover:underline"
+                >
+                  +91 97921 66702
+                </a>
+              </li>
               <li className="text-gray-600">
-                <span className="font-medium">Hours:</span> 24 Hrs
+                <span className="font-medium">Hours:</span> 24 hours
               </li>
             </ul>
           </div>

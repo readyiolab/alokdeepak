@@ -11,12 +11,12 @@ const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Privacy Policy | Sownmark Solutions</title>
+        <title>Privacy Policy – Sownmark Digital</title>
         <meta
           name="description"
-          content="Read Sownmark's privacy policy to understand how we collect, use, and protect your personal information."
+          content="Read the Sownmark Digital privacy policy to understand how we collect, use, and protect your personal information."
         />
-        <link rel="canonical" href="https://sownmark.com/privacy-policy" />
+        <link rel="canonical" href="https://www.sownmark.com/privacy-policy" />
       </Helmet>
       <div className="container px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-100/50">
         <motion.div {...fadeInUp} className="text-center mb-12">
@@ -28,13 +28,13 @@ const PrivacyPolicy = () => {
 
         <motion.div {...fadeInUp} className="space-y-8 text-gray-700">
           <p>
-            At Sownmark ("Sownmark", "we", "us", or "our"), your privacy is important to us. This Privacy Policy explains how we collect, use, store, and protect your personal data when you access our website, enroll in our online courses, or purchase our digital services. By using our website and services, you consent to the practices described in this policy.
+            At Sownmark Digital ("we", "us", or "our"), your privacy is important to us. This Privacy Policy explains how we collect, use, store, and protect your personal data when you access our website or purchase our digital services. By using our website and services, you consent to the practices described in this policy.
           </p>
 
           <div>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. Who We Are</h2>
             <p>
-              Sownmark is a digital education and marketing solutions provider based in India. We offer online digital marketing courses, hiring solutions, and all-in-one business services including website development, social media marketing, and digital advertising, primarily for businesses seeking growth at industry-best pricing.
+              Sownmark Digital is a marketing solutions provider based in India. We offer hiring solutions and all-in-one business services including website development, social media marketing, and digital advertising, primarily for businesses seeking growth at industry-best pricing.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
               <li>Full Name</li>
               <li>Email Address</li>
               <li>Phone Number</li>
-              <li>Course/Application Preferences</li>
+              <li>Service Preferences</li>
               <li>Service Requirements (for business clients)</li>
             </ul>
           </div>
@@ -54,8 +54,6 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">3. How We Use Your Information</h2>
             <p>We use your information to:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Enroll students in online courses</li>
-              <li>Offer scholarships based on academic performance in entrance tests</li>
               <li>Provide requested services to business clients</li>
               <li>Communicate offers, updates, and service details</li>
               <li>Improve user experience on our platforms</li>
@@ -67,8 +65,8 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">4. Marketing and CRM Usage</h2>
             <p>We may use your information to send you:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Course reminders, scholarship updates, new offerings</li>
               <li>Business service promotions or project updates</li>
+              <li>Important service announcements and offerings</li>
             </ul>
             <p className="mt-4">
               You may opt out at any time by emailing us or unsubscribing via our emails.

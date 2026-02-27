@@ -215,12 +215,12 @@ const CaseStudiesPage: React.FC = () => {
     return (
         <div className="bg-white min-h-screen">
             <Helmet>
-                <title>Success Stories | Case Studies | Sownmark</title>
-                <meta name="description" content="Explore how Sownmark scales global brands across Australia and USA, from Fintech arbitrage platforms to B2B service leaders, local SEO, and high-end branding solutions." />
-                <link rel="canonical" href="https://sownmark.com/case-studies" />
-                <meta property="og:title" content="Success Stories | Case Studies | Sownmark" />
-                <meta property="og:description" content="Explore how Sownmark scales global brands across Australia and USA, from Fintech arbitrage platforms to B2B service leaders, local SEO, and high-end branding solutions." />
-                <meta property="og:url" content="https://sownmark.com/case-studies" />
+                <title>Case Studies & Success Stories – Sownmark Digital</title>
+                <meta name="description" content="Explore Sownmark Digital's case studies and success stories. See how we help brands scale with SEO, influencer marketing, and high-converting websites." />
+                <link rel="canonical" href="https://www.sownmark.com/case-studies" />
+                <meta property="og:title" content="Case Studies & Success Stories – Sownmark Digital" />
+                <meta property="og:description" content="Explore Sownmark Digital's case studies and success stories. See how we help brands scale with SEO, influencer marketing, and high-converting websites." />
+                <meta property="og:url" content="https://www.sownmark.com/case-studies" />
                 <meta property="og:type" content="website" />
 
                 {/* Structured Data */}

@@ -70,95 +70,95 @@ const BlogPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const postsPerPage = 6;
 
- useEffect(() => {
-     const fetchBlogs = async () => {
-       try {
-         setLoading(true);
-         const response = await getAllBlogs();
-         
-         // Handle different response structures
-         const data = response.data || response;
-         
-         if (Array.isArray(data)) {
-           const mappedPosts = data.map((post: any) => ({
-               id: post.id,
-               title: post.title,
-               slug: post.slug || generateSlug(post.title),
-               excerpt: post.excerpt,
-               metaDescription: post.meta_description,
-               content: post.content,
-               image: post.image,
-               author: post.author,
-               author_bio: post.author_bio,
-               readTime: post.read_time ? `${post.read_time} min read` : "5 min read",
-               category: Array.isArray(post.category)
-                 ? post.category[0] || "Uncategorized"
-                 : typeof post.category === 'string' 
-                   ? (post.category.startsWith('[') ? JSON.parse(post.category)[0] : post.category) || "Uncategorized"
-                   : "Uncategorized",
-               tags: Array.isArray(post.tags)
-                 ? post.tags
-                 : typeof post.tags === 'string'
-                   ? (post.tags.startsWith('[') ? JSON.parse(post.tags) : [post.tags])
-                   : [],
-               isFeatured: post.is_featured || 0,
-               likes: post.likes || 0,
-               shares: post.shares || 0,
-               comments: post.comments || 0,
-               publishedAt: post.published_at || post.createdAt || new Date().toISOString(),
-             }));
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const response = await getAllBlogs();
 
-             const sortedPosts = mappedPosts.sort(
-               (a, b) =>
-                 new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-             );
+        // Handle different response structures
+        const data = response.data || response;
 
-             setBlogPosts(sortedPosts);
-         } else {
-           console.error("Expected array but got:", data);
-           setBlogPosts([]);
-         }
-         setLoading(false);
-       } catch (err) {
-         console.error("Error fetching blogs:", err);
-         setError("Failed to load blog posts");
-         setLoading(false);
-       }
-     };
-     fetchBlogs();
-   }, []);
- 
-   const generateSlug = (title: string): string =>
-     title
-       .toLowerCase()
-       .replace(/[^a-z0-9]+/g, "-")
-       .replace(/(^-|-$)/g, "");
- 
-   // Filter posts based on search query only
-   const filteredPosts = blogPosts.filter((post) => {
-     const matchesSearch =
-       searchQuery === "" ||
-       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-       post.tags.some((tag) =>
-         tag.toLowerCase().includes(searchQuery.toLowerCase())
-       ) ||
-       post.category.toLowerCase().includes(searchQuery.toLowerCase());
-     return matchesSearch;
-   });
- 
-   const recentPosts = blogPosts.slice(0, 3);
- 
-   // Reset page to 1 when search query changes
-   useEffect(() => {
-     setPage(1);
-   }, [searchQuery]);
- 
-   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-   const paginatedPosts = filteredPosts.slice(
-     (page - 1) * postsPerPage,
-     page * postsPerPage
-   );
+        if (Array.isArray(data)) {
+          const mappedPosts = data.map((post: any) => ({
+            id: post.id,
+            title: post.title,
+            slug: post.slug || generateSlug(post.title),
+            excerpt: post.excerpt,
+            metaDescription: post.meta_description,
+            content: post.content,
+            image: post.image,
+            author: post.author,
+            author_bio: post.author_bio,
+            readTime: post.read_time ? `${post.read_time} min read` : "5 min read",
+            category: Array.isArray(post.category)
+              ? post.category[0] || "Uncategorized"
+              : typeof post.category === 'string'
+                ? (post.category.startsWith('[') ? JSON.parse(post.category)[0] : post.category) || "Uncategorized"
+                : "Uncategorized",
+            tags: Array.isArray(post.tags)
+              ? post.tags
+              : typeof post.tags === 'string'
+                ? (post.tags.startsWith('[') ? JSON.parse(post.tags) : [post.tags])
+                : [],
+            isFeatured: post.is_featured || 0,
+            likes: post.likes || 0,
+            shares: post.shares || 0,
+            comments: post.comments || 0,
+            publishedAt: post.published_at || post.createdAt || new Date().toISOString(),
+          }));
+
+          const sortedPosts = mappedPosts.sort(
+            (a, b) =>
+              new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+          );
+
+          setBlogPosts(sortedPosts);
+        } else {
+          console.error("Expected array but got:", data);
+          setBlogPosts([]);
+        }
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching blogs:", err);
+        setError("Failed to load blog posts");
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
+  const generateSlug = (title: string): string =>
+    title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+  // Filter posts based on search query only
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchesSearch =
+      searchQuery === "" ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      ) ||
+      post.category.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
+  });
+
+  const recentPosts = blogPosts.slice(0, 3);
+
+  // Reset page to 1 when search query changes
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery]);
+
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const paginatedPosts = filteredPosts.slice(
+    (page - 1) * postsPerPage,
+    page * postsPerPage
+  );
 
   if (loading) {
     return (
@@ -210,25 +210,25 @@ const BlogPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Digital Marketing & Tech Blog | Sownmark</title>
+        <title>Digital Marketing & SEO Blog – Sownmark Digital</title>
         <meta
           name="description"
-          content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies"
+          content="Read the Sownmark Digital blog for the latest expert insights on SEO, Google Ads, social media trends, and website development strategies."
         />
         <meta
           name="keywords"
           content="digital marketing blog, SEO tips blog, online marketing trends, content marketing blog, small business growth tips"
         />
-        <link rel="canonical" href="https://sownmark.com/blog" />
+        <link rel="canonical" href="https://www.sownmark.com/blog" />
         <meta
           property="og:title"
-          content="Digital Marketing & Tech Blog | Sownmark"
+          content="Digital Marketing & SEO Blog – Sownmark Digital"
         />
         <meta
           property="og:description"
-          content="Explore expert insights on digital marketing, SEO, design, and business growth from the Sownmark blog. Stay ahead with proven strategies"
+          content="Read the Sownmark Digital blog for the latest expert insights on SEO, Google Ads, social media trends, and website development strategies."
         />
-        <meta property="og:url" content="https://sownmark.com/blog" />
+        <meta property="og:url" content="https://www.sownmark.com/blog" />
         <meta property="og:type" content="website" />
       </Helmet>
 
@@ -298,363 +298,361 @@ const BlogPage: React.FC = () => {
       </section>
 
       {/* Search Section - Light Theme */}
-           <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">
-             <div className="container px-4 sm:px-6 md:px-8">
-               <motion.div {...fadeInUp} className="text-center mb-16">
-                 <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                   Explore Our
-                   <span
-                     className="block text-transparent bg-clip-text pb-5"
-                     style={{
-                       backgroundImage: "linear-gradient(135deg, #1a2957, #90abff)",
-                     }}
-                   >
-                     Blog Content
-                   </span>
-                 </h2>
-                 <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                   Discover articles crafted by industry experts to help you stay
-                   ahead in the digital world.
-                 </p>
-               </motion.div>
-     
-               <motion.div {...fadeInUp} className="relative max-w-4xl mx-auto mb-8">
-                 <div className="relative flex items-center">
-                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                   <input
-                     type="text"
-                     placeholder="Search blog posts..."
-                     value={searchQuery}
-                     onChange={(e) => setSearchQuery(e.target.value)}
-                     className="w-full pl-12 pr-12 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
-                     aria-label="Search blog posts"
-                   />
-                   {searchQuery && (
-                     <button
-                       onClick={() => setSearchQuery("")}
-                       className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                       aria-label="Clear search"
-                     >
-                       <X className="w-5 h-5" />
-                     </button>
-                   )}
-                 </div>
-               </motion.div>
-     
-               <div className="text-center">
-                 <p className="text-sm text-gray-600">
-                   Found {filteredPosts.length} blog post{filteredPosts.length !== 1 ? 's' : ''} 
-                   {searchQuery && ` for "${searchQuery}"`}
-                 </p>
-               </div>
-             </div>
-           </section>
-     
-           {/* Blog Posts Grid - Dark Theme */}
-           <section
-             id="blog-posts"
-             className="py-16 sm:py-20"
-             style={{
-               background: "linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)",
-             }}
-           >
-             <div className="container px-4 sm:px-6 md:px-8">
-               <motion.div {...fadeInUp} className="text-center mb-16">
-                 <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
-                   {searchQuery ? "Search Results" : "Dive Into Our"}
-                   {!searchQuery && (
-                     <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent pb-2">
-                       Expert Insights
-                     </span>
-                   )}
-                 </h2>
-                 <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed pt-5">
-                   {searchQuery 
-                     ? `Showing ${paginatedPosts.length} of ${filteredPosts.length} results`
-                     : "Comprehensive articles designed to empower you with actionable knowledge and strategies."
-                   }
-                 </p>
-               </motion.div>
-     
-               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                 <motion.div
-                   key={page}
-                   variants={staggerContainer}
-                   initial="initial"
-                   whileInView="whileInView"
-                   viewport={{ once: true }}
-                   className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6"
-                 >
-                   {paginatedPosts.length > 0 ? (
-                     paginatedPosts.map((post) => (
-                       <motion.article
-                         key={post.id}
-                         variants={fadeInUp}
-                         className="group relative"
-                       >
-                         <div className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-2 h-auto">
-                           <div className="relative overflow-hidden">
-                             <img
-                               src={post.image}
-                               alt={post.title}
-                               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                               loading="lazy"
-                             />
-                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                             <div className="absolute top-3 right-3 flex gap-2">
-                               {post.isFeatured === 1 && (
-                                 <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded-full text-xs font-semibold">
-                                   Featured
-                                 </span>
-                               )}
-                               <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-2 py-1 rounded-full text-xs font-semibold">
-                                 {post.category}
-                               </span>
-                             </div>
-                           </div>
-     
-                           <div className="p-6">
-                             <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                               {post.title}
-                             </h3>
-                             <p className="text-gray-600 text-sm mb-5 leading-relaxed line-clamp-3">
-                               {post.excerpt}
-                             </p>
-     
-                             <div className="space-y-2 mb-5">
-                               <div className="flex items-center gap-2">
-                                 <User className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                 <span className="text-gray-700 text-sm">
-                                   {post.author}
-                                 </span>
-                               </div>
-                               <div className="flex items-center gap-2">
-                                 <Calendar className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                 <span className="text-gray-700 text-sm">
-                                   {new Date(post.publishedAt).toLocaleDateString()}
-                                 </span>
-                               </div>
-                               <div className="flex items-center gap-2">
-                                 <Clock className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                 <span className="text-gray-700 text-sm">
-                                   {post.readTime}
-                                 </span>
-                               </div>
-                             </div>
-     
-                             <div className="flex items-center justify-between mb-5">
-                               <div className="flex flex-wrap gap-1">
-                                 {post.tags.slice(0, 2).map((tag, tagIndex) => (
-                                   <span
-                                     key={tagIndex}
-                                     className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
-                                   >
-                                     #{tag}
-                                   </span>
-                                 ))}
-                               </div>
-                               <Link
-                                 to={`/blog/${post.slug}`}
-                                 className="w-32 py-2 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg text-center"
-                                 style={{
-                                   background:
-                                     "linear-gradient(135deg, #1a2957, #90abff)",
-                                   color: "white",
-                                 }}
-                                 aria-label={`Read more about ${post.title}`}
-                               >
-                                 Read More
-                               </Link>
-                             </div>
-     
-                             <div className="flex items-center gap-4 text-sm text-gray-600">
-                               <div className="flex items-center gap-1">
-                                 <Heart className="w-4 h-4 text-red-500" />
-                                 <span>{post.likes}</span>
-                               </div>
-                               <div className="flex items-center gap-1">
-                                 <Share2 className="w-4 h-4 text-blue-500" />
-                                 <span>{post.shares}</span>
-                               </div>
-                               <div className="flex items-center gap-1">
-                                 <MessageSquare className="w-4 h-4 text-green-500" />
-                                 <span>{post.comments}</span>
-                               </div>
-                             </div>
-                           </div>
-                         </div>
-                       </motion.article>
-                     ))
-                   ) : (
-                     <div className="col-span-2 text-center py-12">
-                       <div className="bg-white rounded-3xl p-8 shadow-lg">
-                         <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                         <h3 className="text-xl font-bold text-gray-900 mb-2">
-                           No posts found
-                         </h3>
-                         <p className="text-gray-600 mb-4">
-                           {searchQuery 
-                             ? `No blog posts match "${searchQuery}". Try different keywords.`
-                             : "No blog posts available at the moment."
-                           }
-                         </p>
-                         {searchQuery && (
-                           <button
-                             onClick={() => setSearchQuery("")}
-                             className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                           >
-                             Clear Search
-                           </button>
-                         )}
-                       </div>
-                     </div>
-                   )}
-                 </motion.div>
-     
-                 <div className="lg:col-span-1">
-                   <div className="sticky top-8 space-y-8">
-                     <NewsletterForm />
-     
-                     <motion.div
-                       {...fadeInUp}
-                       className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
-                     >
-                       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                       <div className="relative z-10">
-                         <h3 className="text-xl font-bold text-gray-900 mb-4">
-                           Recent Posts
-                         </h3>
-                         <div className="space-y-4">
-                           {recentPosts.map((post) => (
-                             <Link
-                               key={post.id}
-                               to={`/blog/${post.slug}`}
-                               className="flex gap-4 group hover:bg-gray-50 p-2 rounded-xl transition-colors duration-300 w-full text-left"
-                               aria-label={`Read recent post: ${post.title}`}
-                             >
-                               <img
-                                 src={post.image}
-                                 alt={post.title}
-                                 className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
-                                 loading="lazy"
-                               />
-                               <div className="flex-1 min-w-0">
-                                 <h4 className="font-medium text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
-                                   {post.title}
-                                 </h4>
-                                 <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-                                   <Calendar className="w-3 h-3" />
-                                   <span>
-                                     {new Date(
-                                       post.publishedAt
-                                     ).toLocaleDateString()}
-                                   </span>
-                                 </div>
-                               </div>
-                             </Link>
-                           ))}
-                         </div>
-                       </div>
-                     </motion.div>
-     
-                     <motion.div
-                       {...fadeInUp}
-                       className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
-                     >
-                       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                       <div className="relative z-10">
-                         <h3 className="text-xl font-bold text-gray-900 mb-4">
-                           Popular Tags
-                         </h3>
-                         <div className="flex flex-wrap gap-2">
-                           {[
-                             "SEO",
-                             "Social Media",
-                             "Content Marketing",
-                             "Web Development",
-                             "Analytics",
-                             "Digital Marketing Course",
-                             "Job Guarantee",
-                           ].map((tag, index) => (
-                             <button
-                               key={index}
-                               onClick={() => setSearchQuery(tag)}
-                               className="bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-600 px-3 py-2 rounded-full text-sm cursor-pointer transition-colors duration-300"
-                             >
-                               #{tag}
-                             </button>
-                           ))}
-                         </div>
-                       </div>
-                     </motion.div>
-                   </div>
-                 </div>
-               </div>
-     
-               {/* Pagination */}
-               {totalPages > 1 && (
-                 <motion.div {...fadeInUp} className="flex justify-center mt-12">
-                   <div className="flex items-center gap-2">
-                     <button
-                       onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                       disabled={page === 1}
-                       className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-blue-50 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
-                       aria-label="Previous page"
-                     >
-                       Previous
-                     </button>
-                     
-                     {/* Show page numbers */}
-                     {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
-                       let pageNum;
-                       if (totalPages <= 5) {
-                         pageNum = i + 1;
-                       } else if (page <= 3) {
-                         pageNum = i + 1;
-                       } else if (page >= totalPages - 2) {
-                         pageNum = totalPages - 4 + i;
-                       } else {
-                         pageNum = page - 2 + i;
-                       }
-                       
-                       return (
-                         <button
-                           key={pageNum}
-                           onClick={() => setPage(pageNum)}
-                           className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
-                             page === pageNum
-                               ? "bg-blue-600 text-white"
-                               : "border border-gray-200 text-gray-600 hover:bg-blue-50 bg-white"
-                           }`}
-                           aria-label={`Go to page ${pageNum}`}
-                         >
-                           {pageNum}
-                         </button>
-                       );
-                     })}
-                     
-                     <button
-                       onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-                       disabled={page === totalPages}
-                       className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-blue-50 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
-                       aria-label="Next page"
-                     >
-                       Next
-                     </button>
-                   </div>
-                 </motion.div>
-               )}
-     
-               {/* Show pagination info */}
-               {filteredPosts.length > 0 && (
-                 <motion.div {...fadeInUp} className="text-center mt-8">
-                   <p className="text-blue-200 text-sm">
-                     Showing {((page - 1) * postsPerPage) + 1} to {Math.min(page * postsPerPage, filteredPosts.length)} of {filteredPosts.length} posts
-                   </p>
-                 </motion.div>
-               )}
-             </div>
-           </section>
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container px-4 sm:px-6 md:px-8">
+          <motion.div {...fadeInUp} className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Explore Our
+              <span
+                className="block text-transparent bg-clip-text pb-5"
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #1a2957, #90abff)",
+                }}
+              >
+                Blog Content
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Discover articles crafted by industry experts to help you stay
+              ahead in the digital world.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeInUp} className="relative max-w-4xl mx-auto mb-8">
+            <div className="relative flex items-center">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search blog posts..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-12 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                aria-label="Search blog posts"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  aria-label="Clear search"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+          </motion.div>
+
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Found {filteredPosts.length} blog post{filteredPosts.length !== 1 ? 's' : ''}
+              {searchQuery && ` for "${searchQuery}"`}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Posts Grid - Dark Theme */}
+      <section
+        id="blog-posts"
+        className="py-16 sm:py-20"
+        style={{
+          background: "linear-gradient(135deg, #1a2957 0%, #2d4a8f 100%)",
+        }}
+      >
+        <div className="container px-4 sm:px-6 md:px-8">
+          <motion.div {...fadeInUp} className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+              {searchQuery ? "Search Results" : "Dive Into Our"}
+              {!searchQuery && (
+                <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent pb-2">
+                  Expert Insights
+                </span>
+              )}
+            </h2>
+            <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed pt-5">
+              {searchQuery
+                ? `Showing ${paginatedPosts.length} of ${filteredPosts.length} results`
+                : "Comprehensive articles designed to empower you with actionable knowledge and strategies."
+              }
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <motion.div
+              key={page}
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+              className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {paginatedPosts.length > 0 ? (
+                paginatedPosts.map((post) => (
+                  <motion.article
+                    key={post.id}
+                    variants={fadeInUp}
+                    className="group relative"
+                  >
+                    <div className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-2 h-auto">
+                      <div className="relative overflow-hidden">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <div className="absolute top-3 right-3 flex gap-2">
+                          {post.isFeatured === 1 && (
+                            <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded-full text-xs font-semibold">
+                              Featured
+                            </span>
+                          )}
+                          <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-2 py-1 rounded-full text-xs font-semibold">
+                            {post.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-5 leading-relaxed line-clamp-3">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="space-y-2 mb-5">
+                          <div className="flex items-center gap-2">
+                            <User className="w-4 h-4 text-green-500 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm">
+                              {post.author}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-green-500 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm">
+                              {new Date(post.publishedAt).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-green-500 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm">
+                              {post.readTime}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between mb-5">
+                          <div className="flex flex-wrap gap-1">
+                            {post.tags.slice(0, 2).map((tag, tagIndex) => (
+                              <span
+                                key={tagIndex}
+                                className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs"
+                              >
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                          <Link
+                            to={`/blog/${post.slug}`}
+                            className="w-32 py-2 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg text-center"
+                            style={{
+                              background:
+                                "linear-gradient(135deg, #1a2957, #90abff)",
+                              color: "white",
+                            }}
+                            aria-label={`Read more about ${post.title}`}
+                          >
+                            Read More
+                          </Link>
+                        </div>
+
+                        <div className="flex items-center gap-4 text-sm text-gray-600">
+                          <div className="flex items-center gap-1">
+                            <Heart className="w-4 h-4 text-red-500" />
+                            <span>{post.likes}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Share2 className="w-4 h-4 text-blue-500" />
+                            <span>{post.shares}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <MessageSquare className="w-4 h-4 text-green-500" />
+                            <span>{post.comments}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.article>
+                ))
+              ) : (
+                <div className="col-span-2 text-center py-12">
+                  <div className="bg-white rounded-3xl p-8 shadow-lg">
+                    <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      No posts found
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {searchQuery
+                        ? `No blog posts match "${searchQuery}". Try different keywords.`
+                        : "No blog posts available at the moment."
+                      }
+                    </p>
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                      >
+                        Clear Search
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+
+            <div className="lg:col-span-1">
+              <div className="sticky top-8 space-y-8">
+                <NewsletterForm />
+
+                <motion.div
+                  {...fadeInUp}
+                  className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">
+                      Recent Posts
+                    </h3>
+                    <div className="space-y-4">
+                      {recentPosts.map((post) => (
+                        <Link
+                          key={post.id}
+                          to={`/blog/${post.slug}`}
+                          className="flex gap-4 group hover:bg-gray-50 p-2 rounded-xl transition-colors duration-300 w-full text-left"
+                          aria-label={`Read recent post: ${post.title}`}
+                        >
+                          <img
+                            src={post.image}
+                            alt={post.title}
+                            className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                            loading="lazy"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-medium text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                              {post.title}
+                            </h4>
+                            <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
+                              <Calendar className="w-3 h-3" />
+                              <span>
+                                {new Date(
+                                  post.publishedAt
+                                ).toLocaleDateString()}
+                              </span>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp}
+                  className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">
+                      Popular Tags
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        "SEO",
+                        "SEO Services",
+                        "Web Development",
+                        "Influencer Marketing",
+                        "Hiring Solutions",
+                        "Performance Marketing"
+                      ].map((tag, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setSearchQuery(tag)}
+                          className="bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-600 px-3 py-2 rounded-full text-sm cursor-pointer transition-colors duration-300"
+                        >
+                          #{tag}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <motion.div {...fadeInUp} className="flex justify-center mt-12">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                  disabled={page === 1}
+                  className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-blue-50 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
+                  aria-label="Previous page"
+                >
+                  Previous
+                </button>
+
+                {/* Show page numbers */}
+                {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) {
+                    pageNum = i + 1;
+                  } else if (page <= 3) {
+                    pageNum = i + 1;
+                  } else if (page >= totalPages - 2) {
+                    pageNum = totalPages - 4 + i;
+                  } else {
+                    pageNum = page - 2 + i;
+                  }
+
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => setPage(pageNum)}
+                      className={`px-4 py-2 rounded-lg transition-colors duration-300 ${page === pageNum
+                        ? "bg-blue-600 text-white"
+                        : "border border-gray-200 text-gray-600 hover:bg-blue-50 bg-white"
+                        }`}
+                      aria-label={`Go to page ${pageNum}`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+
+                <button
+                  onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                  disabled={page === totalPages}
+                  className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-blue-50 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
+                  aria-label="Next page"
+                >
+                  Next
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Show pagination info */}
+          {filteredPosts.length > 0 && (
+            <motion.div {...fadeInUp} className="text-center mt-8">
+              <p className="text-blue-200 text-sm">
+                Showing {((page - 1) * postsPerPage) + 1} to {Math.min(page * postsPerPage, filteredPosts.length)} of {filteredPosts.length} posts
+              </p>
+            </motion.div>
+          )}
+        </div>
+      </section>
 
       {/* CTA Section - Dark Theme */}
       <section

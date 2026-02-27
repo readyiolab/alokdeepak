@@ -85,16 +85,16 @@ const InfluencerMarketingPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Influencer Marketing Services | Sownmark</title>
+                <title>Influencer Marketing Agency in India – Scale Your Brand</title>
                 <meta
                     name="description"
-                    content="Humanize your brand with Sownmark's influencer marketing services. We connect you with top creators to drive authentic engagement and growth."
+                    content="Looking for an influencer marketing agency in India? Sownmark Digital connects brands with top influencers to drive engagement and sales."
                 />
                 <meta
                     name="keywords"
-                    content="influencer marketing, creator economy, social media marketing, brand ambassadors, viral marketing"
+                    content="influencer marketing agency India, social media influencers India, brand collaboration agency, digital influencer marketing, influencer outreach services"
                 />
-                <link rel="canonical" href="https://sownmark.com/influencer-marketing" />
+                <link rel="canonical" href="https://www.sownmark.com/influencer-marketing-agency" />
                 <meta property="og:type" content="website" />
 
                 {/* Structured Data */}

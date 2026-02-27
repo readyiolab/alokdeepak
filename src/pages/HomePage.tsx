@@ -19,19 +19,19 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Sownmark: Your Partner in Digital Growth</title>
+        <title>Website Development Company in India – Get More Leads</title>
         <meta
           name="description"
-          content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career"
+          content="Looking for a website development company in India? Sownmark Digital builds fast, SEO-ready, high-converting websites that generate leads."
         />
         <meta
           name="keywords"
-          content="digital marketing agency, website development company, best digital marketing course, social media marketing agency, SEO company USA"
+          content="digital marketing agency, website development company, social media marketing agency, SEO company USA"
         />
-        <link rel="canonical" href="https://sownmark.com/" />
-        <meta property="og:title" content="Sownmark: Your Partner in Digital Growth" />
-        <meta property="og:description" content="Sownmark offers expert web design, digital marketing, and training solutions to grow your business online and build your career" />
-        <meta property="og:url" content="https://sownmark.com/" />
+        <link rel="canonical" href="https://www.sownmark.com/" />
+        <meta property="og:title" content="Website Development Company in India – Get More Leads" />
+        <meta property="og:description" content="Looking for a website development company in India? Sownmark Digital builds fast, SEO-ready, high-converting websites that generate leads." />
+        <meta property="og:url" content="https://www.sownmark.com/" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}
@@ -40,19 +40,50 @@ const HomePage: React.FC = () => {
             {
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Sownmark",
-              "url": "https://sownmark.com",
-              "logo": "https://sownmark.com/logo.png",
-              "sameAs": [
-                "https://www.instagram.com/sownmark_",
-                "https://www.linkedin.com/company/sownmark",
-                "https://x.com/Sownmark143641"
+              "name": "Sownmark Digital",
+              "url": "https://www.sownmark.com",
+              "logo": "https://www.sownmark.com/logo.png",
+              "description": "Sownmark Digital is an AI-driven digital marketing and website development company in India offering SEO, PPC, influencer marketing and hiring solutions.",
+              "areaServed": {
+                "@type": "Country",
+                "name": "India"
+              },
+              "foundingLocation": {
+                "@type": "Country",
+                "name": "India"
+              },
+              "knowsAbout": [
+                "Digital Marketing Services in India",
+                "SEO Services",
+                "Website Development",
+                "Influencer Marketing",
+                "Hiring Solutions",
+                "AI Marketing Strategies",
+                "Performance Marketing"
               ],
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-XXXXXXXXXX",
-                "contactType": "customer service"
-              }
+              "service": [
+                {
+                  "@type": "Service",
+                  "name": "Digital Marketing Services in India"
+                },
+                {
+                  "@type": "Service",
+                  "name": "Website Development Services in India"
+                },
+                {
+                  "@type": "Service",
+                  "name": "Influencer Marketing Agency in India"
+                },
+                {
+                  "@type": "Service",
+                  "name": "Hiring Solutions in India"
+                }
+              ],
+              "sameAs": [
+                "https://www.linkedin.com/company/sownmark",
+                "https://www.instagram.com/sownmark_",
+                "https://x.com/Sownmark143641"
+              ]
             }
           `}
         </script>
@@ -61,10 +92,10 @@ const HomePage: React.FC = () => {
             {
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "url": "https://sownmark.com",
+              "url": "https://www.sownmark.com",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://sownmark.com/blog?q={search_term_string}",
+                "target": "https://www.sownmark.com/blog?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
             }

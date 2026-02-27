@@ -59,16 +59,16 @@ const AboutUsPage = () => {
     <div className="min-h-screen bg-white">
 
       <Helmet>
-        <title>About Sownmark | Digital Growth Experts</title>
+        <title>About Sownmark Digital – AI-Driven Marketing Agency</title>
         <meta
           name="description"
-          content="Learn more about Sownmark's mission, team, and vision. Discover why businesses and students trust us to deliver results and growth"
+          content="Learn how Sownmark Digital became a leading AI-driven digital marketing agency in India, helping businesses grow with SEO and web development."
         />
         <meta
           name="keywords"
           content="about digital marketing agency, Sownmark company profile, our mission and vision, meet our team, who we are"
         />
-        <link rel="canonical" href="https://sownmark.com/about" />
+        <link rel="canonical" href="https://www.sownmark.com/about" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}

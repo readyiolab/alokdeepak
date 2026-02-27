@@ -70,16 +70,16 @@ const HiringSolutionsPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Hiring Top Talent in India | Sownmark Solutions</title>
+        <title>Hiring Solutions in India – Find the Best Digital Talent</title>
         <meta
           name="description"
-          content="Build your dream team with Sownmark. We connect businesses with top-tier tech and digital talent across India."
+          content="Offering professional hiring solutions in India for digital marketing, IT, BPO, and Sales roles. Get high-quality talent for your business."
         />
         <meta
           name="keywords"
-          content="hiring solutions, recruitment services India, job placement agency, talent acquisition"
+          content="hiring solutions India, recruitment services for businesses, digital marketing talent, IT recruitment agency, staff augmentation services"
         />
-        <link rel="canonical" href="https://sownmark.com/hiring-solutions" />
+        <link rel="canonical" href="https://www.sownmark.com/hiring-solutions" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}

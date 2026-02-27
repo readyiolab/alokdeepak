@@ -11,64 +11,20 @@ const ContactPage = () => {
 
   const faqs = [
     {
-      question: "What is Sownmark and what services does it offer?",
-      answer: "Sownmark is a leading digital solutions company in India, offering digital marketing courses for students, digital marketing services for businesses, web development, and hiring solutions for companies in IT, BPO, sales, and digital marketing domains.",
+      question: "What services does Sownmark Digital offer?",
+      answer: "We offer SEO, PPC (Google & Meta Ads), website development, influencer marketing, and hiring solutions for businesses.",
     },
     {
-      question: "Who can join the Sownmark Digital Marketing Course?",
-      answer: "Our digital marketing course is ideal for students, freshers, entrepreneurs, and working professionals looking to upskill in SEO, Google Ads, social media marketing, content marketing, and more. No prior experience is needed.",
+      question: "How long does it take to build a website?",
+      answer: "A standard business website usually takes 2–4 weeks, while complex e-commerce platforms may take 6–8 weeks.",
     },
     {
-      question: "Is the Sownmark digital marketing course 100% practical?",
-      answer: "Yes, our course includes 100% hands-on training, live projects, real-time tools, and practical assignments to help students gain industry-ready skills in SEO, PPC, email marketing, social media, and analytics.",
+      question: "Do you offer localized SEO services?",
+      answer: "Yes, we specialize in Local SEO to help businesses rank in specific geographic areas like India, USA, and Australia.",
     },
     {
-      question: "What kind of businesses does Sownmark serve for digital marketing?",
-      answer: "We serve startups, small businesses, and large enterprises with result-driven digital marketing services including SEO services, Facebook & Google Ads, content marketing, social media management, and lead generation.",
-    },
-    {
-      question: "How does Sownmark help companies with hiring solutions?",
-      answer: "Sownmark provides end-to-end hiring solutions for companies in IT, sales, BPO, and digital marketing sectors. We offer pre-vetted candidates, skill-based assessments, and fast hiring processes to scale your workforce efficiently.",
-    },
-    {
-      question: "What makes Sownmark a reliable web development company?",
-      answer: "We specialize in responsive website design, ecommerce website development, and custom web solutions using the latest tech stacks. Our websites are SEO-optimized, mobile-friendly, and performance-focused to generate leads and conversions.",
-    },
-    {
-      question: "Can startups benefit from your digital marketing services?",
-      answer: "Absolutely! Our startup digital marketing packages are tailored to maximize ROI with affordable SEO, PPC campaigns, social media growth, and website traffic generation strategies that deliver real business results.",
-    },
-    {
-      question: "Does Sownmark offer placement after completing the digital marketing course?",
-      answer: "Yes. We provide placement assistance, resume-building support, mock interviews, and access to our partner companies looking to hire skilled digital marketers across India and globally.",
-    },
-    {
-      question: "What is the duration of the digital marketing course?",
-      answer: "Our comprehensive digital marketing course runs for 8–12 weeks, depending on the batch. You can choose between weekend, weekday, or online batches as per your convenience.",
-    },
-    {
-      question: "What industries do you offer hiring services for?",
-      answer: "We provide hiring services for IT companies, digital marketing agencies, call centers (BPO), eCommerce firms, and startups needing skilled talent in sales, marketing, web development, and customer support.",
-    },
-    {
-      question: "Are Sownmark’s services available across India and internationally?",
-      answer: "Yes, Sownmark works with clients across India, the US, UK, Canada, and other Tier 1 countries, delivering remote web development, outsourced digital marketing, and hiring solutions for global business needs.",
-    },
-    {
-      question: "How do I get a quote for digital marketing or web development?",
-      answer: "You can contact us through the Contact Us page or email us directly at hello@sownmark.com. Share your business goals and we’ll provide a customized strategy and quote for your project.",
-    },
-    {
-      question: "What platforms does Sownmark use for digital marketing?",
-      answer: "We use platforms like Google Ads, Facebook Ads, Instagram, LinkedIn, YouTube, Mailchimp, WordPress, and Shopify, depending on your business type and goals.",
-    },
-    {
-      question: "Do you offer SEO services separately?",
-      answer: "Yes, we offer standalone SEO services focused on Google ranking, keyword optimization, backlink building, content SEO, and technical SEO audits to improve organic traffic and visibility.",
-    },
-    {
-      question: "Is your hiring service suitable for remote teams?",
-      answer: "Yes, our remote hiring solutions connect you with vetted professionals across India and other countries. We help you build a productive, remote-ready team at cost-effective rates.",
+      question: "How do I get a quote for my project?",
+      answer: "You can fill out the contact form above or email us at hello@sownmark.com, and we’ll get back to you with a custom proposal.",
     },
   ];
 
@@ -113,16 +69,16 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Contact Sownmark | Get Digital Solutions Today</title>
+        <title>Contact Us – Sownmark Digital Development Team</title>
         <meta
           name="description"
-          content="Have questions or want to get started? Contact Sownmark today for expert support, inquiries, or project discussions. We're here to help!"
+          content="Have a project in mind? Contact Sownmark Digital for SEO, website development, and influencer marketing services. Let's grow your brand together."
         />
         <meta
           name="keywords"
-          content="contact digital marketing agency, get in touch with us, digital marketing consultation, web design inquiries, marketing support contact"
+          content="contact digital marketing agency, Sownmark contact number, digital marketing services inquiry, website development company contact"
         />
-        <link rel="canonical" href="https://sownmark.com/contact" />
+        <link rel="canonical" href="https://www.sownmark.com/contact" />
         <meta property="og:type" content="website" />
 
         {/* Structured Data */}
@@ -222,7 +178,7 @@ const ContactPage = () => {
               </span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Whether you have questions about our courses or need help with your digital strategy, our
+              Whether you have questions about our services or need help with your digital strategy, our
               team is ready to assist you every step of the way.
             </p>
           </motion.div>
@@ -258,11 +214,6 @@ const ContactPage = () => {
                           hello@sownmark.com
                         </a>
                       ),
-                    },
-                    {
-                      icon: <Clock className="w-6 h-6 text-white" />,
-                      title: 'Operating Hours',
-                      content: <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>,
                     },
                   ].map((item, index) => (
                     <motion.div key={index} variants={fadeInUp} className="flex items-start">
@@ -302,7 +253,7 @@ const ContactPage = () => {
               </span>
             </h2>
             <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
-              Find answers to common questions about our services, courses, and more.
+              Find answers to common questions about our services and more.
             </p>
           </motion.div>
 
@@ -400,7 +351,7 @@ const ContactPage = () => {
 
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               Contact us today to learn how Sownmark can help you achieve your digital marketing goals
-              with our expert-led courses and personalized support.
+              with our expert-led services and personalized support.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
