@@ -24,10 +24,6 @@ const validateEditorContent = (content) => {
         console.warn('Paragraph block has no text field:', block);
         return false;
       }
-      // Remove HTML tags if present
-      if (typeof block.data.text === 'string' && block.data.text.includes('<')) {
-        block.data.text = block.data.text.replace(/<[^>]*>/g, '');
-      }
       return true; // Keep paragraphs even if empty
     }
 

@@ -192,6 +192,61 @@
   .paragraph {
     @apply text-base leading-relaxed text-text-secondary;
   }
+
+  .prose {
+    @apply text-gray-700 leading-relaxed max-w-none;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+
+  .prose a {
+    @apply text-blue-600 font-medium underline-offset-4 transition-all duration-200;
+  }
+
+  .prose a:hover {
+    @apply text-blue-700 underline;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    @apply text-gray-900 font-bold mt-8 mb-4 tracking-tight;
+  }
+
+  .prose h1 {
+    @apply text-4xl;
+  }
+
+  .prose h2 {
+    @apply text-3xl;
+  }
+
+  .prose h3 {
+    @apply text-2xl;
+  }
+
+  .prose ul {
+    @apply list-disc pl-6 mb-4;
+  }
+
+  .prose ol {
+    @apply list-decimal pl-6 mb-4;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-gray-200 pl-4 italic text-gray-600 my-6;
+  }
+
+  .prose img {
+    @apply rounded-xl shadow-md my-8 mx-auto;
+  }
 }
 
 /* Custom animations */

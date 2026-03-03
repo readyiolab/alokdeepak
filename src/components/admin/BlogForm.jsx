@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Save, AlertCircle } from "lucide-react";
+import { 
+  Save, 
+  AlertCircle, 
+  FileText, 
+  User, 
+  Layers, 
+  Tag, 
+  Clock, 
+  Eye, 
+  Settings, 
+  Image as ImageIcon,
+  Star,
+  Search
+} from "lucide-react";
 import { createBlog, updateBlog, getBlogById } from "../../../services/api";
 import EditorJSEditor from "./EditorJSEditor";
 import EditorJSPreview from "./EditorJSPreview";
@@ -233,35 +246,63 @@ const BlogForm = ({ isEdit = false }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-7xl mx-auto space-y-8 pb-12"
     >
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-            {isEdit ? "Edit Blog" : "Create Blog"}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <Alert variant="destructive">
-                <AlertCircle className="h-5 w-5" />
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            </motion.div>
-          )}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-6">
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
-                  Title *
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+            {isEdit ? "Edit Blog Post" : "Create New Post"}
+          </h1>
+          <p className="text-gray-500 mt-1">
+            {isEdit ? "Update existing content and settings" : "Draft a new story for your audience"}
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setShowPreview(true)}
+            className="hidden sm:flex items-center gap-2"
+          >
+            <Eye className="w-4 h-4" />
+            Preview
+          </Button>
+          <Button onClick={handleSubmit} disabled={loading} className="flex items-center gap-2">
+            {loading ? (
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+            ) : (
+              <Save className="w-4 h-4" />
+            )}
+            {isEdit ? "Update Post" : "Publish Post"}
+          </Button>
+        </div>
+      </div>
+
+      {error && (
+        <Alert variant="destructive" className="border-red-200 bg-red-50">
+          <AlertCircle className="h-5 w-5" />
+          <AlertTitle>Action Required</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Left Column - Main Content */}
+        <div className="lg:col-span-8 space-y-8">
+          <Card className="border-none shadow-sm overflow-hidden">
+            <CardHeader className="bg-gray-50/50 border-b">
+              <div className="flex items-center gap-2">
+                <FileText className="w-5 h-5 text-blue-600" />
+                <CardTitle className="text-lg">Content & Details</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  Post Title
                 </label>
                 <Input
                   type="text"
@@ -269,214 +310,225 @@ const BlogForm = ({ isEdit = false }) => {
                   value={formData.title}
                   onChange={handleChange}
                   required
-                  aria-required="true"
-                  placeholder="Enter blog title"
+                  placeholder="Enter a catchy title..."
+                  className="text-lg font-medium py-6"
                 />
               </div>
 
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
-                  Author *
-                </label>
-                <Input
-                  type="text"
-                  name="author"
-                  value={formData.author}
-                  onChange={handleChange}
-                  required
-                  aria-required="true"
-                  placeholder="Enter author name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
                   Excerpt
                 </label>
                 <Textarea
                   name="excerpt"
                   value={formData.excerpt}
                   onChange={handleChange}
-                  placeholder="Brief description of the blog post"
-                  rows={4}
+                  placeholder="Brief summary shown in lists..."
+                  rows={3}
+                  className="resize-none"
                 />
               </div>
 
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
-                  Author Bio
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  Body Content
                 </label>
-                <Textarea
+                <div className="bg-white rounded-md border shadow-inner">
+                  <EditorJSEditor
+                    content={formData.content}
+                    onChange={handleContentChange}
+                    onImageUpload={handleImageUpload}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-none shadow-sm">
+            <CardHeader className="bg-gray-50/50 border-b">
+              <div className="flex items-center gap-2">
+                <User className="w-5 h-5 text-blue-600" />
+                <CardTitle className="text-lg">Author Information</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Author Name</label>
+                <Input
+                  type="text"
+                  name="author"
+                  value={formData.author}
+                  onChange={handleChange}
+                  required
+                  placeholder="Writer's name"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Author Bio</label>
+                <Input
+                  type="text"
                   name="author_bio"
                   value={formData.author_bio}
                   onChange={handleChange}
-                  placeholder="Brief bio about the author"
-                  rows={3}
+                  placeholder="Short description of the author"
                 />
               </div>
+            </CardContent>
+          </Card>
+        </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-gray-900 mb-2 text-sm font-medium">
-                    Status
-                  </label>
-                  <Select
-                    name="status"
-                    value={formData.status}
-                    onValueChange={(value) =>
-                      setFormData((prev) => ({ ...prev, status: value }))
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="draft">Draft</SelectItem>
-                      <SelectItem value="published">Published</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-gray-900 mb-2 text-sm font-medium">
-                    Read Time (minutes)
-                  </label>
-                  <Input
-                    type="number"
-                    name="read_time"
-                    value={formData.read_time}
-                    onChange={handleChange}
-                    min="0"
-                    placeholder="0"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label className="flex items-center text-gray-900 text-sm font-medium cursor-pointer">
-                    <Checkbox
-                      name="is_featured"
-                      checked={formData.is_featured}
-                      onCheckedChange={(checked) =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          is_featured: checked,
-                        }))
-                      }
-                      className="mr-3"
-                    />
-                    Featured Post
-                  </label>
-                </div>
+        {/* Right Column - Settings & SEO */}
+        <div className="lg:col-span-4 space-y-8">
+          <Card className="border-none shadow-sm">
+            <CardHeader className="bg-gray-50/50 border-b">
+              <div className="flex items-center gap-2">
+                <Settings className="w-5 h-5 text-blue-600" />
+                <CardTitle className="text-lg">Publish Settings</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Layers className="w-4 h-4" /> Status
+                </label>
+                <Select
+                  value={formData.status}
+                  onValueChange={(v) => setFormData(p => ({ ...p, status: v }))}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="draft">Draft</SelectItem>
+                    <SelectItem value="published">Published</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-gray-900 mb-2 text-sm font-medium">
-                    Categories (comma-separated)
-                  </label>
-                  <Input
-                    type="text"
-                    name="categories"
-                    value={formData.categories}
-                    onChange={handleChange}
-                    placeholder="e.g., Technology, Web Development"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-900 mb-2 text-sm font-medium">
-                    Tags (comma-separated)
-                  </label>
-                  <Input
-                    type="text"
-                    name="tags"
-                    value={formData.tags}
-                    onChange={handleChange}
-                    placeholder="e.g., react, javascript, tutorial"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
-                  Meta Description
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Clock className="w-4 h-4" /> Read Time (min)
                 </label>
                 <Input
-                  type="text"
-                  name="meta_description"
-                  value={formData.meta_description}
+                  type="number"
+                  name="read_time"
+                  value={formData.read_time}
                   onChange={handleChange}
-                  placeholder="SEO description for search engines"
-                  maxLength={160}
+                  min="0"
                 />
               </div>
 
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
-                  Featured Image
-                </label>
-                {isEdit && formData.current_image && (
-                  <div className="mb-4">
-                    <p className="text-gray-600 text-sm mb-2">Current Image:</p>
-                    <img
-                      src={formData.current_image}
-                      alt="Current featured image"
-                      className="w-full max-w-xs h-auto rounded-lg object-cover"
-                    />
+              <div className="pt-2">
+                <label className="flex items-center gap-3 p-3 bg-blue-50/50 rounded-lg border border-blue-100 cursor-pointer hover:bg-blue-50 transition-colors">
+                  <Checkbox
+                    checked={formData.is_featured}
+                    onCheckedChange={(c) => setFormData(p => ({ ...p, is_featured: c }))}
+                  />
+                  <div className="flex items-center gap-2 text-sm font-semibold text-blue-900">
+                    <Star className="w-4 h-4 fill-blue-500 text-blue-500" />
+                    Featured on Homepage
                   </div>
-                )}
+                </label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-none shadow-sm">
+            <CardHeader className="bg-gray-50/50 border-b">
+              <div className="flex items-center gap-2">
+                <ImageIcon className="w-5 h-5 text-blue-600" />
+                <CardTitle className="text-lg">Featured Image</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+              {isEdit && formData.current_image && !formData.featured_image && (
+                <div className="relative group rounded-lg overflow-hidden border">
+                  <img
+                    src={formData.current_image}
+                    alt="Cover"
+                    className="w-full h-40 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="text-white text-xs font-medium">Current Image</span>
+                  </div>
+                </div>
+              )}
+              <div className="flex flex-col gap-2">
                 <Input
                   type="file"
-                  name="featured_image"
                   accept="image/*"
                   onChange={handleChange}
+                  name="featured_image"
+                  className="text-xs"
                 />
-                {isEdit && (
-                  <p className="text-gray-600 text-sm mt-2">
-                    Upload a new image to replace the current one, or leave
-                    blank to keep it.
-                  </p>
-                )}
+                <p className="text-[10px] text-gray-400">Recommended: 1200x630px JPG or WEBP</p>
               </div>
+            </CardContent>
+          </Card>
 
-              <div>
-                <label className="block text-gray-900 mb-2 text-sm font-medium">
-                  Content *
+          <Card className="border-none shadow-sm">
+            <CardHeader className="bg-gray-50/50 border-b">
+              <div className="flex items-center gap-2">
+                <Search className="w-5 h-5 text-blue-600" />
+                <CardTitle className="text-lg">Categorization & SEO</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Layers className="w-4 h-4" /> Categories
                 </label>
-                <EditorJSEditor
-                  content={formData.content}
-                  onChange={handleContentChange}
-                  onImageUpload={handleImageUpload}
+                <Input
+                  name="categories"
+                  value={formData.categories}
+                  onChange={handleChange}
+                  placeholder="News, Updates, Tips..."
                 />
               </div>
-            </div>
 
-            <div className="flex justify-end pt-6 space-x-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowPreview(true)}
-                disabled={loading}
-              >
-                Preview
-              </Button>
-              <Button type="submit" disabled={loading}>
-                {loading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                    {isEdit ? "Updating..." : "Creating..."}
-                  </>
-                ) : (
-                  <>
-                    <Save className="w-5 h-5 mr-2" />
-                    {isEdit ? "Update Blog" : "Create Blog"}
-                  </>
-                )}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                  <Tag className="w-4 h-4" /> Tags
+                </label>
+                <Input
+                  name="tags"
+                  value={formData.tags}
+                  onChange={handleChange}
+                  placeholder="react, tech, future..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-gray-700">Meta Description</label>
+                <Textarea
+                  name="meta_description"
+                    value={formData.meta_description}
+                  onChange={handleChange}
+                  placeholder="Optimized for search engines..."
+                  rows={2}
+                  maxLength={160}
+                  className="text-xs"
+                />
+                <p className="text-[10px] text-gray-400 text-right">
+                  {formData.meta_description?.length || 0}/160
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Mobile Preview Button */}
+      <div className="sm:hidden fixed bottom-6 right-6 shadow-2xl z-50">
+        <Button
+          type="button"
+          size="icon"
+          className="rounded-full h-14 w-14"
+          onClick={() => setShowPreview(true)}
+        >
+          <Eye className="w-6 h-6" />
+        </Button>
+      </div>
       {showPreview && (
         <EditorJSPreview
           content={formData.content}
