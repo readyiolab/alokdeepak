@@ -11,7 +11,9 @@ import {
   Heart,
   Share2,
   AlertCircle,
+  Search,
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -36,7 +38,6 @@ import {
   getAllBlogs,
   deleteBlog,
   incrementLikes,
-  incrementShares,
 } from "../../../services/api";
 
 const BlogList = () => {
