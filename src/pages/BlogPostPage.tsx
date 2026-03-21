@@ -284,6 +284,7 @@ const BlogPostPage: React.FC = () => {
       <Helmet>
         <title>{post.title} | Sownmark Blog</title>
         <meta name="description" content={post.meta_description} />
+        <meta name="robots" content="max-image-preview:large" />
         <link rel="canonical" href={`https://sownmark.com/blog/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.meta_description} />
@@ -342,7 +343,11 @@ const BlogPostPage: React.FC = () => {
               <img
                 src={post.image}
                 alt={`${post.title} - Blog cover`}
-                className="w-auto h-auto sm:h-auto object-fill rounded-2xl shadow-lg"
+                width="1200"
+                height="600"
+                loading="eager"
+                fetchPriority="high"
+                className="w-full h-auto sm:h-auto object-cover rounded-2xl shadow-lg"
               />
               <div className=" rounded-2xl" />
               <div className="absolute bottom-6 left-6 right-6">
@@ -550,6 +555,9 @@ const BlogPostPage: React.FC = () => {
                           <img
                             src={relatedPost.image}
                             alt={`${relatedPost.title} - Related blog post`}
+                            width="400"
+                            height="200"
+                            loading="lazy"
                             className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                           <span

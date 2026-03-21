@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="robots" content="max-image-preview:large" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Remove these meta tags as they will be handled by Helmet -->
@@ -18,6 +19,7 @@
 
   <!-- Preload Critical Assets -->
   <link rel="preload" as="image" href="/logo.png" />
+  <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
 
   <!-- Basic meta tags -->
   <meta name="robots" content="index, follow" />
@@ -27,7 +29,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://sownmark.com/og-image.jpg" />
 
-  <!-- Google AdSense -->
+</head>
+
+<body>
+  <!-- Meta Pixel Fallback for NoScript -->
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1486668442357854&ev=PageView&noscript=1" />
+  </noscript>
+
+  <div id="root"></div>
+
+  <!-- Google AdSense (Deferred) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506322018386318"
     crossorigin="anonymous"></script>
 
@@ -40,6 +53,7 @@
     gtag('config', 'AW-17005532217');
   </script>
 
+  <!-- Facebook Pixel (Deferred) -->
   <script defer>
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return;
@@ -57,16 +71,7 @@
     fbq('init', '1486668442357854');
     fbq('track', 'PageView');
   </script>
-</head>
 
-<body>
-  <!-- Meta Pixel Fallback for NoScript -->
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1486668442357854&ev=PageView&noscript=1" />
-  </noscript>
-
-  <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

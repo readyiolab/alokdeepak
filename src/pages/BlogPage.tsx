@@ -230,6 +230,7 @@ const BlogPage: React.FC = () => {
         />
         <meta property="og:url" content="https://sownmark.com/blog" />
         <meta property="og:type" content="website" />
+        <meta name="robots" content="max-image-preview:large" />
       </Helmet>
 
       {/* Hero Section - Dark Theme */}
@@ -397,8 +398,11 @@ const BlogPage: React.FC = () => {
                         <img
                           src={post.image}
                           alt={post.title}
+                          width="400"
+                          height="200"
                           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                          loading="lazy"
+                          loading={filteredPosts.indexOf(post) < 2 ? "eager" : "lazy"}
+                          fetchPriority={filteredPosts.indexOf(post) === 0 ? "high" : "auto"}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                         <div className="absolute top-3 right-3 flex gap-2">
