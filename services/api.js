@@ -36,6 +36,10 @@ export const getBlogById = async (id) => {
   return api.get(`/blogs/${id}`);
 };
 
+export const getBlogBySlug = async (slug) => {
+  return api.get(`/blogs/slug/${slug}`);
+};
+
 export const getCommentsByBlogId = async (id) => {
   return api.get(`/blogs/${id}/comments`);
 };

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
 import {
   getAllBlogs,
-  getBlogById,
+  getBlogBySlug,
   getCommentsByBlogId,
   createComment,
 } from "../../services/api";
@@ -127,27 +127,24 @@ const BlogPostPage: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Fetch all blogs to find the post by slug
-        const { data: blogs } = await getAllBlogs();
+        if (!slug) return;
 
-        if (!Array.isArray(blogs)) {
-          setError("Failed to load blog data");
-          setLoading(false);
-          return;
-        }
+        // Parallel fetching
+        const [postRes, blogsRes] = await Promise.all([
+          getBlogBySlug(slug),
+          getAllBlogs()
+        ]);
 
-        const foundPost = blogs.find((p) => p.slug === slug);
+        const postData = postRes.data;
+        const blogs = blogsRes.data;
 
-        if (!foundPost) {
+        if (!postData) {
           setError("Blog post not found");
           setLoading(false);
           return;
         }
 
-        // Fetch detailed post data by ID
-        const { data: postData } = await getBlogById(foundPost.id);
-
-        setPost({
+        const parsedPost = {
           ...postData,
           category: Array.isArray(postData.category)
             ? postData.category
@@ -155,29 +152,28 @@ const BlogPostPage: React.FC = () => {
           tags: Array.isArray(postData.tags)
             ? postData.tags
             : JSON.parse(postData.tags || "[]"),
-          slug: postData.slug || slug,
-        });
+        };
+        
+        setPost(parsedPost);
 
-        // Fetch comments
+        // Fetch comments and related posts
         try {
-          const { data: commentsData } = await getCommentsByBlogId(
-            foundPost.id
-          );
-
+          const { data: commentsData } = await getCommentsByBlogId(postData.id);
           setComments(Array.isArray(commentsData) ? commentsData : []);
+          
+          if (Array.isArray(blogs)) {
+            const related = blogs
+              .filter(
+                (p) =>
+                  p.id !== postData.id &&
+                  p.category.some((cat) => parsedPost.category.includes(cat))
+              )
+              .slice(0, 3);
+            setRelatedPosts(related);
+          }
         } catch (err) {
-          setComments([]); // Fallback to empty array
+          console.error("Related/Comments error:", err);
         }
-
-        // Find related posts
-        const related = blogs
-          .filter(
-            (p) =>
-              p.id !== foundPost.id &&
-              p.category.some((cat) => foundPost.category.includes(cat))
-          )
-          .slice(0, 3);
-        setRelatedPosts(related);
 
         setLoading(false);
       } catch (err) {
