@@ -10,16 +10,30 @@
   <!-- Remove these meta tags as they will be handled by Helmet -->
   <title>Sownmark</title>
 
+  <!-- DNS Prefetch for External Domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://connect.facebook.net" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
   <!-- Preconnect for Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
-    rel="stylesheet" />
+  
+  <!-- Non-Blocking Google Fonts -->
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" 
+    rel="stylesheet" 
+    media="print" 
+    onload="this.media='all'" 
+  />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  </noscript>
 
   <!-- Preload Critical Assets -->
   <link rel="preload" as="image" href="/logo.png" />
-  <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" media="(min-width: 1024px)" />
 
   <!-- Basic meta tags -->
   <meta name="robots" content="index, follow" />

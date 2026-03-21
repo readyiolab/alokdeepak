@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: isMobile ? 0.4 : 0.8, delay: isMobile ? 0.1 : 0.3 }}
                 className="text-5xl font-black leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl"
               >
                 We Build, Market, <br />
