@@ -14,8 +14,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           three: ['three'],
-          framer: ['framer-motion'],
-          lucide: ['lucide-react'],
+          'framer-motion': ['framer-motion'],
         },
       },
     },

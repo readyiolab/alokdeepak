@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, Sparkles, TrendingUp, Zap, ChevronRight } from 'lucide-react';
+import { Users, Sparkles, TrendingUp, Zap, ChevronRight } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const isMobile = React.useRef(
@@ -31,9 +31,9 @@ const HeroSection: React.FC = () => {
           >
             {/* Animated Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md"
             >
               <div className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
@@ -43,9 +43,9 @@ const HeroSection: React.FC = () => {
             {/* Premium Headline */}
             <div className="space-y-6">
               <motion.h1
-                initial={{ opacity: 0, y: 30 }}
+                initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: isMobile ? 0.4 : 0.8, delay: isMobile ? 0.1 : 0.3 }}
+                transition={{ duration: isMobile ? 0.2 : 0.8, delay: isMobile ? 0 : 0.3 }}
                 className="text-5xl font-black leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl"
               >
                 We Build, Market, <br />

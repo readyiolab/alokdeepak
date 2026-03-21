@@ -43,6 +43,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://sownmark.com/og-image.jpg" />
 
+  <!-- Critical Path CSS (Inlined) -->
+  <style>
+    :root {
+      --bg-dark: #0a0f1e;
+      --text-main: #ffffff;
+      --accent-cyan: #22d3ee;
+    }
+    body { background-color: var(--bg-dark); margin: 0; font-family: 'Poppins', system-ui, -apple-system, sans-serif; color: var(--text-main); }
+    #root { min-height: 100vh; }
+    .hero-placeholder { padding-top: 8rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  </style>
+
 </head>
 
 <body>
@@ -54,39 +66,41 @@
 
   <div id="root"></div>
 
-  <!-- Google AdSense (Deferred) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506322018386318"
-    crossorigin="anonymous"></script>
-
-  <!-- Tracking Scripts (Deferred) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17005532217"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'AW-17005532217');
-  </script>
-
-  <!-- Facebook Pixel (Deferred) -->
-  <script defer>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n; n.loaded = !0; n.version = '2.0';
-      n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    }(window, document, 'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1486668442357854');
-    fbq('track', 'PageView');
-  </script>
-
   <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Delayed Third-Party Scripts (4s Delay to unblock LCP/FCP) -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // 1. Google AdSense
+        var adsense = document.createElement('script');
+        adsense.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506322018386318";
+        adsense.async = true;
+        adsense.crossOrigin = "anonymous";
+        document.body.appendChild(adsense);
+
+        // 2. Google Tag Manager (gtag)
+        var gtm = document.createElement('script');
+        gtm.src = "https://www.googletagmanager.com/gtag/js?id=AW-17005532217";
+        gtm.async = true;
+        document.body.appendChild(gtm);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17005532217');
+
+        // 3. Facebook Pixel
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1486668442357854');
+        fbq('track', 'PageView');
+      }, 4000);
+    });
+  </script>
 </body>
 
 </html>
