@@ -63,7 +63,7 @@ const CtaSection: React.FC = () => {
                 className="bg-transparent border-2 text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-base sm:text-lg border-white hover:bg-white hover:text-gray-600 transition-all duration-300 min-w-[250px] flex items-center w-full sm:w-auto justify-center"
                 aria-label="Learn More About Sownmark's Web Development Services"
               >
-                Learn More
+                Learn About Sownmark
               </Link>
             </motion.div>
           </div>

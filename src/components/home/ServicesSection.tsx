@@ -33,7 +33,7 @@ const services = [
     title: 'Influencer Marketing',
     description: 'Amplify your brand reach with strategic influencer partnerships and campaigns.',
     link: '/influencer-marketing',
-    linkText: 'Learn More',
+    linkText: 'Explore Influencer Marketing',
     delay: 0.5,
   },
 ];

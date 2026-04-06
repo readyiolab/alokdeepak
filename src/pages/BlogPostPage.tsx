@@ -310,7 +310,7 @@ const BlogPostPage: React.FC = () => {
                 "name": "Sownmark",
                 "logo": {
                   "@type": "ImageObject",
-                  "url": "https://sownmark.com/logo.png"
+                  "url": "https://sownmark.com/logo.webp"
                 }
               },
               "mainEntityOfPage": {

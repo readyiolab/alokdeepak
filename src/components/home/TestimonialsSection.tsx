@@ -80,6 +80,9 @@ const TestimonialsSection: React.FC = () => {
                 <img 
                   src={testimonials[current].image} 
                   alt={testimonials[current].name} 
+                  loading="lazy"
+                  width="96"
+                  height="96"
                   className="w-14 h-14 rounded-full object-cover mr-4 border border-[#90abff]/20"
                 />
                 <div>

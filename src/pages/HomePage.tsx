@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
               "@type": "Organization",
               "name": "Sownmark Digital",
               "url": "https://sownmark.com",
-              "logo": "https://sownmark.com/logo.png",
+              "logo": "https://sownmark.com/logo.webp",
               "description": "Sownmark Digital is an AI-driven digital marketing and website development company in India offering SEO, PPC, influencer marketing and hiring solutions.",
               "areaServed": {
                 "@type": "Country",

@@ -19,20 +19,19 @@
   <!-- Preconnect for Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  
+
   <!-- Non-Blocking Google Fonts -->
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" 
-    rel="stylesheet" 
-    media="print" 
-    onload="this.media='all'" 
-  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet" />
   </noscript>
 
   <!-- Preload Critical Assets -->
-  <link rel="preload" as="image" href="/logo.png" />
+  <link rel="preload" as="image" href="/logo.webp" />
   <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" media="(min-width: 1024px)" />
 
   <!-- Basic meta tags -->
@@ -42,18 +41,6 @@
   <meta property="og:image" content="https://sownmark.com/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://sownmark.com/og-image.jpg" />
-
-  <!-- Critical Path CSS (Inlined) -->
-  <style>
-    :root {
-      --bg-dark: #0a0f1e;
-      --text-main: #ffffff;
-      --accent-cyan: #22d3ee;
-    }
-    body { background-color: var(--bg-dark); margin: 0; font-family: 'Poppins', system-ui, -apple-system, sans-serif; color: var(--text-main); }
-    #root { min-height: 100vh; }
-    .hero-placeholder { padding-top: 8rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  </style>
 
 </head>
 
@@ -70,8 +57,8 @@
 
   <!-- Delayed Third-Party Scripts (4s Delay to unblock LCP/FCP) -->
   <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
+    window.addEventListener('load', function () {
+      setTimeout(function () {
         // 1. Google AdSense
         var adsense = document.createElement('script');
         adsense.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506322018386318";
@@ -84,18 +71,22 @@
         gtm.src = "https://www.googletagmanager.com/gtag/js?id=AW-17005532217";
         gtm.async = true;
         document.body.appendChild(gtm);
-        
+
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'AW-17005532217');
 
         // 3. Facebook Pixel
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        !function (f, b, e, v, n, t, s) {
+          if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          }; if (!f._fbq) f._fbq = n;
+          n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+          t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+        }(window,
+          document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1486668442357854');
         fbq('track', 'PageView');
       }, 4000);
